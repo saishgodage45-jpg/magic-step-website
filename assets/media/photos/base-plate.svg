@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" width="1000" height="750" role="img" aria-labelledby="bp-title">
+  <title id="bp-title">Base Plate Fabrication — 300 × 160 × 10 mm Hardwood Block</title>
+  <defs>
+    <linearGradient id="bench-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#182232" /><stop offset="100%" stop-color="#0f1622" />
+    </linearGradient>
+    <linearGradient id="timber" x1="0%" y1="0%" x2="100%" y2="20%">
+      <stop offset="0%" stop-color="#855b32" /><stop offset="50%" stop-color="#a67343" /><stop offset="100%" stop-color="#734e2a" />
+    </linearGradient>
+    <filter id="wood-shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feGaussianBlur stdDeviation="10" result="b" /><feComposite in="SourceGraphic" in2="b" operator="over" />
+    </filter>
+  </defs>
+  <rect width="1000" height="750" fill="url(#bench-bg)" rx="12" />
+  <!-- Workbench Texture -->
+  <g stroke="#38bdf8" stroke-opacity="0.04" stroke-width="1">
+    <path d="M0,75 H1000 M0,150 H1000 M0,225 H1000 M0,300 H1000 M0,375 H1000 M0,450 H1000 M0,525 H1000 M0,600 H1000 M0,675 H1000" />
+    <path d="M75,0 V750 M150,0 V750 M225,0 V750 M300,0 V750 M375,0 V750 M450,0 V750 M525,0 V750 M600,0 V750 M675,0 V750 M750,0 V750 M825,0 V750 M900,0 V750" />
+  </g>
+  <!-- Timber Block on Bench -->
+  <g transform="translate(180, 160)" filter="url(#wood-shadow)">
+    <!-- Base Plate Top: 640 × 340 -->
+    <rect x="0" y="0" width="640" height="340" fill="url(#timber)" rx="6" stroke="#5c3e1e" stroke-width="2" />
+    <!-- Woodgrain lines -->
+    <g stroke="#614120" stroke-width="1.2" opacity="0.45">
+      <path d="M0,50 Q160,45 320,55 T640,48" fill="none" />
+      <path d="M0,110 Q200,105 400,115 T640,108" fill="none" />
+      <path d="M0,170 Q140,175 300,165 T640,172" fill="none" />
+      <path d="M0,230 Q220,225 440,235 T640,228" fill="none" />
+      <path d="M0,290 Q180,295 360,285 T640,292" fill="none" />
+    </g>
+    <!-- Marked Grid Layout for 6 Discs -->
+    <g stroke="#38bdf8" stroke-width="1" stroke-dasharray="6,4" opacity="0.8">
+      <line x1="0" y1="110" x2="640" y2="110" />
+      <line x1="0" y1="230" x2="640" y2="230" />
+      <line x1="160" y1="0" x2="160" y2="340" />
+      <line x1="320" y1="0" x2="320" y2="340" />
+      <line x1="480" y1="0" x2="480" y2="340" />
+    </g>
+    <!-- Punch marks -->
+    <circle cx="160" cy="110" r="5" fill="#f8fafc" stroke="#000" stroke-width="1" />
+    <circle cx="320" cy="110" r="5" fill="#f8fafc" stroke="#000" stroke-width="1" />
+    <circle cx="480" cy="110" r="5" fill="#f8fafc" stroke="#000" stroke-width="1" />
+    <circle cx="160" cy="230" r="5" fill="#f8fafc" stroke="#000" stroke-width="1" />
+    <circle cx="320" cy="230" r="5" fill="#f8fafc" stroke="#000" stroke-width="1" />
+    <circle cx="480" cy="230" r="5" fill="#f8fafc" stroke="#000" stroke-width="1" />
+    <!-- Thickness edge -->
+    <rect x="0" y="340" width="640" height="25" fill="#4d3319" stroke="#332211" stroke-width="1.5" rx="2" />
+    <text x="320" y="358" font-family="'JetBrains Mono', monospace" font-size="12" fill="#d97706" text-anchor="middle" font-weight="700">THICKNESS: 10 mm</text>
+  </g>
+  <!-- Steel Ruler on Bench -->
+  <g transform="translate(140, 560)">
+    <rect width="720" height="40" fill="#94a3b8" stroke="#475569" stroke-width="1.5" rx="3" />
+    <g stroke="#1e293b" stroke-width="1">
+      <line x1="60" y1="0" x2="60" y2="15" /><line x1="120" y1="0" x2="120" y2="15" />
+      <line x1="180" y1="0" x2="180" y2="20" /><line x1="240" y1="0" x2="240" y2="15" />
+      <line x1="300" y1="0" x2="300" y2="15" /><line x1="360" y1="0" x2="360" y2="25" />
+      <line x1="420" y1="0" x2="420" y2="15" /><line x1="480" y1="0" x2="480" y2="15" />
+      <line x1="540" y1="0" x2="540" y2="20" /><line x1="600" y1="0" x2="600" y2="15" />
+      <line x1="660" y1="0" x2="660" y2="15" /><line x1="720" y1="0" x2="720" y2="25" />
+    </g>
+    <text x="360" y="30" font-family="'JetBrains Mono', monospace" font-size="12" fill="#0f172a" text-anchor="middle" font-weight="700">PRECISION STEEL RULE · 300 mm LENGTH CHECK</text>
+  </g>
+  <!-- Photo Metadata Stamp -->
+  <rect x="50" y="40" width="380" height="45" fill="#0f172a" opacity="0.9" rx="6" stroke="#38bdf8" stroke-width="1" />
+  <text x="70" y="68" font-family="'JetBrains Mono', monospace" font-size="12" fill="#38bdf8" font-weight="700">WORKSHOP LOG: STEP 01 · BASE PLATE (300×160×10mm)</text>
+</svg>

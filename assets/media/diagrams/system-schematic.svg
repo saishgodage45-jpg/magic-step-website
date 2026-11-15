@@ -1,0 +1,199 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" role="img" aria-labelledby="sch-title sch-desc">
+  <title id="sch-title">Magic Step System Architecture &amp; Energy Flow Diagram</title>
+  <desc id="sch-desc">Functional block diagram illustrating mechanical force input, piezoelectric disc array, full-wave diode bridge, capacitive filter, 1S2P Li-ion battery pack, and ESP32 telemetry with 16x2 LCD.</desc>
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1320" />
+      <stop offset="100%" stop-color="#111c2e" />
+    </linearGradient>
+    <linearGradient id="piezo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+    <linearGradient id="energy-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00d2ff" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+    <linearGradient id="mcu-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#334155" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <marker id="arr-cyan" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#38bdf8" />
+    </marker>
+    <marker id="arr-amber" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#f59e0b" />
+    </marker>
+    <marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#10b981" />
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1200" height="640" fill="url(#bg-grad)" rx="16" />
+  
+  <!-- Subtle Blueprint Grid -->
+  <g stroke="#38bdf8" stroke-opacity="0.06" stroke-width="1">
+    <path d="M0,80 H1200 M0,160 H1200 M0,240 H1200 M0,320 H1200 M0,400 H1200 M0,480 H1200 M0,560 H1200" />
+    <path d="M80,0 V640 M160,0 V640 M240,0 V640 M320,0 V640 M400,0 V640 M480,0 V640 M560,0 V640 M640,0 V640 M720,0 V640 M800,0 V640 M880,0 V640 M960,0 V640 M1040,0 V640 M1120,0 V640" />
+  </g>
+
+  <!-- Title Block Header -->
+  <rect x="40" y="30" width="1120" height="52" fill="#152136" rx="8" stroke="#2a3f60" stroke-width="1" />
+  <text x="60" y="62" font-family="'Space Grotesk', system-ui, sans-serif" font-size="18" font-weight="700" fill="#f8fafc" letter-spacing="1">MAGIC STEP — SYSTEM ARCHITECTURE &amp; ENERGY TRANSDUCTION PATHWAY</text>
+  <rect x="1000" y="42" width="140" height="28" fill="#1e293b" rx="4" stroke="#38bdf8" stroke-width="1" />
+  <text x="1070" y="61" font-family="'JetBrains Mono', monospace" font-size="12" fill="#38bdf8" text-anchor="middle" font-weight="600">GROUP 16 · SU</text>
+
+  <!-- BLOCK 1: Human Footfall Input -->
+  <g transform="translate(60, 130)">
+    <rect width="160" height="200" fill="#162238" stroke="#3b82f6" stroke-width="2" rx="12" />
+    <circle cx="80" cy="55" r="28" fill="#1d3052" stroke="#38bdf8" stroke-width="1.5" />
+    <path d="M72 45 C78 40, 86 40, 92 48 C96 54, 94 62, 88 66 L82 72 L72 65 Z" fill="#38bdf8" opacity="0.8" />
+    <text x="80" y="110" font-family="'Space Grotesk', sans-serif" font-size="15" font-weight="700" fill="#f1f5f9" text-anchor="middle">Footstep Force</text>
+    <text x="80" y="132" font-family="'JetBrains Mono', monospace" font-size="12" fill="#94a3b8" text-anchor="middle">400 N – 900 N</text>
+    <text x="80" y="152" font-family="'JetBrains Mono', monospace" font-size="12" fill="#94a3b8" text-anchor="middle">Cadence 1–2 Hz</text>
+    <rect x="25" y="170" width="110" height="20" fill="#0f172a" rx="4" />
+    <text x="80" y="184" font-family="'JetBrains Mono', monospace" font-size="10" fill="#38bdf8" text-anchor="middle">MECHANICAL INPUT</text>
+  </g>
+
+  <!-- Arrow 1: Force Transfer -->
+  <path d="M220 230 H270" stroke="#f59e0b" stroke-width="3" stroke-dasharray="6,4" marker-end="url(#arr-amber)" />
+  <text x="245" y="220" font-family="'JetBrains Mono', monospace" font-size="10" fill="#f59e0b" text-anchor="middle">Pressure</text>
+
+  <!-- BLOCK 2: Piezoelectric Matrix -->
+  <g transform="translate(280, 130)">
+    <rect width="170" height="200" fill="#162238" stroke="#f59e0b" stroke-width="2" rx="12" />
+    <!-- 2x3 Matrix of discs -->
+    <g transform="translate(30, 25)">
+      <circle cx="20" cy="20" r="14" fill="url(#piezo-grad)" stroke="#fff" stroke-width="1" />
+      <circle cx="55" cy="20" r="14" fill="url(#piezo-grad)" stroke="#fff" stroke-width="1" />
+      <circle cx="90" cy="20" r="14" fill="url(#piezo-grad)" stroke="#fff" stroke-width="1" />
+      <circle cx="20" cy="55" r="14" fill="url(#piezo-grad)" stroke="#fff" stroke-width="1" />
+      <circle cx="55" cy="55" r="14" fill="url(#piezo-grad)" stroke="#fff" stroke-width="1" />
+      <circle cx="90" cy="55" r="14" fill="url(#piezo-grad)" stroke="#fff" stroke-width="1" />
+    </g>
+    <text x="85" y="120" font-family="'Space Grotesk', sans-serif" font-size="15" font-weight="700" fill="#f1f5f9" text-anchor="middle">6× Piezo Discs</text>
+    <text x="85" y="140" font-family="'JetBrains Mono', monospace" font-size="12" fill="#fbbf24" text-anchor="middle">⌀27 mm PZT</text>
+    <text x="85" y="158" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">2×3 Array Grid</text>
+    <rect x="25" y="170" width="120" height="20" fill="#0f172a" rx="4" />
+    <text x="85" y="184" font-family="'JetBrains Mono', monospace" font-size="10" fill="#f59e0b" text-anchor="middle">TRANSDUCTION</text>
+  </g>
+
+  <!-- Arrow 2: Raw AC Pulses -->
+  <path d="M450 230 H500" stroke="#f59e0b" stroke-width="3" marker-end="url(#arr-amber)" />
+  <text x="475" y="215" font-family="'JetBrains Mono', monospace" font-size="10" fill="#f59e0b" text-anchor="middle">AC Spikes</text>
+  <text x="475" y="226" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8" text-anchor="middle">±15V–35V</text>
+
+  <!-- BLOCK 3: Full-Wave Rectifier + Buffer -->
+  <g transform="translate(510, 130)">
+    <rect width="180" height="200" fill="#162238" stroke="#38bdf8" stroke-width="2" rx="12" />
+    <!-- Diode Diamond Icon -->
+    <path d="M90 35 L120 65 L90 95 L60 65 Z" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5" />
+    <line x1="75" y1="65" x2="105" y2="65" stroke="#38bdf8" stroke-width="2" />
+    <polygon points="95,58 95,72 105,65" fill="#38bdf8" />
+    <text x="90" y="120" font-family="'Space Grotesk', sans-serif" font-size="15" font-weight="700" fill="#f1f5f9" text-anchor="middle">Full-Wave Bridge</text>
+    <text x="90" y="140" font-family="'JetBrains Mono', monospace" font-size="12" fill="#38bdf8" text-anchor="middle">DB107 + 10 µF Cap</text>
+    <text x="90" y="158" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">Smoothing Buffer</text>
+    <rect x="25" y="170" width="130" height="20" fill="#0f172a" rx="4" />
+    <text x="90" y="184" font-family="'JetBrains Mono', monospace" font-size="10" fill="#38bdf8" text-anchor="middle">RECTIFICATION</text>
+  </g>
+
+  <!-- Arrow 3: Conditioned DC to Harvesting -->
+  <path d="M690 230 H750" stroke="#38bdf8" stroke-width="3" marker-end="url(#arr-cyan)" />
+  <text x="720" y="215" font-family="'JetBrains Mono', monospace" font-size="10" fill="#38bdf8" text-anchor="middle">DC Pulse</text>
+
+  <!-- BLOCK 4: Energy Management & Safe Charging -->
+  <g transform="translate(760, 130)">
+    <rect width="180" height="200" fill="#162238" stroke="#10b981" stroke-width="2" rx="12" />
+    <rect x="50" y="35" width="80" height="50" fill="#132e27" stroke="#10b981" stroke-width="1.5" rx="6" />
+    <text x="90" y="65" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#10b981" text-anchor="middle">BMS / CHRG</text>
+    <text x="90" y="120" font-family="'Space Grotesk', sans-serif" font-size="15" font-weight="700" fill="#f1f5f9" text-anchor="middle">1S Charge Manager</text>
+    <text x="90" y="140" font-family="'JetBrains Mono', monospace" font-size="12" fill="#10b981" text-anchor="middle">CC/CV Protection</text>
+    <text x="90" y="158" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">Overvoltage Cutoff</text>
+    <rect x="20" y="170" width="140" height="20" fill="#0f172a" rx="4" />
+    <text x="90" y="184" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10b981" text-anchor="middle">POWER MANAGEMENT</text>
+  </g>
+
+  <!-- Arrow 4: Storage Current -->
+  <path d="M940 230 H1000" stroke="#10b981" stroke-width="3" marker-end="url(#arr-green)" />
+  <text x="970" y="215" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10b981" text-anchor="middle">3.7V – 4.2V</text>
+
+  <!-- BLOCK 5: 1S2P Li-ion Storage -->
+  <g transform="translate(1010, 130)">
+    <rect width="140" height="200" fill="#162238" stroke="#10b981" stroke-width="2" rx="12" />
+    <!-- Battery Cells -->
+    <rect x="35" y="35" width="30" height="55" fill="#132e27" stroke="#10b981" stroke-width="1.5" rx="4" />
+    <rect x="43" y="27" width="14" height="8" fill="#10b981" rx="2" />
+    <rect x="75" y="35" width="30" height="55" fill="#132e27" stroke="#10b981" stroke-width="1.5" rx="4" />
+    <rect x="83" y="27" width="14" height="8" fill="#10b981" rx="2" />
+    <text x="70" y="120" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="700" fill="#f1f5f9" text-anchor="middle">1S2P Li-Ion</text>
+    <text x="70" y="140" font-family="'JetBrains Mono', monospace" font-size="12" fill="#10b981" text-anchor="middle">2× 18650 Cells</text>
+    <text x="70" y="158" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">Parallel Pack</text>
+    <rect x="15" y="170" width="110" height="20" fill="#0f172a" rx="4" />
+    <text x="70" y="184" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10b981" text-anchor="middle">STORAGE</text>
+  </g>
+
+  <!-- TELEMETRY BRANCH: From Rectifier & Battery down to ESP32 -->
+  <!-- Signal line from Rectifier to Voltage Divider -->
+  <path d="M600 330 V420 H480" stroke="#38bdf8" stroke-width="2" stroke-dasharray="5,4" fill="none" marker-end="url(#arr-cyan)" />
+  <text x="590" y="380" font-family="'JetBrains Mono', monospace" font-size="10" fill="#38bdf8" text-anchor="end">Step Pulse Sense</text>
+
+  <!-- Signal line from Battery to Voltage Divider -->
+  <path d="M1080 330 V450 H480" stroke="#10b981" stroke-width="2" stroke-dasharray="5,4" fill="none" marker-end="url(#arr-green)" />
+  <text x="960" y="440" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10b981" text-anchor="middle">Battery Voltage Sense (Divided)</text>
+
+  <!-- BLOCK 6: Signal Conditioning Network -->
+  <g transform="translate(280, 400)">
+    <rect width="190" height="150" fill="#131e33" stroke="#64748b" stroke-width="1.5" rx="10" />
+    <text x="95" y="35" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="700" fill="#f1f5f9" text-anchor="middle">Signal Conditioning</text>
+    <text x="95" y="60" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">• Resistor Dividers (2:1)</text>
+    <text x="95" y="80" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">• 3.3V Zener Protection</text>
+    <text x="95" y="100" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">• RC Anti-Aliasing Filter</text>
+    <rect x="25" y="115" width="140" height="20" fill="#0f172a" rx="4" />
+    <text x="95" y="129" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b" text-anchor="middle">ANALOG SCALING</text>
+  </g>
+
+  <!-- Arrow to ESP32 -->
+  <path d="M470 475 H540" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-cyan)" />
+  <text x="505" y="465" font-family="'JetBrains Mono', monospace" font-size="10" fill="#38bdf8" text-anchor="middle">ADC1</text>
+
+  <!-- BLOCK 7: ESP32 Microcontroller Core -->
+  <g transform="translate(550, 390)">
+    <rect width="250" height="170" fill="#14213d" stroke="#38bdf8" stroke-width="2" rx="12" filter="url(#glow)" />
+    <!-- Chip details -->
+    <rect x="20" y="20" width="210" height="40" fill="#1e293b" rx="6" stroke="#475569" stroke-width="1" />
+    <text x="125" y="45" font-family="'Space Grotesk', sans-serif" font-size="16" font-weight="800" fill="#38bdf8" text-anchor="middle">ESP32 DevKit V1</text>
+    <text x="125" y="85" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f8fafc" text-anchor="middle">Xtensa Dual-Core 32-bit</text>
+    <text x="125" y="105" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">• Pulse Threshold &amp; Debounce</text>
+    <text x="125" y="122" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">• Step Accumulator Register</text>
+    <text x="125" y="139" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">• Battery ADC &amp; SOC Estimation</text>
+  </g>
+
+  <!-- Arrow to 16x2 LCD (I2C Bus) -->
+  <path d="M800 475 H870" stroke="#38bdf8" stroke-width="2.5" marker-end="url(#arr-cyan)" />
+  <text x="835" y="460" font-family="'JetBrains Mono', monospace" font-size="10" fill="#38bdf8" text-anchor="middle">I²C Bus</text>
+  <text x="835" y="472" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8" text-anchor="middle">SDA/SCL</text>
+
+  <!-- BLOCK 8: 16x2 I2C LCD Display -->
+  <g transform="translate(880, 395)">
+    <rect width="260" height="160" fill="#0c1d1a" stroke="#10b981" stroke-width="2" rx="10" />
+    <!-- Screen Bezel -->
+    <rect x="20" y="20" width="220" height="85" fill="#064e3b" rx="4" stroke="#047857" stroke-width="2" />
+    <!-- Text Lines on LCD -->
+    <text x="35" y="52" font-family="'JetBrains Mono', monospace" font-size="15" fill="#a7f3d0" font-weight="700">STEPS: 0048 [*]</text>
+    <text x="35" y="85" font-family="'JetBrains Mono', monospace" font-size="15" fill="#a7f3d0" font-weight="700">BAT: 3.84V IDLE</text>
+    <text x="130" y="125" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="700" fill="#f1f5f9" text-anchor="middle">16×2 I²C Display</text>
+    <text x="130" y="145" font-family="'JetBrains Mono', monospace" font-size="11" fill="#10b981" text-anchor="middle">Address 0x27 / 100 kHz</text>
+  </g>
+
+  <!-- System Safety Warning Strip -->
+  <g transform="translate(40, 585)">
+    <rect width="1120" height="35" fill="#241708" stroke="#d97706" stroke-width="1" rx="6" />
+    <text x="60" y="607" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#f59e0b">ELECTRICAL ISOLATION NOTE:</text>
+    <text x="260" y="607" font-family="'Inter', sans-serif" font-size="12" fill="#fed7aa">Raw piezoelectric spikes (&gt;30V) are strictly isolated from the ESP32 ADC and Lithium-ion cells via rectification, capacitive buffering, and scaled resistive division.</text>
+  </g>
+</svg>

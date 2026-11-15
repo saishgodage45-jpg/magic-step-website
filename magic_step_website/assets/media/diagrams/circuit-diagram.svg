@@ -1,0 +1,279 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700" role="img" aria-labelledby="cd-title cd-desc">
+  <title id="cd-title">Magic Step Electrical Circuit &amp; ESP32 Wiring Diagram</title>
+  <desc id="cd-desc">Detailed electrical schematic showing piezoelectric array, full-wave diode bridge DB107, 10uF filter capacitor, resistive voltage divider networks, ESP32 DevKit V1 connections, 16x2 I2C LCD, and 1S2P battery connection.</desc>
+  <defs>
+    <linearGradient id="cd-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#09101d" />
+      <stop offset="100%" stop-color="#101c30" />
+    </linearGradient>
+    <marker id="dot" markerWidth="6" markerHeight="6" refX="3" refY="3">
+      <circle cx="3" cy="3" r="3" fill="#38bdf8" />
+    </marker>
+  </defs>
+
+  <rect width="1200" height="700" fill="url(#cd-bg)" rx="16" />
+
+  <!-- Blueprint grid -->
+  <g stroke="#38bdf8" stroke-opacity="0.05" stroke-width="1">
+    <path d="M0,70 H1200 M0,140 H1200 M0,210 H1200 M0,280 H1200 M0,350 H1200 M0,420 H1200 M0,490 H1200 M0,560 H1200 M0,630 H1200" />
+    <path d="M70,0 V700 M140,0 V700 M210,0 V700 M280,0 V700 M350,0 V700 M420,0 V700 M490,0 V700 M560,0 V700 M630,0 V700 M700,0 V700 M770,0 V700 M840,0 V700 M910,0 V700 M980,0 V700 M1050,0 V700 M1120,0 V700" />
+  </g>
+
+  <!-- Title Header -->
+  <rect x="40" y="25" width="1120" height="50" fill="#131e33" rx="8" stroke="#2a3f60" stroke-width="1" />
+  <text x="60" y="56" font-family="'Space Grotesk', system-ui, sans-serif" font-size="17" font-weight="700" fill="#f8fafc">ELECTRICAL SCHEMATIC: POWER CONDITIONING, SENSING &amp; TELEMETRY INTERFACE</text>
+  <text x="1130" y="55" font-family="'JetBrains Mono', monospace" font-size="12" fill="#38bdf8" text-anchor="end">DWG NO: MS-ELEC-01</text>
+
+  <!-- SECTION 1: Piezoelectric Sensor Matrix -->
+  <g transform="translate(50, 100)">
+    <rect width="210" height="520" fill="#111c2e" stroke="#f59e0b" stroke-width="1.5" rx="10" />
+    <text x="105" y="30" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="700" fill="#f59e0b" text-anchor="middle">6× PIEZO MATRIX (PARALLEL)</text>
+    
+    <!-- 6 Piezo Symbols -->
+    <!-- P1 -->
+    <g transform="translate(45, 60)">
+      <circle cx="20" cy="20" r="18" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5" />
+      <line x1="8" y1="14" x2="32" y2="14" stroke="#f59e0b" stroke-width="2" />
+      <line x1="8" y1="26" x2="32" y2="26" stroke="#f59e0b" stroke-width="2" />
+      <rect x="12" y="16" width="16" height="8" fill="#cbd5e1" />
+      <text x="50" y="24" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f8fafc">PZ 1 (⌀27mm)</text>
+    </g>
+    <!-- P2 -->
+    <g transform="translate(45, 125)">
+      <circle cx="20" cy="20" r="18" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5" />
+      <line x1="8" y1="14" x2="32" y2="14" stroke="#f59e0b" stroke-width="2" />
+      <line x1="8" y1="26" x2="32" y2="26" stroke="#f59e0b" stroke-width="2" />
+      <rect x="12" y="16" width="16" height="8" fill="#cbd5e1" />
+      <text x="50" y="24" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f8fafc">PZ 2 (⌀27mm)</text>
+    </g>
+    <!-- P3 -->
+    <g transform="translate(45, 190)">
+      <circle cx="20" cy="20" r="18" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5" />
+      <line x1="8" y1="14" x2="32" y2="14" stroke="#f59e0b" stroke-width="2" />
+      <line x1="8" y1="26" x2="32" y2="26" stroke="#f59e0b" stroke-width="2" />
+      <rect x="12" y="16" width="16" height="8" fill="#cbd5e1" />
+      <text x="50" y="24" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f8fafc">PZ 3 (⌀27mm)</text>
+    </g>
+    <!-- P4 -->
+    <g transform="translate(45, 255)">
+      <circle cx="20" cy="20" r="18" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5" />
+      <line x1="8" y1="14" x2="32" y2="14" stroke="#f59e0b" stroke-width="2" />
+      <line x1="8" y1="26" x2="32" y2="26" stroke="#f59e0b" stroke-width="2" />
+      <rect x="12" y="16" width="16" height="8" fill="#cbd5e1" />
+      <text x="50" y="24" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f8fafc">PZ 4 (⌀27mm)</text>
+    </g>
+    <!-- P5 -->
+    <g transform="translate(45, 320)">
+      <circle cx="20" cy="20" r="18" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5" />
+      <line x1="8" y1="14" x2="32" y2="14" stroke="#f59e0b" stroke-width="2" />
+      <line x1="8" y1="26" x2="32" y2="26" stroke="#f59e0b" stroke-width="2" />
+      <rect x="12" y="16" width="16" height="8" fill="#cbd5e1" />
+      <text x="50" y="24" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f8fafc">PZ 5 (⌀27mm)</text>
+    </g>
+    <!-- P6 -->
+    <g transform="translate(45, 385)">
+      <circle cx="20" cy="20" r="18" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5" />
+      <line x1="8" y1="14" x2="32" y2="14" stroke="#f59e0b" stroke-width="2" />
+      <line x1="8" y1="26" x2="32" y2="26" stroke="#f59e0b" stroke-width="2" />
+      <rect x="12" y="16" width="16" height="8" fill="#cbd5e1" />
+      <text x="50" y="24" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f8fafc">PZ 6 (⌀27mm)</text>
+    </g>
+
+    <!-- Parallel Bus Rails -->
+    <line x1="25" y1="80" x2="25" y2="460" stroke="#f59e0b" stroke-width="2.5" />
+    <line x1="15" y1="80" x2="15" y2="480" stroke="#94a3b8" stroke-width="2" />
+    <text x="15" y="505" font-family="'JetBrains Mono', monospace" font-size="10" fill="#94a3b8">AC COM</text>
+    <text x="35" y="480" font-family="'JetBrains Mono', monospace" font-size="10" fill="#f59e0b">AC SIG</text>
+  </g>
+
+  <!-- Connection to Rectifier -->
+  <line x1="260" y1="220" x2="320" y2="220" stroke="#f59e0b" stroke-width="2.5" />
+  <line x1="260" y1="260" x2="320" y2="260" stroke="#94a3b8" stroke-width="2" />
+
+  <!-- SECTION 2: Full-Wave Diode Bridge (DB107) -->
+  <g transform="translate(320, 150)">
+    <rect width="180" height="220" fill="#111c2e" stroke="#38bdf8" stroke-width="1.5" rx="10" />
+    <text x="90" y="28" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="700" fill="#38bdf8" text-anchor="middle">BRIDGE RECTIFIER</text>
+    <text x="90" y="46" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">Model: DB107 (1A 1000V)</text>
+
+    <!-- Diode Bridge Diamond -->
+    <g transform="translate(90, 115)">
+      <polygon points="0,-45 45,0 0,45 -45,0" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
+      <!-- D1 -->
+      <polygon points="-25,-25 -10,-10 -25,-10" fill="#38bdf8" />
+      <!-- D2 -->
+      <polygon points="25,-25 10,-10 25,-10" fill="#38bdf8" />
+      <!-- D3 -->
+      <polygon points="-25,25 -10,10 -25,10" fill="#38bdf8" />
+      <!-- D4 -->
+      <polygon points="25,25 10,10 25,10" fill="#38bdf8" />
+
+      <!-- AC Inputs -->
+      <circle cx="-45" cy="0" r="3" fill="#f59e0b" />
+      <text x="-52" y="-5" font-family="'JetBrains Mono', monospace" font-size="11" fill="#f59e0b">~</text>
+      <circle cx="0" cy="45" r="3" fill="#94a3b8" />
+      <text x="6" y="48" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">~</text>
+
+      <!-- DC Outputs -->
+      <circle cx="0" cy="-45" r="4" fill="#ef4444" />
+      <text x="8" y="-45" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#ef4444">+</text>
+      <circle cx="45" cy="0" r="4" fill="#3b82f6" />
+      <text x="48" y="16" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#3b82f6">-</text>
+    </g>
+
+    <text x="90" y="200" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b" text-anchor="middle">4× Fast Recovery Diodes</text>
+  </g>
+
+  <!-- SECTION 3: Smoothing & Buffer Filter (10 uF) -->
+  <g transform="translate(540, 150)">
+    <rect width="160" height="220" fill="#111c2e" stroke="#38bdf8" stroke-width="1.5" rx="10" />
+    <text x="80" y="28" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="700" fill="#38bdf8" text-anchor="middle">CAPACITOR BUFFER</text>
+    <text x="80" y="46" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">10 µF, 50V Electrolytic</text>
+
+    <!-- Capacitor symbol -->
+    <g transform="translate(80, 115)">
+      <!-- Leads -->
+      <line x1="0" y1="-45" x2="0" y2="-12" stroke="#ef4444" stroke-width="2" />
+      <line x1="0" y1="12" x2="0" y2="45" stroke="#3b82f6" stroke-width="2" />
+      <!-- Plates -->
+      <rect x="-24" y="-12" width="48" height="6" fill="#ef4444" rx="1" />
+      <path d="M-24,12 Q0,6 24,12" stroke="#3b82f6" stroke-width="4" fill="none" />
+      <text x="12" y="-20" font-family="'JetBrains Mono', monospace" font-size="12" fill="#ef4444">+</text>
+    </g>
+
+    <text x="80" y="185" font-family="'JetBrains Mono', monospace" font-size="11" fill="#38bdf8" text-anchor="middle">Low ESR Filter</text>
+    <text x="80" y="202" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b" text-anchor="middle">Smooths pulse ringing</text>
+  </g>
+
+  <!-- DC Bus connections -->
+  <path d="M410 105 H540 V105" stroke="#ef4444" stroke-width="2.5" />
+  <path d="M410 105 H620" stroke="#ef4444" stroke-width="2.5" />
+  <path d="M410 330 H620" stroke="#3b82f6" stroke-width="2.5" />
+
+  <!-- SECTION 4: Analog Signal Conditioning (Resistor Divider) -->
+  <g transform="translate(540, 400)">
+    <rect width="160" height="220" fill="#111c2e" stroke="#64748b" stroke-width="1.5" rx="10" />
+    <text x="80" y="28" font-family="'Space Grotesk', sans-serif" font-size="13" font-weight="700" fill="#cbd5e1" text-anchor="middle">VOLTAGE DIVIDER</text>
+    <text x="80" y="46" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">ADC Protection Scaling</text>
+
+    <!-- Resistor R1 -->
+    <rect x="70" y="70" width="20" height="40" fill="#1e293b" stroke="#cbd5e1" stroke-width="1.5" />
+    <text x="100" y="95" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cbd5e1">R1 100kΩ</text>
+    <!-- Midpoint tap -->
+    <circle cx="80" cy="125" r="4" fill="#38bdf8" />
+    <!-- Resistor R2 -->
+    <rect x="70" y="140" width="20" height="40" fill="#1e293b" stroke="#cbd5e1" stroke-width="1.5" />
+    <text x="100" y="165" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cbd5e1">R2 47kΩ</text>
+
+    <!-- 3.3V Zener Diode Clamp -->
+    <g transform="translate(45, 125)">
+      <line x1="0" y1="0" x2="35" y2="0" stroke="#38bdf8" stroke-width="1.5" />
+      <polygon points="5,-6 15,0 5,6" fill="#f59e0b" />
+      <line x1="15" y1="-8" x2="15" y2="8" stroke="#f59e0b" stroke-width="1.5" />
+      <text x="-5" y="-10" font-family="'JetBrains Mono', monospace" font-size="9" fill="#f59e0b">3.3V Zener</text>
+    </g>
+
+    <text x="80" y="205" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10b981" text-anchor="middle">V_adc ≤ 3.30 V</text>
+  </g>
+
+  <!-- Tap connection down to voltage divider -->
+  <line x1="620" y1="105" x2="620" y2="470" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,4" />
+
+  <!-- SECTION 5: ESP32 DevKit V1 Pinout -->
+  <g transform="translate(740, 100)">
+    <rect width="210" height="520" fill="#132135" stroke="#38bdf8" stroke-width="2" rx="12" />
+    <rect x="20" y="18" width="170" height="34" fill="#1e293b" rx="6" stroke="#475569" stroke-width="1" />
+    <text x="105" y="40" font-family="'Space Grotesk', sans-serif" font-size="16" font-weight="800" fill="#38bdf8" text-anchor="middle">ESP32 DevKit V1</text>
+    <text x="105" y="70" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">30-PIN MCU MODULE</text>
+
+    <!-- Pins on Left -->
+    <g transform="translate(15, 95)" font-family="'JetBrains Mono', monospace" font-size="11">
+      <rect x="0" y="0" width="80" height="22" fill="#1e293b" rx="3" stroke="#38bdf8" stroke-width="1" />
+      <text x="6" y="16" fill="#38bdf8">GPIO 34</text>
+      <text x="90" y="16" fill="#94a3b8" font-size="10">← Piezo ADC</text>
+
+      <rect x="0" y="40" width="80" height="22" fill="#1e293b" rx="3" stroke="#10b981" stroke-width="1" />
+      <text x="6" y="56" fill="#10b981">GPIO 35</text>
+      <text x="90" y="56" fill="#94a3b8" font-size="10">← Battery ADC</text>
+
+      <rect x="0" y="80" width="80" height="22" fill="#1e293b" rx="3" stroke="#f59e0b" stroke-width="1" />
+      <text x="6" y="96" fill="#f59e0b">GPIO 32</text>
+      <text x="90" y="96" fill="#94a3b8" font-size="10">← CHRG Stat</text>
+
+      <rect x="0" y="140" width="80" height="22" fill="#1e293b" rx="3" stroke="#38bdf8" stroke-width="1" />
+      <text x="6" y="156" fill="#38bdf8">GPIO 21</text>
+      <text x="90" y="156" fill="#38bdf8" font-size="10">→ I²C SDA</text>
+
+      <rect x="0" y="180" width="80" height="22" fill="#1e293b" rx="3" stroke="#38bdf8" stroke-width="1" />
+      <text x="6" y="196" fill="#38bdf8">GPIO 22</text>
+      <text x="90" y="196" fill="#38bdf8" font-size="10">→ I²C SCL</text>
+
+      <rect x="0" y="240" width="80" height="22" fill="#1e293b" rx="3" stroke="#ef4444" stroke-width="1" />
+      <text x="6" y="256" fill="#ef4444">VIN (5V)</text>
+      <text x="90" y="256" fill="#ef4444" font-size="10">Supply In</text>
+
+      <rect x="0" y="280" width="80" height="22" fill="#1e293b" rx="3" stroke="#3b82f6" stroke-width="1" />
+      <text x="6" y="296" fill="#3b82f6">GND</text>
+      <text x="90" y="296" fill="#3b82f6" font-size="10">Common</text>
+    </g>
+
+    <!-- Internal Flash note -->
+    <rect x="25" y="440" width="160" height="60" fill="#0f172a" rx="6" />
+    <text x="105" y="462" font-family="'JetBrains Mono', monospace" font-size="11" fill="#38bdf8" text-anchor="middle">Firmware Engine</text>
+    <text x="105" y="480" font-family="'JetBrains Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="middle">FreeRTOS / 12-bit ADC</text>
+  </g>
+
+  <!-- Route from divider midpoint to GPIO 34 -->
+  <path d="M620 525 H720 V195 H740" stroke="#38bdf8" stroke-width="2" fill="none" />
+
+  <!-- SECTION 6: 16x2 I2C Character LCD -->
+  <g transform="translate(980, 200)">
+    <rect width="180" height="200" fill="#0b241c" stroke="#10b981" stroke-width="2" rx="10" />
+    <text x="90" y="28" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="700" fill="#10b981" text-anchor="middle">16×2 I²C LCD</text>
+    <text x="90" y="46" font-family="'JetBrains Mono', monospace" font-size="11" fill="#6ee7b7" text-anchor="middle">Address: 0x27</text>
+
+    <!-- LCD Display Pane -->
+    <rect x="15" y="60" width="150" height="60" fill="#064e3b" rx="4" stroke="#047857" stroke-width="1" />
+    <text x="25" y="85" font-family="'JetBrains Mono', monospace" font-size="12" fill="#a7f3d0" font-weight="700">STEPS: 0048</text>
+    <text x="25" y="105" font-family="'JetBrains Mono', monospace" font-size="12" fill="#a7f3d0" font-weight="700">BAT: 3.84V</text>
+
+    <!-- Pin Headers -->
+    <g transform="translate(20, 135)" font-family="'JetBrains Mono', monospace" font-size="10" fill="#94a3b8">
+      <text x="0" y="15">GND</text>
+      <text x="35" y="15">VCC</text>
+      <text x="75" y="15">SDA</text>
+      <text x="115" y="15">SCL</text>
+    </g>
+
+    <text x="90" y="180" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10b981" text-anchor="middle">PCF8574 Backpack</text>
+  </g>
+
+  <!-- I2C Bus wires to LCD -->
+  <path d="M820 245 H980" stroke="#38bdf8" stroke-width="2" fill="none" />
+  <path d="M820 285 H980" stroke="#38bdf8" stroke-width="2" fill="none" />
+
+  <!-- SECTION 7: 1S2P Li-ion Storage Experiment -->
+  <g transform="translate(980, 440)">
+    <rect width="180" height="180" fill="#111c2e" stroke="#10b981" stroke-width="1.5" rx="10" />
+    <text x="90" y="28" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="700" fill="#10b981" text-anchor="middle">1S2P LI-ION PACK</text>
+    <text x="90" y="46" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">2× 18650 in Parallel</text>
+
+    <!-- Cells -->
+    <rect x="40" y="65" width="40" height="70" fill="#132e27" stroke="#10b981" stroke-width="1.5" rx="4" />
+    <rect x="50" y="57" width="20" height="8" fill="#10b981" rx="2" />
+    <rect x="100" y="65" width="40" height="70" fill="#132e27" stroke="#10b981" stroke-width="1.5" rx="4" />
+    <rect x="110" y="57" width="20" height="8" fill="#10b981" rx="2" />
+
+    <text x="90" y="160" font-family="'JetBrains Mono', monospace" font-size="11" fill="#10b981" text-anchor="middle">3.7V Nom. / 4.2V Max</text>
+  </g>
+
+  <!-- Battery tap line to GPIO 35 -->
+  <path d="M980 500 H890 V145 H820" stroke="#10b981" stroke-width="2" stroke-dasharray="4,4" fill="none" />
+
+  <!-- Footer Verification Label -->
+  <g transform="translate(40, 645)">
+    <rect width="1120" height="35" fill="#1e293b" rx="6" />
+    <text x="60" y="667" font-family="'JetBrains Mono', monospace" font-size="11" fill="#38bdf8">CONFIRMATION CHECKLIST:</text>
+    <text x="240" y="667" font-family="'Inter', sans-serif" font-size="11" fill="#cbd5e1">1S2P parallel cells must be capacity-matched. Charge management board model, status pin logic and divider ratios to be verified before final submission.</text>
+  </g>
+</svg>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" width="1000" height="750" role="img" aria-labelledby="at-title">
+  <title id="at-title">Fully Assembled Magic Step Footstep Tile Prototype</title>
+  <defs>
+    <linearGradient id="bench6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111c2c" /><stop offset="100%" stop-color="#0a121e" />
+    </linearGradient>
+    <linearGradient id="tile-tread" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155" /><stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="750" fill="url(#bench6)" rx="12" />
+
+  <!-- Assembled Prototype in 3D Perspective -->
+  <g transform="translate(180, 160)">
+    <!-- Base Plate Rim -->
+    <rect x="0" y="300" width="640" height="40" fill="#4d3319" stroke="#2b1a0a" stroke-width="2" rx="4" />
+    <!-- Upper Tread Assembly Box -->
+    <rect x="10" y="40" width="620" height="260" fill="url(#tile-tread)" stroke="#38bdf8" stroke-width="2.5" rx="10" />
+
+    <!-- Tread Plate Gripping Surface Texture -->
+    <g stroke="#38bdf8" stroke-width="1.2" opacity="0.35">
+      <line x1="40" y1="60" x2="600" y2="60" /><line x1="40" y1="90" x2="600" y2="90" />
+      <line x1="40" y1="120" x2="600" y2="120" /><line x1="40" y1="150" x2="600" y2="150" />
+      <line x1="40" y1="180" x2="600" y2="180" /><line x1="40" y1="210" x2="600" y2="210" />
+      <line x1="40" y1="240" x2="600" y2="240" /><line x1="40" y1="270" x2="600" y2="270" />
+    </g>
+
+    <!-- Center Stomp Footprint Marker -->
+    <g transform="translate(320, 170)" opacity="0.9">
+      <!-- Footprint Graphic -->
+      <path d="M-40,40 C-20,60 30,60 45,40 C60,20 65,-30 35,-65 C10,-90 -30,-80 -45,-40 Z" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="5,4" />
+      <text x="0" y="-10" font-family="'Space Grotesk', sans-serif" font-size="16" font-weight="800" fill="#38bdf8" text-anchor="middle" letter-spacing="1">STEP HERE</text>
+      <text x="0" y="10" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">ACTIVE ENERGY HARVEST ZONE</text>
+    </g>
+
+    <!-- Edge Fastener Rivets -->
+    <circle cx="30" cy="60" r="4" fill="#94a3b8" stroke="#475569" stroke-width="1" />
+    <circle cx="610" cy="60" r="4" fill="#94a3b8" stroke="#475569" stroke-width="1" />
+    <circle cx="30" cy="280" r="4" fill="#94a3b8" stroke="#475569" stroke-width="1" />
+    <circle cx="610" cy="280" r="4" fill="#94a3b8" stroke="#475569" stroke-width="1" />
+
+    <!-- Wiring Conduit Gland (Rear Left) -->
+    <rect x="-15" y="150" width="25" height="35" fill="#475569" rx="3" stroke="#334155" stroke-width="1" />
+    <path d="M-15,168 C-60,168 -100,240 -120,320" stroke="#000" stroke-width="6" fill="none" />
+  </g>
+
+  <!-- Prototype Specifications Overlay Tag -->
+  <g transform="translate(200, 560)">
+    <rect width="600" height="70" fill="#132135" stroke="#38bdf8" stroke-width="1.5" rx="8" />
+    <text x="25" y="28" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="700" fill="#f8fafc">MAGIC STEP PROTOTYPE TILE · TEST-READY ASSEMBLY</text>
+    <text x="25" y="50" font-family="'JetBrains Mono', monospace" font-size="12" fill="#38bdf8">Active Footprint: 300 × 160 mm  |  Internal Height: 10 mm Base + 6 mm Tread</text>
+  </g>
+
+  <!-- Photo Metadata Stamp -->
+  <rect x="50" y="40" width="460" height="45" fill="#0f172a" opacity="0.9" rx="6" stroke="#38bdf8" stroke-width="1" />
+  <text x="70" y="68" font-family="'JetBrains Mono', monospace" font-size="12" fill="#38bdf8" font-weight="700">WORKSHOP LOG: STEP 08 · ASSEMBLED PLATFORM TILE</text>
+</svg>

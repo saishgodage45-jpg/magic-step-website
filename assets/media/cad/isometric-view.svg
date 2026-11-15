@@ -1,0 +1,201 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-labelledby="iso-title iso-desc">
+  <title id="iso-title">Magic Step Footstep Tile — Isometric CAD Assembly View</title>
+  <desc id="iso-desc">3D isometric CAD visualization of the assembled footstep generation tile showing the upper tread plate, 2x3 piezoelectric sensor matrix, wooden base platform, and wiring outlet.</desc>
+  <defs>
+    <linearGradient id="cad-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e1726" />
+      <stop offset="100%" stop-color="#141f33" />
+    </linearGradient>
+    <linearGradient id="wood-top" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#644929" />
+      <stop offset="100%" stop-color="#7c5c37" />
+    </linearGradient>
+    <linearGradient id="wood-side" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#453118" />
+      <stop offset="100%" stop-color="#30210f" />
+    </linearGradient>
+    <linearGradient id="tread-top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <linearGradient id="gold-disc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d97706" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feGaussianBlur stdDeviation="14" result="blur" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.45 0" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#cad-bg)" rx="16" />
+
+  <!-- Blueprint Engineering Grid -->
+  <g stroke="#38bdf8" stroke-opacity="0.06" stroke-width="1">
+    <path d="M0,80 H1200 M0,160 H1200 M0,240 H1200 M0,320 H1200 M0,400 H1200 M0,480 H1200 M0,560 H1200 M0,640 H1200 M0,720 H1200" />
+    <path d="M80,0 V800 M160,0 V800 M240,0 V800 M320,0 V800 M400,0 V800 M480,0 V800 M560,0 V800 M640,0 V800 M720,0 V800 M800,0 V800 M880,0 V800 M960,0 V800 M1040,0 V800 M1120,0 V800" />
+  </g>
+
+  <!-- SolidWorks Drawing Frame Border -->
+  <rect x="30" y="30" width="1140" height="740" fill="none" stroke="#263a56" stroke-width="2" rx="8" />
+  <rect x="34" y="34" width="1132" height="732" fill="none" stroke="#1b2a40" stroke-width="1" rx="6" />
+
+  <!-- Drawing Title Block -->
+  <g transform="translate(820, 660)">
+    <rect width="330" height="90" fill="#0f1929" stroke="#38bdf8" stroke-width="1.5" rx="4" />
+    <line x1="0" y1="30" x2="330" y2="30" stroke="#263a56" stroke-width="1" />
+    <line x1="0" y1="60" x2="330" y2="60" stroke="#263a56" stroke-width="1" />
+    <line x1="180" y1="0" x2="180" y2="60" stroke="#263a56" stroke-width="1" />
+    <text x="12" y="20" font-family="'JetBrains Mono', monospace" font-size="10" fill="#94a3b8">PROJECT: MAGIC STEP</text>
+    <text x="192" y="20" font-family="'JetBrains Mono', monospace" font-size="10" fill="#38bdf8">SCALE: 1:2.5</text>
+    <text x="12" y="50" font-family="'JetBrains Mono', monospace" font-size="10" fill="#94a3b8">DWG: MS-CAD-ISO-01</text>
+    <text x="192" y="50" font-family="'JetBrains Mono', monospace" font-size="10" fill="#94a3b8">SHEET 1 OF 3</text>
+    <text x="12" y="80" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" fill="#f8fafc">SANJIVANI UNIVERSITY · GROUP 16</text>
+  </g>
+
+  <!-- Header Annotation -->
+  <text x="60" y="70" font-family="'Space Grotesk', sans-serif" font-size="20" font-weight="700" fill="#f8fafc" letter-spacing="0.5">SOLIDWORKS 3D CAD MODEL — ASSEMBLED FOOTSTEP PLATFORM</text>
+  <text x="60" y="95" font-family="'JetBrains Mono', monospace" font-size="13" fill="#38bdf8">ISOMETRIC PROJECTION · 300 mm × 160 mm × 10 mm BASE WITH 6× ⌀27 mm DISCS</text>
+
+  <!-- ISOMETRIC 3D TILE ASSEMBLY -->
+  <!-- Center is around (560, 420) -->
+  <g transform="translate(560, 400)" filter="url(#shadow)">
+    <!-- Floor Drop Shadow -->
+    <ellipse cx="0" cy="180" rx="420" ry="120" fill="#000" opacity="0.4" />
+
+    <!-- LAYER 1: Wooden Base Platform (300 × 160 × 10 mm) -->
+    <!-- Base Bottom Edge & Sides -->
+    <!-- Isometric axes: X = (+340, +120), Y = (-280, +120), Z = (0, -40) -->
+    <g id="base-plate">
+      <!-- Front-Left Face -->
+      <polygon points="-280,90 0,190 0,225 -280,125" fill="#3a2713" stroke="#251809" stroke-width="1.5" />
+      <!-- Front-Right Face -->
+      <polygon points="0,190 320,80 320,115 0,225" fill="#52391c" stroke="#251809" stroke-width="1.5" />
+      <!-- Base Top Surface -->
+      <polygon points="0,70 320,-40 40,-150 -280,-40" fill="url(#wood-top)" stroke="#7c5c37" stroke-width="1.5" />
+      
+      <!-- Base edge trim line -->
+      <polyline points="-280,-40 0,70 320,-40" fill="none" stroke="#a17646" stroke-width="2" />
+    </g>
+
+    <!-- LAYER 2: 6× Piezoelectric Transducer Discs (2 Rows × 3 Columns) -->
+    <g id="piezo-discs" transform="translate(10, 0)">
+      <!-- Row 1 (Rear) -->
+      <!-- Disc 1 -->
+      <g transform="translate(-160, -60)">
+        <ellipse cx="0" cy="0" rx="36" ry="16" fill="url(#gold-disc)" stroke="#78350f" stroke-width="1.5" />
+        <ellipse cx="0" cy="-2" rx="24" ry="10" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1" />
+      </g>
+      <!-- Disc 2 -->
+      <g transform="translate(-10, -95)">
+        <ellipse cx="0" cy="0" rx="36" ry="16" fill="url(#gold-disc)" stroke="#78350f" stroke-width="1.5" />
+        <ellipse cx="0" cy="-2" rx="24" ry="10" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1" />
+      </g>
+      <!-- Disc 3 -->
+      <g transform="translate(140, -130)">
+        <ellipse cx="0" cy="0" rx="36" ry="16" fill="url(#gold-disc)" stroke="#78350f" stroke-width="1.5" />
+        <ellipse cx="0" cy="-2" rx="24" ry="10" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1" />
+      </g>
+
+      <!-- Row 2 (Front) -->
+      <!-- Disc 4 -->
+      <g transform="translate(-90, 0)">
+        <ellipse cx="0" cy="0" rx="38" ry="17" fill="url(#gold-disc)" stroke="#78350f" stroke-width="1.5" />
+        <ellipse cx="0" cy="-2" rx="26" ry="11" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1" />
+      </g>
+      <!-- Disc 5 -->
+      <g transform="translate(60, -35)">
+        <ellipse cx="0" cy="0" rx="38" ry="17" fill="url(#gold-disc)" stroke="#78350f" stroke-width="1.5" />
+        <ellipse cx="0" cy="-2" rx="26" ry="11" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1" />
+      </g>
+      <!-- Disc 6 -->
+      <g transform="translate(210, -70)">
+        <ellipse cx="0" cy="0" rx="38" ry="17" fill="url(#gold-disc)" stroke="#78350f" stroke-width="1.5" />
+        <ellipse cx="0" cy="-2" rx="26" ry="11" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1" />
+      </g>
+    </g>
+
+    <!-- LAYER 3: Force Distribution Rubber Pads (on top of discs) -->
+    <g id="rubber-dampers" opacity="0.85">
+      <ellipse cx="-150" cy="-62" rx="20" ry="9" fill="#1e293b" stroke="#0f172a" stroke-width="1" />
+      <ellipse cx="0" cy="-97" rx="20" ry="9" fill="#1e293b" stroke="#0f172a" stroke-width="1" />
+      <ellipse cx="150" cy="-132" rx="20" ry="9" fill="#1e293b" stroke="#0f172a" stroke-width="1" />
+      <ellipse cx="-80" cy="-2" rx="22" ry="10" fill="#1e293b" stroke="#0f172a" stroke-width="1" />
+      <ellipse cx="70" cy="-37" rx="22" ry="10" fill="#1e293b" stroke="#0f172a" stroke-width="1" />
+      <ellipse cx="220" cy="-72" rx="22" ry="10" fill="#1e293b" stroke="#0f172a" stroke-width="1" />
+    </g>
+
+    <!-- LAYER 4: Semi-Transparent Top Stepping Plate (Exploded / Lifted slightly to show interior) -->
+    <g id="tread-plate" transform="translate(0, -90)">
+      <!-- Left side face -->
+      <polygon points="-270,80 0,175 0,190 -270,95" fill="#1e293b" opacity="0.8" />
+      <!-- Right side face -->
+      <polygon points="0,175 310,70 310,85 0,190" fill="#0f172a" opacity="0.8" />
+      <!-- Top Tread Surface (Translucent to view discs inside) -->
+      <polygon points="0,75 310,-35 40,-140 -270,-30" fill="url(#tread-top)" opacity="0.82" stroke="#38bdf8" stroke-width="2" />
+      
+      <!-- Anti-slip Tread Grid Textures on Plate -->
+      <g stroke="#38bdf8" stroke-opacity="0.3" stroke-width="1">
+        <line x1="-180" y1="0" x2="-20" y2="-60" />
+        <line x1="-90" y1="35" x2="70" y2="-25" />
+        <line x1="0" y1="70" x2="160" y2="10" />
+        <line x1="-230" y1="-15" x2="-70" y2="45" />
+        <line x1="-120" y1="-50" x2="40" y2="10" />
+        <line x1="-10" y1="-85" x2="150" y2="-25" />
+      </g>
+
+      <!-- Step Indicator Footprint Outline -->
+      <g transform="translate(15, -30) scale(0.9)" opacity="0.75">
+        <path d="M-40,25 C-30,40, 10,40, 25,25 C35,10, 45,-20, 20,-45 C0,-65, -30,-50, -40,-25 Z" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4,3" />
+        <text x="-5" y="-10" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" fill="#38bdf8" text-anchor="middle">STEP ZONE</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- CAD DIMENSION CALLOUTS & LEADER LINES -->
+  <!-- Callout 1: Top Plate -->
+  <g transform="translate(100, 230)">
+    <line x1="180" y1="90" x2="80" y2="0" stroke="#38bdf8" stroke-width="1.5" />
+    <circle cx="180" cy="90" r="4" fill="#38bdf8" />
+    <rect x="-80" y="-30" width="160" height="36" fill="#131e33" rx="4" stroke="#38bdf8" stroke-width="1" />
+    <text x="0" y="-8" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" fill="#f8fafc" text-anchor="middle">Upper Tread Plate</text>
+  </g>
+
+  <!-- Callout 2: Piezo Transducers -->
+  <g transform="translate(220, 470)">
+    <line x1="260" y1="-30" x2="100" y2="40" stroke="#f59e0b" stroke-width="1.5" />
+    <circle cx="260" cy="-30" r="4" fill="#f59e0b" />
+    <rect x="-20" y="30" width="220" height="48" fill="#131e33" rx="4" stroke="#f59e0b" stroke-width="1" />
+    <text x="90" y="52" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" fill="#f59e0b" text-anchor="middle">6× ⌀27mm Piezo Discs</text>
+    <text x="90" y="68" font-family="'JetBrains Mono', monospace" font-size="10" fill="#fed7aa" text-anchor="middle">2×3 Matrix · Brass/PZT</text>
+  </g>
+
+  <!-- Callout 3: Wooden Base Platform -->
+  <g transform="translate(860, 480)">
+    <line x1="-90" y1="20" x2="60" y2="-40" stroke="#10b981" stroke-width="1.5" />
+    <circle cx="-90" cy="20" r="4" fill="#10b981" />
+    <rect x="60" y="-60" width="220" height="52" fill="#131e33" rx="4" stroke="#10b981" stroke-width="1" />
+    <text x="170" y="-38" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" fill="#10b981" text-anchor="middle">Wooden Base Platform</text>
+    <text x="170" y="-20" font-family="'JetBrains Mono', monospace" font-size="11" fill="#6ee7b7" text-anchor="middle">300 × 160 × 10 mm</text>
+  </g>
+
+  <!-- Dimension line 300 mm -->
+  <g transform="translate(680, 520)">
+    <line x1="-120" y1="45" x2="200" y2="-65" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3" />
+    <circle cx="-120" cy="45" r="3" fill="#38bdf8" />
+    <circle cx="200" cy="-65" r="3" fill="#38bdf8" />
+    <rect x="10" y="-28" width="85" height="24" fill="#0f172a" rx="3" stroke="#38bdf8" stroke-width="1" />
+    <text x="52" y="-12" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">300 mm</text>
+  </g>
+
+  <!-- Dimension line 160 mm -->
+  <g transform="translate(380, 560)">
+    <line x1="-100" y1="-70" x2="140" y2="20" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3" />
+    <circle cx="-100" cy="-70" r="3" fill="#38bdf8" />
+    <circle cx="140" cy="20" r="3" fill="#38bdf8" />
+    <rect x="-10" y="-40" width="85" height="24" fill="#0f172a" rx="3" stroke="#38bdf8" stroke-width="1" />
+    <text x="32" y="-24" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">160 mm</text>
+  </g>
+</svg>

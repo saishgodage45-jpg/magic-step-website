@@ -1,0 +1,256 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 950" width="1400" height="950" role="img" aria-labelledby="dd-title dd-desc">
+  <title id="dd-title">Magic Step Engineering Drawing Sheet — Dimensioned Views</title>
+  <desc id="dd-desc">First-angle orthographic projection engineering drawing sheet of the Magic Step footstep generation tile with complete dimensional callouts: 300 mm length, 160 mm width, 10 mm thickness, and 27 mm transducer pitch.</desc>
+  <defs>
+    <linearGradient id="dwg-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a121e" />
+      <stop offset="100%" stop-color="#0e192a" />
+    </linearGradient>
+    <marker id="arr-dim" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M 0 1 L 8 4 L 0 7 Z" fill="#38bdf8" />
+    </marker>
+    <marker id="arr-dim-rev" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M 8 1 L 0 4 L 8 7 Z" fill="#38bdf8" />
+    </marker>
+  </defs>
+
+  <rect width="1400" height="950" fill="url(#dwg-bg)" rx="16" />
+
+  <!-- Drawing Outer & Inner Border -->
+  <rect x="25" y="25" width="1350" height="900" fill="none" stroke="#2a4365" stroke-width="2.5" />
+  <rect x="35" y="35" width="1330" height="880" fill="none" stroke="#1e293b" stroke-width="1.2" />
+
+  <!-- Grid Coordinate Marks on Border (A, B, C, D and 1, 2, 3, 4) -->
+  <g font-family="'JetBrains Mono', monospace" font-size="12" fill="#64748b" text-anchor="middle">
+    <text x="350" y="20">1</text><text x="700" y="20">2</text><text x="1050" y="20">3</text>
+    <text x="350" y="940">1</text><text x="700" y="940">2</text><text x="1050" y="940">3</text>
+    <text x="15" y="250">A</text><text x="15" y="475">B</text><text x="15" y="700">C</text>
+    <text x="1385" y="250">A</text><text x="1385" y="475">B</text><text x="1385" y="700">C</text>
+  </g>
+
+  <!-- FORMAL SOLIDWORKS TITLE BLOCK (Bottom Right) -->
+  <g transform="translate(835, 715)">
+    <rect width="530" height="200" fill="#0c1726" stroke="#38bdf8" stroke-width="1.8" />
+    <!-- Grid dividing lines -->
+    <line x1="0" y1="40" x2="530" y2="40" stroke="#1e3a5f" stroke-width="1.2" />
+    <line x1="0" y1="80" x2="530" y2="80" stroke="#1e3a5f" stroke-width="1.2" />
+    <line x1="0" y1="120" x2="530" y2="120" stroke="#1e3a5f" stroke-width="1.2" />
+    <line x1="0" y1="160" x2="530" y2="160" stroke="#1e3a5f" stroke-width="1.2" />
+    
+    <line x1="260" y1="0" x2="260" y2="120" stroke="#1e3a5f" stroke-width="1.2" />
+    <line x1="390" y1="0" x2="390" y2="80" stroke="#1e3a5f" stroke-width="1.2" />
+    <line x1="130" y1="40" x2="130" y2="120" stroke="#1e3a5f" stroke-width="1.2" />
+
+    <text x="15" y="26" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="700" fill="#f8fafc">SANJIVANI UNIVERSITY</text>
+    <text x="275" y="26" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">DEPT: MECHANICAL ENGG</text>
+    <text x="405" y="26" font-family="'JetBrains Mono', monospace" font-size="11" fill="#38bdf8">GROUP: 16</text>
+
+    <text x="15" y="62" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">DESIGNED BY:</text>
+    <text x="15" y="75" font-family="'Space Grotesk', sans-serif" font-size="11" font-weight="600" fill="#cbd5e1">S. GODAGE &amp; TEAM</text>
+
+    <text x="145" y="62" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">APPROVED BY:</text>
+    <text x="145" y="75" font-family="'Space Grotesk', sans-serif" font-size="11" font-weight="600" fill="#cbd5e1">DR. K. WAKCHAURE</text>
+
+    <text x="275" y="62" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">TOLERANCES:</text>
+    <text x="275" y="75" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cbd5e1">ISO 2768-m (±0.5mm)</text>
+
+    <text x="405" y="62" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">SCALE:</text>
+    <text x="405" y="75" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#38bdf8">1:2 (FULL METRIC)</text>
+
+    <text x="15" y="102" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">MATERIAL (BASE):</text>
+    <text x="15" y="115" font-family="'Space Grotesk', sans-serif" font-size="11" font-weight="600" fill="#cbd5e1">HARDWOOD (300×160×10)</text>
+
+    <text x="145" y="102" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">FINISH / SURFACE:</text>
+    <text x="145" y="115" font-family="'Space Grotesk', sans-serif" font-size="11" font-weight="600" fill="#cbd5e1">SEALED PLANED WOOD</text>
+
+    <text x="275" y="102" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">PROJECTION:</text>
+    <text x="275" y="115" font-family="'JetBrains Mono', monospace" font-size="11" fill="#38bdf8">FIRST ANGLE (⌖)</text>
+
+    <text x="15" y="145" font-family="'Space Grotesk', sans-serif" font-size="16" font-weight="800" fill="#38bdf8" letter-spacing="1">MAGIC STEP — GENERATION TILE</text>
+    <text x="515" y="145" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#94a3b8" text-anchor="end">REV: 01.4</text>
+
+    <text x="15" y="185" font-family="'JetBrains Mono', monospace" font-size="12" fill="#94a3b8">DWG NO: <tspan fill="#f8fafc" font-weight="700">MS-2026-ENG-001</tspan></text>
+    <text x="515" y="185" font-family="'JetBrains Mono', monospace" font-size="11" fill="#38bdf8" text-anchor="end">SHEET 1 OF 1</text>
+  </g>
+
+  <!-- VIEW 1: TOP ORTHOGRAPHIC VIEW (PLAN VIEW) -->
+  <g transform="translate(100, 100)">
+    <text x="0" y="0" font-family="'Space Grotesk', sans-serif" font-size="15" font-weight="700" fill="#38bdf8">VIEW A: TOP ORTHOGRAPHIC VIEW (PLAN)</text>
+    <text x="0" y="18" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">SCALE 1:2 · SENSOR GRID LAYOUT &amp; PITCH</text>
+
+    <!-- Base Plate Outline: 300 mm × 160 mm scaled to 600 px × 320 px -->
+    <rect x="50" y="50" width="600" height="320" fill="#141f33" stroke="#f8fafc" stroke-width="2" />
+    
+    <!-- Chamfered corners -->
+    <line x1="50" y1="65" x2="65" y2="50" stroke="#f8fafc" stroke-width="2" />
+    <line x1="635" y1="50" x2="650" y2="65" stroke="#f8fafc" stroke-width="2" />
+    <line x1="650" y1="355" x2="635" y2="370" stroke="#f8fafc" stroke-width="2" />
+    <line x1="65" y1="370" x2="50" y2="355" stroke="#f8fafc" stroke-width="2" />
+
+    <!-- Centerlines (Longitudinal & Transverse) -->
+    <line x1="25" y1="210" x2="675" y2="210" stroke="#38bdf8" stroke-width="1" stroke-dasharray="14,4,4,4" />
+    <line x1="350" y1="30" x2="350" y2="390" stroke="#38bdf8" stroke-width="1" stroke-dasharray="14,4,4,4" />
+
+    <!-- 6 Piezoelectric Discs (2 rows × 3 columns) -->
+    <!-- Col 1: X = 150 (50mm in from left), Col 2: X = 350 (Center), Col 3: X = 550 (50mm from right) -->
+    <!-- Row 1: Y = 130 (40mm from top), Row 2: Y = 290 (40mm from bottom) -->
+    <!-- Scaled diameter: 27 mm × 2 = 54 px (r = 27) -->
+    
+    <!-- Disc 1 -->
+    <circle cx="150" cy="130" r="27" fill="#1e293b" stroke="#f59e0b" stroke-width="2" />
+    <circle cx="150" cy="130" r="18" fill="#334155" stroke="#cbd5e1" stroke-width="1" />
+    <cross x="150" y="130" />
+    <line x1="135" y1="130" x2="165" y2="130" stroke="#f59e0b" stroke-width="1" />
+    <line x1="150" y1="115" x2="150" y2="145" stroke="#f59e0b" stroke-width="1" />
+
+    <!-- Disc 2 -->
+    <circle cx="350" cy="130" r="27" fill="#1e293b" stroke="#f59e0b" stroke-width="2" />
+    <circle cx="350" cy="130" r="18" fill="#334155" stroke="#cbd5e1" stroke-width="1" />
+    <line x1="335" y1="130" x2="365" y2="130" stroke="#f59e0b" stroke-width="1" />
+    <line x1="350" y1="115" x2="350" y2="145" stroke="#f59e0b" stroke-width="1" />
+
+    <!-- Disc 3 -->
+    <circle cx="550" cy="130" r="27" fill="#1e293b" stroke="#f59e0b" stroke-width="2" />
+    <circle cx="550" cy="130" r="18" fill="#334155" stroke="#cbd5e1" stroke-width="1" />
+    <line x1="535" y1="130" x2="565" y2="130" stroke="#f59e0b" stroke-width="1" />
+    <line x1="550" y1="115" x2="550" y2="145" stroke="#f59e0b" stroke-width="1" />
+
+    <!-- Disc 4 -->
+    <circle cx="150" cy="290" r="27" fill="#1e293b" stroke="#f59e0b" stroke-width="2" />
+    <circle cx="150" cy="290" r="18" fill="#334155" stroke="#cbd5e1" stroke-width="1" />
+    <line x1="135" y1="290" x2="165" y2="290" stroke="#f59e0b" stroke-width="1" />
+    <line x1="150" y1="275" x2="150" y2="305" stroke="#f59e0b" stroke-width="1" />
+
+    <!-- Disc 5 -->
+    <circle cx="350" cy="290" r="27" fill="#1e293b" stroke="#f59e0b" stroke-width="2" />
+    <circle cx="350" cy="290" r="18" fill="#334155" stroke="#cbd5e1" stroke-width="1" />
+    <line x1="335" y1="290" x2="365" y2="290" stroke="#f59e0b" stroke-width="1" />
+    <line x1="350" y1="275" x2="350" y2="305" stroke="#f59e0b" stroke-width="1" />
+
+    <!-- Disc 6 -->
+    <circle cx="550" cy="290" r="27" fill="#1e293b" stroke="#f59e0b" stroke-width="2" />
+    <circle cx="550" cy="290" r="18" fill="#334155" stroke="#cbd5e1" stroke-width="1" />
+    <line x1="535" y1="290" x2="565" y2="290" stroke="#f59e0b" stroke-width="1" />
+    <line x1="550" y1="275" x2="550" y2="305" stroke="#f59e0b" stroke-width="1" />
+
+    <!-- Dimension: Width 300 mm (Top horizontal) -->
+    <g transform="translate(0, -10)">
+      <line x1="50" y1="40" x2="50" y2="15" stroke="#64748b" stroke-width="1" />
+      <line x1="650" y1="40" x2="650" y2="15" stroke="#64748b" stroke-width="1" />
+      <line x1="55" y1="25" x2="645" y2="25" stroke="#38bdf8" stroke-width="1.5" marker-start="url(#arr-dim-rev)" marker-end="url(#arr-dim)" />
+      <rect x="315" y="14" width="70" height="22" fill="#0b1220" />
+      <text x="350" y="30" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#38bdf8" text-anchor="middle">300.0</text>
+    </g>
+
+    <!-- Dimension: Height 160 mm (Left vertical) -->
+    <g transform="translate(-15, 0)">
+      <line x1="45" y1="50" x2="20" y2="50" stroke="#64748b" stroke-width="1" />
+      <line x1="45" y1="370" x2="20" y2="370" stroke="#64748b" stroke-width="1" />
+      <line x1="30" y1="55" x2="30" y2="365" stroke="#38bdf8" stroke-width="1.5" marker-start="url(#arr-dim-rev)" marker-end="url(#arr-dim)" />
+      <rect x="15" y="198" width="30" height="24" fill="#0b1220" />
+      <text x="30" y="215" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#38bdf8" text-anchor="middle" transform="rotate(-90 30 210)">160.0</text>
+    </g>
+
+    <!-- Pitch Dimensions Between Discs (100 mm pitch = 200 px) -->
+    <g transform="translate(0, 395)">
+      <line x1="150" y1="-10" x2="150" y2="20" stroke="#64748b" stroke-width="1" />
+      <line x1="350" y1="-10" x2="350" y2="20" stroke="#64748b" stroke-width="1" />
+      <line x1="550" y1="-10" x2="550" y2="20" stroke="#64748b" stroke-width="1" />
+      <line x1="155" y1="12" x2="345" y2="12" stroke="#f59e0b" stroke-width="1.2" marker-start="url(#arr-dim-rev)" marker-end="url(#arr-dim)" />
+      <line x1="355" y1="12" x2="545" y2="12" stroke="#f59e0b" stroke-width="1.2" marker-start="url(#arr-dim-rev)" marker-end="url(#arr-dim)" />
+      <text x="250" y="28" font-family="'JetBrains Mono', monospace" font-size="11" fill="#f59e0b" text-anchor="middle">100.0</text>
+      <text x="450" y="28" font-family="'JetBrains Mono', monospace" font-size="11" fill="#f59e0b" text-anchor="middle">100.0</text>
+    </g>
+
+    <!-- Disc Diameter Callout -->
+    <g transform="translate(550, 130)">
+      <line x1="20" y1="-18" x2="70" y2="-50" stroke="#f59e0b" stroke-width="1.2" />
+      <line x1="70" y1="-50" x2="140" y2="-50" stroke="#f59e0b" stroke-width="1.2" />
+      <circle cx="20" cy="-18" r="3" fill="#f59e0b" />
+      <text x="75" y="-56" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#f59e0b">6× ⌀27.0 mm</text>
+    </g>
+  </g>
+
+  <!-- VIEW 2: FRONT ELEVATION VIEW (SECTION B-B) -->
+  <g transform="translate(100, 600)">
+    <text x="0" y="0" font-family="'Space Grotesk', sans-serif" font-size="15" font-weight="700" fill="#38bdf8">VIEW B: FRONT ELEVATION / CROSS SECTION</text>
+    <text x="0" y="18" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">SCALE 1:2 · BASE THICKNESS &amp; COMPRESSION GAP</text>
+
+    <!-- Top Plate: 600 px × 12 px (6 mm) -->
+    <rect x="50" y="45" width="600" height="14" fill="#334155" stroke="#f8fafc" stroke-width="1.5" />
+    <text x="350" y="56" font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8" text-anchor="middle">TOP FOOTSTEP TREAD PLATE</text>
+
+    <!-- Rubber pads (6 units visible in 2 rows front) -->
+    <rect x="135" y="59" width="30" height="8" fill="#475569" />
+    <rect x="335" y="59" width="30" height="8" fill="#475569" />
+    <rect x="535" y="59" width="30" height="8" fill="#475569" />
+
+    <!-- Piezo Discs (0.5 mm line) -->
+    <rect x="123" y="67" width="54" height="4" fill="#f59e0b" />
+    <rect x="323" y="67" width="54" height="4" fill="#f59e0b" />
+    <rect x="523" y="67" width="54" height="4" fill="#f59e0b" />
+
+    <!-- Wooden Base Platform: 600 px × 20 px (10 mm) -->
+    <rect x="50" y="71" width="600" height="25" fill="#52391c" stroke="#f8fafc" stroke-width="1.8" />
+    
+    <!-- Cross-hatching for wood -->
+    <g stroke="#7c5c37" stroke-width="1" opacity="0.6">
+      <line x1="80" y1="71" x2="105" y2="96" />
+      <line x1="140" y1="71" x2="165" y2="96" />
+      <line x1="200" y1="71" x2="225" y2="96" />
+      <line x1="260" y1="71" x2="285" y2="96" />
+      <line x1="320" y1="71" x2="345" y2="96" />
+      <line x1="380" y1="71" x2="405" y2="96" />
+      <line x1="440" y1="71" x2="465" y2="96" />
+      <line x1="500" y1="71" x2="525" y2="96" />
+      <line x1="560" y1="71" x2="585" y2="96" />
+      <line x1="620" y1="71" x2="645" y2="96" />
+    </g>
+
+    <text x="350" y="88" font-family="'JetBrains Mono', monospace" font-size="10" fill="#fef3c7" text-anchor="middle">WOODEN BASE PLATFORM (10.0 mm)</text>
+
+    <!-- Thickness Dimension 10 mm -->
+    <g transform="translate(660, 71)">
+      <line x1="5" y1="0" x2="25" y2="0" stroke="#64748b" stroke-width="1" />
+      <line x1="5" y1="25" x2="25" y2="25" stroke="#64748b" stroke-width="1" />
+      <line x1="18" y1="-5" x2="18" y2="30" stroke="#38bdf8" stroke-width="1.2" marker-start="url(#arr-dim-rev)" marker-end="url(#arr-dim)" />
+      <text x="30" y="16" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#38bdf8">10.0 mm</text>
+    </g>
+  </g>
+
+  <!-- VIEW 3: RIGHT SIDE ELEVATION VIEW -->
+  <g transform="translate(850, 100)">
+    <text x="0" y="0" font-family="'Space Grotesk', sans-serif" font-size="15" font-weight="700" fill="#38bdf8">VIEW C: SIDE ELEVATION (160 mm)</text>
+    <text x="0" y="18" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">SCALE 1:2 · 2 ROWS DEPTH PROFILE</text>
+
+    <!-- Side View: 320 px wide (160 mm) -->
+    <!-- Top plate -->
+    <rect x="40" y="125" width="320" height="14" fill="#334155" stroke="#f8fafc" stroke-width="1.5" />
+    <!-- 2 Discs along depth -->
+    <rect x="110" y="147" width="54" height="4" fill="#f59e0b" />
+    <rect x="230" y="147" width="54" height="4" fill="#f59e0b" />
+    <!-- Base Plate -->
+    <rect x="40" y="151" width="320" height="25" fill="#52391c" stroke="#f8fafc" stroke-width="1.8" />
+
+    <!-- Centerlines -->
+    <line x1="137" y1="110" x2="137" y2="190" stroke="#38bdf8" stroke-width="1" stroke-dasharray="8,3" />
+    <line x1="257" y1="110" x2="257" y2="190" stroke="#38bdf8" stroke-width="1" stroke-dasharray="8,3" />
+
+    <!-- Row Pitch: 80 mm (160 px) -->
+    <g transform="translate(0, 205)">
+      <line x1="137" y1="-15" x2="137" y2="15" stroke="#64748b" stroke-width="1" />
+      <line x1="257" y1="-15" x2="257" y2="15" stroke="#64748b" stroke-width="1" />
+      <line x1="142" y1="8" x2="252" y2="8" stroke="#f59e0b" stroke-width="1.2" marker-start="url(#arr-dim-rev)" marker-end="url(#arr-dim)" />
+      <text x="197" y="24" font-family="'JetBrains Mono', monospace" font-size="11" fill="#f59e0b" text-anchor="middle">80.0 mm</text>
+    </g>
+
+    <g transform="translate(0, 250)">
+      <rect width="360" height="120" fill="#0f1929" stroke="#1e3a5f" rx="6" />
+      <text x="15" y="25" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#38bdf8">FABRICATION TOLERANCES:</text>
+      <text x="15" y="48" font-family="'Inter', sans-serif" font-size="11" fill="#94a3b8">• Base Plate Length: 300 ± 1.0 mm</text>
+      <text x="15" y="66" font-family="'Inter', sans-serif" font-size="11" fill="#94a3b8">• Base Plate Width: 160 ± 1.0 mm</text>
+      <text x="15" y="84" font-family="'Inter', sans-serif" font-size="11" fill="#94a3b8">• Base Plate Thickness: 10 ± 0.5 mm</text>
+      <text x="15" y="102" font-family="'Inter', sans-serif" font-size="11" fill="#94a3b8">• Transducer Pitch: 100 mm (X) / 80 mm (Y)</text>
+    </g>
+  </g>
+</svg>

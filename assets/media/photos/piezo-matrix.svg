@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" width="1000" height="750" role="img" aria-labelledby="pm-title">
+  <title id="pm-title">Piezoelectric Sensor Matrix Assembly — 6× ⌀27mm Discs</title>
+  <defs>
+    <linearGradient id="bench2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141d2b" /><stop offset="100%" stop-color="#0c131f" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b45309" /><stop offset="50%" stop-color="#f59e0b" /><stop offset="100%" stop-color="#78350f" />
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="750" fill="url(#bench2)" rx="12" />
+  <!-- Base Plate -->
+  <g transform="translate(150, 130)">
+    <rect width="700" height="460" fill="#7a5530" stroke="#52381e" stroke-width="2" rx="8" />
+    <rect x="0" y="460" width="700" height="25" fill="#4d3319" stroke="#332211" stroke-width="1.5" rx="2" />
+    
+    <!-- 6 Discs in 2x3 Grid -->
+    <!-- Col 1 -->
+    <g transform="translate(150, 140)">
+      <circle cx="0" cy="0" r="55" fill="url(#gold)" stroke="#451a03" stroke-width="2" />
+      <circle cx="0" cy="0" r="38" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5" />
+      <circle cx="10" cy="-5" r="4" fill="#64748b" /><!-- Solder dot -->
+      <path d="M10,-5 Q40,-30 80,-20" stroke="#ef4444" stroke-width="2" fill="none" /><!-- Red wire -->
+      <path d="M-30,20 Q-10,50 30,60" stroke="#1e293b" stroke-width="2" fill="none" /><!-- Black wire -->
+      <text x="0" y="4" font-family="'JetBrains Mono', monospace" font-size="11" fill="#1e293b" font-weight="700" text-anchor="middle">PZ 01</text>
+    </g>
+    <g transform="translate(150, 320)">
+      <circle cx="0" cy="0" r="55" fill="url(#gold)" stroke="#451a03" stroke-width="2" />
+      <circle cx="0" cy="0" r="38" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5" />
+      <circle cx="10" cy="-5" r="4" fill="#64748b" />
+      <path d="M10,-5 Q40,-30 80,-20" stroke="#ef4444" stroke-width="2" fill="none" />
+      <path d="M-30,20 Q-10,50 30,60" stroke="#1e293b" stroke-width="2" fill="none" />
+      <text x="0" y="4" font-family="'JetBrains Mono', monospace" font-size="11" fill="#1e293b" font-weight="700" text-anchor="middle">PZ 04</text>
+    </g>
+
+    <!-- Col 2 -->
+    <g transform="translate(350, 140)">
+      <circle cx="0" cy="0" r="55" fill="url(#gold)" stroke="#451a03" stroke-width="2" />
+      <circle cx="0" cy="0" r="38" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5" />
+      <circle cx="10" cy="-5" r="4" fill="#64748b" />
+      <path d="M10,-5 Q40,-30 80,-20" stroke="#ef4444" stroke-width="2" fill="none" />
+      <path d="M-30,20 Q-10,50 30,60" stroke="#1e293b" stroke-width="2" fill="none" />
+      <text x="0" y="4" font-family="'JetBrains Mono', monospace" font-size="11" fill="#1e293b" font-weight="700" text-anchor="middle">PZ 02</text>
+    </g>
+    <g transform="translate(350, 320)">
+      <circle cx="0" cy="0" r="55" fill="url(#gold)" stroke="#451a03" stroke-width="2" />
+      <circle cx="0" cy="0" r="38" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5" />
+      <circle cx="10" cy="-5" r="4" fill="#64748b" />
+      <path d="M10,-5 Q40,-30 80,-20" stroke="#ef4444" stroke-width="2" fill="none" />
+      <path d="M-30,20 Q-10,50 30,60" stroke="#1e293b" stroke-width="2" fill="none" />
+      <text x="0" y="4" font-family="'JetBrains Mono', monospace" font-size="11" fill="#1e293b" font-weight="700" text-anchor="middle">PZ 05</text>
+    </g>
+
+    <!-- Col 3 -->
+    <g transform="translate(550, 140)">
+      <circle cx="0" cy="0" r="55" fill="url(#gold)" stroke="#451a03" stroke-width="2" />
+      <circle cx="0" cy="0" r="38" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5" />
+      <circle cx="10" cy="-5" r="4" fill="#64748b" />
+      <path d="M10,-5 Q40,-30 80,-20" stroke="#ef4444" stroke-width="2" fill="none" />
+      <path d="M-30,20 Q-10,50 30,60" stroke="#1e293b" stroke-width="2" fill="none" />
+      <text x="0" y="4" font-family="'JetBrains Mono', monospace" font-size="11" fill="#1e293b" font-weight="700" text-anchor="middle">PZ 03</text>
+    </g>
+    <g transform="translate(550, 320)">
+      <circle cx="0" cy="0" r="55" fill="url(#gold)" stroke="#451a03" stroke-width="2" />
+      <circle cx="0" cy="0" r="38" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5" />
+      <circle cx="10" cy="-5" r="4" fill="#64748b" />
+      <path d="M10,-5 Q40,-30 80,-20" stroke="#ef4444" stroke-width="2" fill="none" />
+      <path d="M-30,20 Q-10,50 30,60" stroke="#1e293b" stroke-width="2" fill="none" />
+      <text x="0" y="4" font-family="'JetBrains Mono', monospace" font-size="11" fill="#1e293b" font-weight="700" text-anchor="middle">PZ 06</text>
+    </g>
+
+    <!-- Common Bus Loom Out to Right -->
+    <path d="M620,130 C660,130 680,200 700,230" stroke="#ef4444" stroke-width="3" fill="none" />
+    <path d="M620,330 C660,330 680,260 700,240" stroke="#1e293b" stroke-width="3" fill="none" />
+    <rect x="680" y="215" width="20" height="40" fill="#38bdf8" rx="3" />
+  </g>
+  <!-- Photo Metadata Stamp -->
+  <rect x="50" y="40" width="460" height="45" fill="#0f172a" opacity="0.9" rx="6" stroke="#f59e0b" stroke-width="1" />
+  <text x="70" y="68" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f59e0b" font-weight="700">WORKSHOP LOG: STEP 03 · 6× ⌀27mm PIEZO TRANSDUCERS (2×3)</text>
+</svg>
