@@ -1,845 +1,388 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b111a">
-  <meta name="description" content="Magic Step: A footstep power generation prototype converting kinetic foot pressure into electrical energy using piezoelectric transducers. Sanjivani University Makerspace Group 16.">
-  <title>Magic Step — Footstep Power Generation System | Engineering Documentation</title>
-
-  <!-- Open Graph / Meta -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Magic Step">
-  <meta property="og:title" content="Magic Step — Footstep Power Generation System">
-  <meta property="og:description" content="Group 16, Sanjivani University Mechanical Engineering Makerspace: Footstep power generation prototype with 6 piezoelectric discs, full-wave rectification, ESP32 telemetry, and 1S2P Li-ion storage.">
-
-  <!-- Self-contained theme initialization before first paint -->
-  <script>
-    try {
-      var t = localStorage.getItem("magicstep-theme");
-      if (t === "light" || t === "dark") {
-        document.documentElement.setAttribute("data-theme", t);
-        document.querySelector('meta[name="theme-color"]').setAttribute("content", t === "light" ? "#ffffff" : "#0b111a");
-      }
-    } catch (e) {}
-  </script>
-
-  <!-- Google Fonts: Space Grotesk, Inter, JetBrains Mono -->
+  <meta name="theme-color" content="#080a0e">
+  <meta name="description" content="Magic Step — Footstep Power Generation System. Mechanical engineering project documentation, CAD design, electronics and prototype development.">
+  <title>MAGIC STEP — Footstep Power Generation System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Core Stylesheet -->
-  <link rel="stylesheet" href="assets/css/site.css">
-
-  <!-- Three.js CDN for 3D Interactive Explorer -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-  <!-- Project Data & Scripts -->
-  <script defer src="assets/js/project-data.js"></script>
-  <script defer src="assets/js/gallery-data.js"></script>
-  <script defer src="assets/js/site.js"></script>
-  <script defer src="assets/js/explorer-3d.js"></script>
-  <script defer src="assets/js/simulator.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="Magic Step home">
+        <span class="brand-mark">M<span>·</span>S</span>
+        <span class="brand-copy"><strong>SANJIVANI</strong><small>MECHANICAL ENGINEERING</small></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
+      <nav class="main-nav" id="mainNav">
+        <a href="#overview">Overview</a>
+        <a href="#principle">Principle</a>
+        <a href="#mechanical">Mechanical</a>
+        <a href="#solidworks">SolidWorks</a>
+        <a href="#electronics">Electronics</a>
+        <a href="#prototype">Prototype</a>
+        <a href="#testing">Testing</a>
+        <a href="#team">Team</a>
+      </nav>
+      <a class="nav-cta" href="#resources">Project files <span>↗</span></a>
+    </header>
 
-  <!-- ==================== STICKY SITE HEADER ==================== -->
-  <header class="site-header">
-    <a class="brand" href="#top" aria-label="Magic Step, back to top">
-      <span class="brand-mark" aria-hidden="true">MS</span>
-      <span class="brand-type">
-        <strong>MAGIC STEP</strong>
-        <small>Group 16 · Makerspace · Sanjivani University</small>
-      </span>
-    </a>
-
-    <nav class="main-nav" id="main-nav" aria-label="Main navigation">
-      <a href="#overview">Overview</a>
-      <a href="#working">Working</a>
-      <a href="#journey">Journey</a>
-      <a href="#design">CAD Design</a>
-      <a href="#explorer-section">3D Explorer</a>
-      <a href="#electronics">Electronics</a>
-      <a href="#simulator-section">Sim Lab</a>
-      <a href="#testing">Testing</a>
-      <a href="#bom-section">BOM</a>
-      <a href="#video-section">Video</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#status">Status</a>
-      <a href="#downloads">Downloads</a>
-      <a href="#team">Team</a>
-    </nav>
-
-    <div class="header-actions">
-      <button class="share-button" id="share-button" type="button" aria-label="Share this project documentation">
-        <svg class="share-mark" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">
-          <path d="M8 1.5v8.5M4.8 4.6 8 1.5l3.2 3.1M3 7.5v6.5h10V7.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>
-        </svg>
-        <span class="share-text">Share</span>
-      </button>
-
-      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme">
-        <span class="theme-toggle-mark" aria-hidden="true"></span>
-        <span class="theme-toggle-text">Light</span>
-      </button>
-
-      <button class="presentation-toggle" id="presentation-toggle" type="button" aria-pressed="false">Presentation mode</button>
-      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open navigation"><span aria-hidden="true"></span></button>
-    </div>
-  </header>
-
-  <main id="main">
-
-    <!-- ==================== 01 HERO SECTION ==================== -->
-    <section class="hero" id="top" aria-labelledby="hero-title">
-      <div class="hero-canvas-host" id="hero-canvas-host"></div>
-      <div class="hero-inner shell">
+    <main>
+      <section class="hero section-wrap" id="home">
         <div class="hero-copy">
-          <p class="eyebrow">Group 16 · Sanjivani University · Mechanical Engineering · Makerspace · 2026–27</p>
-          <h1 id="hero-title">MAGIC STEP<span class="h1-sub">— Footstep Power Generation System</span></h1>
-          <p class="hero-lede">An electro-mechanical prototype investigating the conversion of human footstep pressure into conditioned electrical energy using a 2×3 matrix of piezoelectric transducers. Features a springless direct-flexure platform (300 × 160 × 10 mm), full-wave rectification, ESP32 embedded telemetry, and a 1S2P lithium-ion storage testbed.</p>
-
+          <div class="eyebrow"><span class="live-dot"></span> MAKERSPACE PROJECT <i></i> GROUP 16 <i></i> 2026–27</div>
+          <h1>Every step.<br><em>A little energy.</em></h1>
+          <p class="hero-lead">MAGIC STEP is a footstep power generation concept that explores converting mechanical energy from footsteps into electrical energy using piezoelectric sensors.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#overview">Explore the Project <span aria-hidden="true">↓</span></a>
-            <a class="button button-quiet" href="#explorer-section">3D CAD Explorer</a>
-            <button class="button button-outline" type="button" onclick="window.print()">Print / Save as PDF</button>
+            <a class="button button-primary" href="#overview">Explore the project <span>↘</span></a>
+            <a class="button button-quiet" href="#principle">Working principle <span>↗</span></a>
           </div>
-
-          <div class="hero-metadata">
-            <div class="hero-meta-row">
-              <span class="hero-meta-label">Students:</span>
-              <span>Saish Godage · Ayush Jadhav · Gaurav Wavdhane · Sai Gholap</span>
-            </div>
-            <div class="hero-meta-row">
-              <span class="hero-meta-label">Project Guides:</span>
-              <span>Dr. Kiran Wakchaure · Dr. Vasudeo Singh Singer · Dr. Prathibha Sinha</span>
-            </div>
-            <div class="hero-meta-row">
-              <span class="hero-meta-label">Department:</span>
-              <span>Department of Mechanical Engineering, Sanjivani University, Kopargaon</span>
-            </div>
+          <div class="hero-meta">
+            <div><span class="meta-label">INSTITUTION</span><strong>Sanjivani University</strong></div>
+            <div><span class="meta-label">DEPARTMENT</span><strong>Mechanical Engineering</strong></div>
+            <div><span class="meta-label">PROJECT</span><strong>Footstep energy harvesting</strong></div>
           </div>
         </div>
-
-        <p class="hero-figure-badge">
-          <span class="label-chip label-chip-ok">Hardware Assembled</span>
-          300 × 160 × 10 mm base · 6× ⌀27 mm PZT discs · ESP32 + 16×2 I²C LCD · Measured test results pending.
-        </p>
-      </div>
-    </section>
-
-    <!-- ==================== 02 PROJECT OVERVIEW & OBJECTIVES ==================== -->
-    <section class="section" id="overview" aria-labelledby="overview-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 02</p>
-          <h2 id="overview-title">The Challenge &amp; Harvesting Opportunity</h2>
-        </header>
-
-        <div class="prose">
-          <p class="lede">During our engineering capstone at Sanjivani University Makerspace, our team set out to capture a fraction of the mechanical kinetic energy dissipated daily on high-traffic university walkways, corridors, and stairs.</p>
-          <p>We evaluated multiple kinetic energy harvesting methodologies — electromagnetic dynamos with gear-trains, triboelectric nanogenerators (TENG), and piezoelectric ceramics. We selected a direct-transduction piezoelectric platform utilizing six ⌀27 mm Lead Zirconate Titanate (PZT) ceramic elements embedded beneath a 300 × 160 × 10 mm wooden platform without coil springs, ensuring maximum compressive strain transfer directly into electrical charge pulses.</p>
-        </div>
-
-        <div class="table-wrap" tabindex="0" role="region" aria-labelledby="compare-caption">
-          <table class="compare-table">
-            <caption id="compare-caption">Kinetic Energy Harvesting Technologies Compared</caption>
-            <thead>
-              <tr>
-                <th scope="col">Transduction Approach</th>
-                <th scope="col">Potential Advantages</th>
-                <th scope="col">Limitations &amp; Mechanical Considerations</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Electromagnetic Dynamo (Rack &amp; Pinion)</th>
-                <td>High continuous power output; established rotary generator technology.</td>
-                <td>Requires mechanical gear-trains, rack-and-pinion linkages; high mechanical wear; noisy operation and large vertical floor clearance required.</td>
-              </tr>
-              <tr>
-                <th scope="row">Triboelectric Nanogenerator (TENG)</th>
-                <td>Extremely high open-circuit voltages (>100 V); lightweight material layers.</td>
-                <td>Extremely low current (micro-amperes); delicate contact-separation surface wear; performance deteriorates under ambient humidity and dust.</td>
-              </tr>
-              <tr>
-                <th scope="row">Photovoltaic / Solar Tile</th>
-                <td>High power density during peak daytime sunlight.</td>
-                <td>Ineffective indoors, at night, or in covered staircases; vulnerable to surface scratching and dirt accumulation.</td>
-              </tr>
-              <tr class="row-highlight">
-                <th scope="row">Magic Step (Piezoelectric Matrix)</th>
-                <td>Solid-state electromechanical transduction; ultra-slim profile (18 mm); springless direct flexure; no moving gears; highly responsive to foot pressure.</td>
-                <td>High electrical impedance; generates short transient AC spikes requiring full-wave rectification and capacitive smoothing before storage. Measured power pending.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <blockquote class="question">
-          <p class="eyebrow">The Engineering Question We Are Investigating</p>
-          <p>Can an array of six PZT piezoelectric discs embedded within a compact 300 × 160 × 10 mm footstep tile reliably generate sufficient electrical charge to buffer an energy storage cell, while an ESP32 provides real-time telemetry of step activity and battery condition?</p>
-        </blockquote>
-
-        <div class="spec-layout" style="margin-top: 36px;">
-          <div class="note-block">
-            <h3>Project Scope &amp; Testing Integrity</h3>
-            <p>Magic Step is built to engineering lab standards. In strict accordance with university guidelines, no test voltages, power outputs, or battery percentages are invented. The hardware is physically assembled, the ESP32 telemetry logic is operational, and scientific measurements are being logged under defined test conditions.</p>
+        <div class="hero-art" aria-label="Abstract technical illustration of a footstep energy platform">
+          <div class="art-grid"></div>
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="platform">
+            <div class="platform-top"><span>MAGIC STEP</span><small>MS / 016</small></div>
+            <div class="platform-layer"></div>
+            <div class="platform-sensors"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="platform-base"></div>
           </div>
+          <div class="art-label label-top"><span>01 / INPUT</span><b>MECHANICAL FORCE</b></div>
+          <div class="art-label label-bottom"><span>02 / CONVERSION</span><b>PIEZOELECTRIC RESPONSE</b></div>
+          <div class="art-cross">+</div>
+          <div class="art-caption">CONCEPTUAL SYSTEM VISUAL / NOT A CAD DRAWING</div>
         </div>
-      </div>
-    </section>
+        <div class="scroll-cue"><span></span> SCROLL TO EXPLORE</div>
+      </section>
 
-    <!-- ==================== 03 WORKING PRINCIPLE & SYSTEM ARCHITECTURE ==================== -->
-    <section class="section section-tinted" id="working" aria-labelledby="working-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 03</p>
-          <h2 id="working-title">Working Principle &amp; Energy Flow</h2>
-        </header>
+      <section class="quick-stats section-wrap">
+        <div class="stat"><span class="meta-label">SENSOR ARRAY</span><strong>06 <small>discs</small></strong><span>27 mm diameter each</span></div>
+        <div class="stat"><span class="meta-label">ARRANGEMENT</span><strong>02 × 03</strong><span>Two rows, three columns</span></div>
+        <div class="stat"><span class="meta-label">BASE PLATE</span><strong>300 × 160</strong><span>10 mm thickness · mm</span></div>
+        <div class="stat"><span class="meta-label">CONTROLLER</span><strong>ESP32</strong><span>DevKit V1 planned / identified</span></div>
+      </section>
 
-        <div class="prose">
-          <p>When a person steps on the Magic Step platform, mechanical force compresses the piezoelectric ceramic elements. Through the direct piezoelectric effect, the mechanical strain displaces positive and negative ions in the crystal lattice, generating an alternating voltage spike. Because footfalls involve both impact (compression) and release (expansion), the transducer generates bidirectional AC pulses.</p>
-          <p>A full-wave diode bridge rectifier (DB107) converts these alternating pulses into unidirectional DC. A 10 µF capacitor buffers the high-impedance transient spikes, accumulating charge. This charge is routed to a lithium-ion management stage, while an ESP32 microcontroller samples scaled analog voltages to count steps and monitor the 1S2P battery pack on a 16×2 I²C LCD.</p>
+      <section class="content-section section-wrap" id="overview">
+        <div class="section-heading">
+          <div><span class="section-index">01 / PROJECT OVERVIEW</span><h2>Turning footsteps<br><em>into an electrical signal.</em></h2></div>
+          <p class="section-intro">A compact engineering exploration of energy harvesting, combining mechanical design, piezoelectric sensing and embedded monitoring.</p>
         </div>
-
-        <!-- System Architecture Vector Schematic -->
-        <figure class="schematic">
-          <figcaption class="figure-label">
-            <span class="label-chip label-chip-ok">Verified Hardware Architecture</span>
-            FIG. 1 — Full Electro-Mechanical Transduction &amp; Telemetry Pathway
-          </figcaption>
-          <div class="schematic-box">
-            <img src="assets/media/diagrams/system-schematic.svg" width="1200" height="640" alt="Magic Step System Architecture Diagram" loading="lazy">
-          </div>
-          <p class="figure-caption">The physical prototype routes kinetic foot strikes through the 6-disc matrix, DB107 bridge rectifier, and 10 µF buffer. A scaled resistive voltage divider feeds the ESP32 ADC1, driving telemetry on the 16×2 I²C LCD screen.</p>
-        </figure>
-
-        <!-- Transduction Physics Graphic -->
-        <figure class="schematic" style="margin-top: 48px;">
-          <figcaption class="figure-label">
-            <span class="label-chip label-chip-warn">Physics Principle</span>
-            FIG. 2 — Direct Piezoelectric Effect in PZT Crystal under Compressive Stress
-          </figcaption>
-          <div class="schematic-box">
-            <img src="assets/media/diagrams/piezo-working.svg" width="1100" height="600" alt="Piezoelectric Working Principle Diagram" loading="lazy">
-          </div>
-        </figure>
-
-        <div class="warning-block">
-          <strong>Electrical Safety &amp; Isolation Protocol:</strong> Piezoelectric discs generate high instantaneous open-circuit voltages (>30 V) with very high source impedance. Never connect raw piezo outputs directly to ESP32 GPIO pins or lithium-ion cells without rectification, capacitive buffering, and resistive voltage division.
+        <div class="overview-grid">
+          <article class="panel overview-main">
+            <span class="panel-kicker">THE PROJECT</span>
+            <h3>What is Magic Step?</h3>
+            <p>Magic Step investigates the use of piezoelectric discs to convert pressure-induced mechanical deformation into an electrical response. The prototype combines a mechanical platform with an electronic measurement and monitoring concept.</p>
+            <p>The project documentation records the design process, components, fabrication, electronics integration, prototype development and test observations. Results will be added from actual measurements after testing.</p>
+          </article>
+          <article class="panel objective-panel">
+            <span class="panel-kicker">PROJECT OBJECTIVES</span>
+            <ol class="objective-list">
+              <li><b>01</b><span>Explore piezoelectric energy conversion from footsteps.</span></li>
+              <li><b>02</b><span>Design a compact mechanical platform and sensor layout.</span></li>
+              <li><b>03</b><span>Develop an ESP32-based monitoring interface.</span></li>
+              <li><b>04</b><span>Document fabrication, integration and measured testing.</span></li>
+            </ol>
+          </article>
         </div>
-      </div>
-    </section>
-
-    <!-- ==================== 04 ENGINEERING JOURNEY ==================== -->
-    <section class="section" id="journey" aria-labelledby="journey-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 04</p>
-          <h2 id="journey-title">Engineering Journey &amp; Fabrication Log</h2>
-        </header>
-        <p class="section-intro">Chronological fabrication and integration log documented at the Sanjivani University Makerspace carpentry and electronics workshops. Click any photo to enlarge and inspect in the lightbox viewer.</p>
-
-        <ol class="journey-steps" id="journey-steps"></ol>
-      </div>
-    </section>
-
-    <!-- ==================== 05 DESIGN & SOLIDWORKS CAD ==================== -->
-    <section class="section section-tinted" id="design" aria-labelledby="design-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 05</p>
-          <h2 id="design-title">SolidWorks CAD Design &amp; Specifications</h2>
-        </header>
-        <p class="section-intro">Engineering CAD models, dimensional orthographic sheets, and mechanical specifications for the 300 × 160 × 10 mm footstep generation platform.</p>
-
-        <figure class="fig-primary">
-          <button class="step-photo" type="button" id="open-cad-drawing" aria-label="Open dimensioned drawing in lightbox">
-            <img src="assets/media/cad/dimensioned-drawing.svg" width="1400" height="950" loading="lazy" alt="SolidWorks Dimensioned Drawing Sheet">
-          </button>
-          <figcaption class="step-caption">
-            <span class="label-chip">Engineering Drawing</span>
-            DWG NO: MS-2026-ENG-001 — Orthographic dimensioned views (300 × 160 × 10 mm). Click to enlarge.
-          </figcaption>
-        </figure>
-
-        <div class="spec-layout">
-          <div>
-            <table class="spec-table">
-              <caption>Confirmed Mechanical &amp; Electrical Specifications</caption>
-              <tbody id="spec-rows"></tbody>
-            </table>
-          </div>
-          <div class="note-block">
-            <h3>Springless Mechanical Rationale</h3>
-            <p>The Magic Step design deliberately omits helical coil springs. Conventional spring designs absorb mechanical energy into spring deflection and introduce damping losses. Our direct-flexure platform uses compliant neoprene damper pads above each disc, transferring the user's kinetic energy directly into piezoelectric crystal strain while protecting the ceramic from destructive point impact.</p>
-          </div>
+        <div class="three-cards">
+          <article class="mini-card"><span class="number-mark">A</span><h3>Mechanical design</h3><p>Platform layout, component modelling and assembly documentation using SolidWorks.</p></article>
+          <article class="mini-card"><span class="number-mark">B</span><h3>Electrical conversion</h3><p>Piezoelectric output conditioning and a battery-storage concept to be verified against the final circuit.</p></article>
+          <article class="mini-card"><span class="number-mark">C</span><h3>Embedded monitoring</h3><p>ESP32 and LCD interface planned for step activity and electrical-system status.</p></article>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ==================== 06 3D INTERACTIVE EXPLORER ==================== -->
-    <section class="section" id="explorer-section" aria-labelledby="explorer-title">
-      <div class="shell shell-wide">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 06</p>
-          <h2 id="explorer-title">Interactive 3D Assembly Explorer</h2>
-        </header>
-        <p class="section-intro">Drag to orbit the 3D model, scroll to zoom, and toggle layers or exploded view to inspect internal components. Click any part to view its mechanical specifications and fabrication status.</p>
+      <section class="content-section section-wrap" id="problem">
+        <div class="section-heading compact">
+          <div><span class="section-index">02 / PROBLEM & SOLUTION</span><h2>Energy is present<br><em>in everyday movement.</em></h2></div>
+          <p class="section-intro">The project explores whether small amounts of mechanical energy from repeated footsteps can be captured and monitored through a piezoelectric system.</p>
+        </div>
+        <div class="problem-solution">
+          <article class="problem-card"><span class="tag tag-muted">THE CHALLENGE</span><h3>Mechanical energy is usually dissipated.</h3><p>Footsteps apply repeated mechanical loads to a surface. Magic Step studies a way to convert part of this input into an electrical signal using piezoelectric elements.</p></article>
+          <div class="transition-arrow">→</div>
+          <article class="solution-card"><span class="tag tag-blue">THE APPROACH</span><h3>Capture, condition and monitor.</h3><p>A piezoelectric sensor array feeds an electrical conditioning stage. The ESP32-based system is intended to monitor step activity and selected electrical or battery-status signals.</p></article>
+        </div>
+      </section>
 
-        <div class="explorer" id="explorer">
-          <div class="explorer-toolbar" role="toolbar" aria-label="3D Explorer Controls">
-            <div class="tool-group" role="group" aria-label="Assembly View">
-              <button type="button" class="tool" data-explode="0" aria-pressed="true">Assembled View</button>
-              <button type="button" class="tool" data-explode="1" aria-pressed="false">Exploded View</button>
-            </div>
-            <div class="tool-group" role="group" aria-label="Component Layers">
-              <button type="button" class="tool" data-layer="topPlate" aria-pressed="true">Upper Tread Plate</button>
-              <button type="button" class="tool" data-layer="dampers" aria-pressed="true">Damper Pads</button>
-              <button type="button" class="tool" data-layer="piezo" aria-pressed="true">6× Piezo Discs</button>
-              <button type="button" class="tool" data-layer="basePlate" aria-pressed="true">Wooden Base</button>
-            </div>
-            <div class="tool-group" role="group" aria-label="Overlays">
-              <button type="button" class="tool" data-toggle="dims" aria-pressed="false">Dimensions</button>
-              <button type="button" class="tool tool-reset" data-action="reset">Reset Camera</button>
+      <section class="content-section section-wrap" id="principle">
+        <div class="section-heading">
+          <div><span class="section-index">03 / WORKING PRINCIPLE</span><h2>From pressure<br><em>to an electrical response.</em></h2></div>
+          <p class="section-intro">The system is documented as a sequence of energy conversion, signal conditioning and monitoring stages. The final power-management and charging hardware must be confirmed from the assembled circuit.</p>
+        </div>
+        <div class="process-flow">
+          <div class="process-step"><span>01</span><div class="process-icon">↓</div><h3>Footstep input</h3><p>Mechanical pressure is applied to the platform.</p></div>
+          <div class="flow-line"></div>
+          <div class="process-step"><span>02</span><div class="process-icon">⌁</div><h3>Piezoelectric discs</h3><p>The piezo elements produce an electrical response under mechanical stress.</p></div>
+          <div class="flow-line"></div>
+          <div class="process-step"><span>03</span><div class="process-icon">ϟ</div><h3>Conditioning</h3><p>Rectification and suitable power conditioning are required for the intended storage system.</p></div>
+          <div class="flow-line"></div>
+          <div class="process-step"><span>04</span><div class="process-icon">▤</div><h3>Monitoring</h3><p>The ESP32 and LCD are intended to display system information.</p></div>
+        </div>
+        <div class="note-box"><span class="note-icon">i</span><p><strong>Technical note:</strong> A bridge rectifier and 10 µF capacitor have been discussed for the six-disc setup. The exact energy-harvesting, battery-charging and protection arrangement is not confirmed here. Piezoelectric output must not be connected directly to an ESP32 input or lithium-ion cell; the completed circuit needs suitable conditioning and instructor verification.</p></div>
+      </section>
+
+      <section class="content-section section-wrap" id="mechanical">
+        <div class="section-heading">
+          <div><span class="section-index">04 / MECHANICAL DESIGN</span><h2>A platform built<br><em>around the sensor array.</em></h2></div>
+          <p class="section-intro">The current mechanical reference is a rectangular base plate carrying six piezoelectric discs. No springs are used in this project.</p>
+        </div>
+        <div class="mechanical-grid">
+          <div class="panel mechanical-visual">
+            <div class="plate-drawing">
+              <div class="dim dim-width"><span>300 mm</span></div>
+              <div class="dim dim-height"><span>160 mm</span></div>
+              <div class="sensor-layout">
+                <i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+              <div class="plate-caption">ILLUSTRATIVE SENSOR LAYOUT · VERIFY AGAINST FINAL CAD</div>
             </div>
           </div>
-
-          <div class="explorer-stage" id="explorer-stage" tabindex="0" aria-label="3D model viewer. Drag to orbit, scroll to zoom.">
-            <div class="stage-notes">
-              <p class="stage-note">Interactive 3D Procedural CAD View · Drag to Rotate · Scroll to Zoom</p>
-            </div>
-            <div id="explorer-dims-overlay" hidden style="position:absolute;inset:0;pointer-events:none;z-index:15;">
-              <span class="label-chip label-chip-ok" style="position:absolute;top:20%;left:25%;">Length: 300 mm</span>
-              <span class="label-chip label-chip-ok" style="position:absolute;top:60%;right:25%;">Width: 160 mm</span>
-              <span class="label-chip label-chip-warn" style="position:absolute;bottom:20%;left:45%;">Base Thickness: 10 mm</span>
-            </div>
-          </div>
-
-          <div class="part-info" id="part-info" hidden>
-            <button type="button" class="part-info-close" id="part-info-close" aria-label="Close part information">×</button>
-            <p class="part-status" id="part-status">COMPLETED</p>
-            <h3 class="part-name" id="part-name">Base Plate</h3>
-            <p class="part-text" id="part-text">Part description will appear here.</p>
+          <div class="mechanical-specs">
+            <div class="spec-row"><span>BASE PLATE</span><strong>300 × 160 × 10 mm</strong></div>
+            <div class="spec-row"><span>PIEZOELECTRIC DISCS</span><strong>6 units</strong></div>
+            <div class="spec-row"><span>DISC DIAMETER</span><strong>27 mm</strong></div>
+            <div class="spec-row"><span>ARRANGEMENT</span><strong>2 rows × 3 columns</strong></div>
+            <div class="spec-row"><span>ATTACHMENT</span><strong>Double-sided tape</strong></div>
+            <div class="spec-row"><span>SPRINGS</span><strong class="accent-text">Not used</strong></div>
+            <p class="small-note">The sensor layout drawing is illustrative. Use actual SolidWorks screenshots and verified dimensions for the final engineering documentation.</p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ==================== 07 ELECTRONICS & ESP32 FIRMWARE ==================== -->
-    <section class="section section-tinted" id="electronics" aria-labelledby="electronics-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 07</p>
-          <h2 id="electronics-title">Electronics, Circuitry &amp; ESP32 Firmware</h2>
-        </header>
-        <p class="section-intro">Complete wiring layout, microcontroller pinout mapping, and verified Arduino C++ firmware running on the ESP32 DevKit V1.</p>
-
-        <!-- Circuit Diagram -->
-        <figure class="fig-primary">
-          <button class="step-photo" type="button" id="open-circuit-diagram" aria-label="Open circuit diagram in lightbox">
-            <img src="assets/media/diagrams/circuit-diagram.svg" width="1200" height="700" loading="lazy" alt="Magic Step Electrical Circuit Diagram">
-          </button>
-          <figcaption class="step-caption">
-            <span class="label-chip">Electrical Schematic</span>
-            DWG NO: MS-ELEC-01 — Power conditioning, sensing dividers, ESP32 GPIO pinout, and 16×2 I²C display.
-          </figcaption>
-        </figure>
-
-        <!-- ESP32 Pinout Mapping -->
-        <h3 class="subhead">ESP32 DevKit V1 Pin Allocation</h3>
-        <table class="pinout-table">
-          <thead>
-            <tr>
-              <th scope="col">ESP32 Pin</th>
-              <th scope="col">Function / Mode</th>
-              <th scope="col">Connected Device</th>
-              <th scope="col">Technical Notes</th>
-            </tr>
-          </thead>
-          <tbody id="pinout-rows"></tbody>
-        </table>
-
-        <!-- Production-Ready Code Viewer -->
-        <div class="code-container">
-          <div class="code-header">
-            <span class="code-title">Firmware: MagicStep_Telemetry_ESP32.ino (C++ / Arduino IDE)</span>
-            <button class="copy-btn" id="copy-code-btn" type="button">Copy Code</button>
+      <section class="content-section section-wrap" id="solidworks">
+        <div class="section-heading">
+          <div><span class="section-index">05 / SOLIDWORKS WORKBENCH</span><h2>CAD models.<br><em>Drawings. Assembly.</em></h2></div>
+          <p class="section-intro">A dedicated workspace for documenting original SolidWorks parts, 2D engineering drawings, dimensioned views and assembly development.</p>
+        </div>
+        <div class="workbench panel">
+          <div class="workbench-top">
+            <div><span class="panel-kicker">DESIGN DOCUMENTATION</span><h3>SolidWorks workbench</h3></div>
+            <span class="workbench-status"><i></i> GALLERY READY FOR YOUR FILES</span>
           </div>
-          <pre class="code-block"><code>/*
- * MAGIC STEP — Footstep Power Generation Telemetry Firmware
- * Group 16 · Department of Mechanical Engineering · Sanjivani University
- * Platform: ESP32 DevKit V1 | Display: 16x2 I2C LCD (0x27)
- */
+          <div class="tabs" role="tablist" aria-label="SolidWorks gallery categories">
+            <button class="tab active" data-gallery-tab="parts" role="tab" aria-selected="true">01&nbsp; Part models</button>
+            <button class="tab" data-gallery-tab="drawings" role="tab" aria-selected="false">02&nbsp; 2D drawings</button>
+            <button class="tab" data-gallery-tab="dimensioned" role="tab" aria-selected="false">03&nbsp; Dimensioned</button>
+            <button class="tab" data-gallery-tab="assembly" role="tab" aria-selected="false">04&nbsp; Assembly</button>
+            <button class="tab" data-gallery-tab="exploded" role="tab" aria-selected="false">05&nbsp; Exploded views</button>
+          </div>
+          <div class="gallery-toolbar">
+            <div><span class="meta-label" id="galleryLabel">INDIVIDUAL PART MODELS</span><p id="galleryDescription">Add screenshots of original SolidWorks components and their modelling views.</p></div>
+            <button class="button button-small" id="openUpload"><span>＋</span> Add screenshot</button>
+          </div>
+          <div class="gallery-grid" id="galleryGrid">
+            <div class="empty-gallery">
+              <div class="empty-symbol">＋</div>
+              <h4>Your CAD gallery starts here</h4>
+              <p>Choose “Add screenshot” to preview and organize SolidWorks images. To publish them permanently, add the image files to the repository as described in the README.</p>
+            </div>
+          </div>
+          <div class="gallery-foot"><span id="galleryCount">0 images in this category</span><button class="text-button" id="exportGallery">Export gallery manifest ↗</button></div>
+        </div>
+        <div class="upload-guidance"><b>How gallery publishing works</b><span>GitHub Pages is static hosting. This page can preview screenshots in your browser and export their details, but it cannot write files into your GitHub repository by itself. Copy the image files into <code>assets/images/gallery/</code> and commit the exported manifest with them to publish permanently.</span></div>
+      </section>
 
-#include &lt;Wire.h&gt;
-#include &lt;LiquidCrystal_I2C.h&gt;
+      <section class="content-section section-wrap" id="electronics">
+        <div class="section-heading">
+          <div><span class="section-index">06 / ELECTRONICS & CONTROL</span><h2>Measure the response.<br><em>Display the status.</em></h2></div>
+          <p class="section-intro">The electronics section records the identified controller and display, sensor signal path and the remaining verification required for safe integration.</p>
+        </div>
+        <div class="electronics-layout">
+          <div class="panel block-panel">
+            <span class="panel-kicker">SYSTEM BLOCK DIAGRAM</span>
+            <div class="block-diagram">
+              <div class="block">PIEZOELECTRIC<br>SENSOR ARRAY<small>6 discs · 2 × 3</small></div>
+              <div class="diagram-arrow">↓</div>
+              <div class="block">RECTIFICATION &<br>SIGNAL CONDITIONING<small>Final circuit to verify</small></div>
+              <div class="diagram-arrow">↓</div>
+              <div class="diagram-split"><div class="block">ENERGY STORAGE<small>Battery system to verify</small></div><div class="block">ESP32 INPUT<small>Conditioned signal only</small></div></div>
+              <div class="diagram-arrow">↓</div>
+              <div class="block block-highlight">ESP32 DEVKIT V1 + 16×2 LCD<small>Monitoring interface</small></div>
+            </div>
+            <p class="diagram-disclaimer">Conceptual documentation diagram. Confirm the final circuit, protection and charging module before treating this as an as-built schematic.</p>
+          </div>
+          <div class="electronics-side">
+            <div class="panel component-panel"><span class="panel-kicker">IDENTIFIED / PLANNED COMPONENTS</span>
+              <ul class="component-list">
+                <li><span>Piezoelectric discs</span><b>6 × 27 mm</b></li>
+                <li><span>Microcontroller</span><b>ESP32 DevKit V1</b></li>
+                <li><span>Display</span><b>16×2 I²C LCD</b></li>
+                <li><span>Rectifier</span><b>Bridge rectifier</b></li>
+                <li><span>Capacitor</span><b>10 µF discussed</b></li>
+                <li><span>Battery storage</span><b>Configuration to verify</b></li>
+                <li><span>Prototyping</span><b>Mini breadboard</b></li>
+              </ul>
+            </div>
+            <div class="panel warning-panel"><span class="panel-kicker">INTEGRATION CHECK</span><p>Verify the actual charger/protection board, voltage-sensing circuit and signal-conditioning circuit before enabling battery monitoring or charger-status pins in firmware. A cell holder is not a charger.</p></div>
+          </div>
+        </div>
+      </section>
 
-// Pin Definitions
-#define PIN_PIEZO_ADC   34  // Analog pulse sense (ADC1_CH6)
-#define PIN_BATTERY_ADC 35  // Battery divider sense (ADC1_CH7)
-#define PIN_CHRG_STAT   32  // Charger IC status pin (Active LOW)
+      <section class="content-section section-wrap" id="programming">
+        <div class="section-heading compact">
+          <div><span class="section-index">07 / ESP32 PROGRAMMING</span><h2>Embedded monitoring<br><em>documentation.</em></h2></div>
+          <p class="section-intro">Document the actual firmware, pin assignments and verified behaviour as the hardware is tested.</p>
+        </div>
+        <div class="code-panel panel">
+          <div class="code-header"><div><i></i><i></i><i></i><span>magic_step_esp32.ino</span></div><span class="tag tag-muted">SOURCE FILE PLACEHOLDER</span></div>
+          <pre><code><span class="code-comment">// MAGIC STEP — ESP32 documentation area</span>
+<span class="code-comment">// Add the tested project firmware here.</span>
 
-// Calibration Constants
-const int PIEZO_THRESHOLD = 450;        // ADC threshold for step registration
-const unsigned long DEBOUNCE_MS = 220;  // Minimum ms between consecutive steps
-const float VREF = 3.30;                // ESP32 calibrated ADC reference
-const float BATTERY_DIVIDER_RATIO = 2.0;// (R1 + R2) / R2 for 100k/100k divider
+<span class="code-key">#include</span> <span class="code-string">&lt;Wire.h&gt;</span>
+<span class="code-key">#include</span> <span class="code-string">&lt;LiquidCrystal_I2C.h&gt;</span>
 
-// Telemetry State
-volatile unsigned long stepCount = 0;
-unsigned long lastStepTime = 0;
-float batteryVoltage = 0.0;
-bool isCharging = false;
-bool pulseDetected = false;
+<span class="code-comment">// Confirm I2C address and signal interfaces</span>
+<span class="code-comment">// against the actual assembled hardware.</span>
 
-LiquidCrystal_I2C lcd(0x27, 16, 2);
-
-void setup() {
-  Serial.begin(115200);
-  Wire.begin(21, 22); // SDA = GPIO 21, SCL = GPIO 22
-
-  lcd.init();
-  lcd.backlight();
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("  MAGIC STEP  ");
-  lcd.setCursor(0, 1);
-  lcd.print("Group 16 SU 26-27");
-  delay(1800);
-  lcd.clear();
-
-  pinMode(PIN_CHRG_STAT, INPUT_PULLUP);
-  analogReadResolution(12); // 12-bit ADC (0-4095)
+<span class="code-key">void</span> <span class="code-func">setup</span>() {
+  Serial.begin(<span class="code-num">115200</span>);
+  <span class="code-comment">// Initialize verified sensors and display.</span>
 }
 
-void loop() {
-  unsigned long currentMillis = millis();
-
-  // 1. Read Rectified Piezo Voltage Pulse
-  int piezoRaw = analogRead(PIN_PIEZO_ADC);
-  if (piezoRaw > PIEZO_THRESHOLD &amp;&amp; (currentMillis - lastStepTime > DEBOUNCE_MS)) {
-    stepCount++;
-    lastStepTime = currentMillis;
-    pulseDetected = true;
-    Serial.printf("[STEP] Count: %lu | Raw ADC: %d\\n", stepCount, piezoRaw);
-  } else {
-    pulseDetected = false;
-  }
-
-  // 2. Read Battery Voltage (every 500 ms)
-  static unsigned long lastBatteryRead = 0;
-  if (currentMillis - lastBatteryRead > 500) {
-    lastBatteryRead = currentMillis;
-    int batRaw = analogRead(PIN_BATTERY_ADC);
-    batteryVoltage = (batRaw / 4095.0) * VREF * BATTERY_DIVIDER_RATIO;
-    isCharging = (digitalRead(PIN_CHRG_STAT) == LOW);
-  }
-
-  // 3. Update 16x2 I2C Display
-  static unsigned long lastLcdUpdate = 0;
-  if (currentMillis - lastLcdUpdate > 150) {
-    lastLcdUpdate = currentMillis;
-    
-    // Row 0: Step Counter and Live Pulse Indicator
-    lcd.setCursor(0, 0);
-    lcd.print("STEPS: ");
-    char stepStr[8];
-    sprintf(stepStr, "%-5lu", stepCount);
-    lcd.print(stepStr);
-    lcd.setCursor(14, 0);
-    lcd.print(pulseDetected ? "[*]" : "   ");
-
-    // Row 1: Battery Voltage &amp; Charge State
-    lcd.setCursor(0, 1);
-    lcd.print("BAT: ");
-    lcd.print(batteryVoltage, 2);
-    lcd.print("V ");
-    lcd.setCursor(11, 1);
-    lcd.print(isCharging ? "CHRG" : "IDLE");
-  }
+<span class="code-key">void</span> <span class="code-func">loop</span>() {
+  <span class="code-comment">// Add tested step-detection and display logic.</span>
 }</code></pre>
+          <div class="code-footer"><span>Replace this illustrative scaffold with the final tested firmware.</span><a href="#resources">Add source file in repository ↗</a></div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ==================== 08 INTERACTIVE ENERGY HARVESTING SIMULATOR ==================== -->
-    <section class="section" id="simulator-section" aria-labelledby="simulator-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 08</p>
-          <h2 id="simulator-title">Kinetic Energy Harvesting Lab (Simulator)</h2>
-        </header>
-
-        <div class="sim-banner" role="note">
-          <strong>Interactive Theoretical Simulation:</strong> Test the piezoelectric transduction physics, diode bridge rectification, capacitive charging curve, and ESP32 LCD telemetry in real time. Does not read physical hardware.
+      <section class="content-section section-wrap" id="prototype">
+        <div class="section-heading">
+          <div><span class="section-index">08 / PROTOTYPE DEVELOPMENT</span><h2>From design<br><em>to physical build.</em></h2></div>
+          <p class="section-intro">Use this archive to record the real fabrication and assembly journey. The current site intentionally leaves photo slots empty until project images are supplied.</p>
         </div>
-
-        <div class="sim-panel">
-          <div class="sim-grid">
-            <!-- Left: Controls & Virtual Oscilloscope -->
-            <div class="sim-stage-block">
-              <p class="sim-block-title">Interactive Walking Controls</p>
-
-              <div class="sim-control-row">
-                <label for="sim-mass-slider">Footstep Force / Body Mass</label>
-                <div class="sim-input-pair">
-                  <input type="range" id="sim-mass-slider" min="40" max="100" step="1" value="70">
-                  <input type="number" id="sim-mass-number" min="40" max="100" step="1" value="70" aria-label="Body mass in kilograms">
-                  <span>kg</span>
-                </div>
-              </div>
-
-              <div class="sim-control-row">
-                <label for="sim-cadence-slider">Walking Cadence / Step Rate</label>
-                <div class="sim-input-pair">
-                  <input type="range" id="sim-cadence-slider" min="30" max="150" step="5" value="75">
-                  <input type="number" id="sim-cadence-number" min="30" max="150" step="5" value="75" aria-label="Steps per minute">
-                  <span>steps/min</span>
-                </div>
-              </div>
-
-              <div class="sim-btn-row">
-                <button type="button" class="sim-action-btn" id="sim-step-btn">STOMP / STEP NOW</button>
-                <button type="button" class="sim-action-btn" id="sim-auto-btn">START CONTINUOUS WALK</button>
-                <button type="button" class="sim-action-btn" id="sim-reset-btn" style="border-style:dashed;">RESET LAB</button>
-              </div>
-
-              <!-- Real-time Oscilloscope Canvas -->
-              <div style="margin-top: 24px;">
-                <p class="sim-block-title">Live Oscilloscope Transduction Display</p>
-                <canvas id="oscilloscope" class="oscilloscope-canvas"></canvas>
-              </div>
-            </div>
-
-            <!-- Right: Telemetry & Virtual 16x2 LCD -->
-            <div class="sim-stage-block">
-              <p class="sim-block-title">ESP32 16×2 I²C LCD Display Emulator</p>
-              
-              <!-- Virtual LCD Screen -->
-              <div class="virtual-lcd">
-                <div class="lcd-line" id="lcd-row-0">STEPS: 0000     </div>
-                <div class="lcd-line" id="lcd-row-1">BAT: 3.74V  IDLE</div>
-              </div>
-
-              <!-- Metrics Grid -->
-              <div class="sim-metrics-grid">
-                <div class="sim-chip">
-                  <span class="sim-chip-label">REGISTERED STEPS</span>
-                  <div class="sim-chip-val" id="sim-val-steps">0</div>
-                </div>
-                <div class="sim-chip">
-                  <span class="sim-chip-label">PEAK PULSE V_PK</span>
-                  <div class="sim-chip-val" id="sim-val-vpeak">0.0 V</div>
-                </div>
-                <div class="sim-chip">
-                  <span class="sim-chip-label">BUFFER CAP V_CAP</span>
-                  <div class="sim-chip-val" id="sim-val-vcap">0.00 V</div>
-                </div>
-                <div class="sim-chip">
-                  <span class="sim-chip-label">1S2P LI-ION V_BAT</span>
-                  <div class="sim-chip-val" id="sim-val-vbat">3.74 V</div>
-                </div>
-              </div>
-
-              <div class="note-block" style="margin-top:20px;">
-                <h4 style="margin:0 0 6px;font-size:15px;color:var(--text);">Telemetry Logic Rule</h4>
-                <p style="font-size:13px;color:var(--muted);margin:0;">
-                  Raw spikes over 450 ADC counts trigger a step increment with a 220 ms debounce window. When buffer voltage exceeds 4.5 V, trickle charging engages.
-                </p>
-              </div>
-            </div>
-          </div>
+        <div class="photo-categories">
+          <button class="photo-category" data-gallery-target="prototype"><span>01</span><b>Initial prototype</b><small>Platform and early build</small><em>Open gallery ↗</em></button>
+          <button class="photo-category" data-gallery-target="prototype"><span>02</span><b>Sensor arrangement</b><small>Piezoelectric disc placement</small><em>Open gallery ↗</em></button>
+          <button class="photo-category" data-gallery-target="prototype"><span>03</span><b>Electronics integration</b><small>Controller, LCD and wiring</small><em>Open gallery ↗</em></button>
+          <button class="photo-category" data-gallery-target="prototype"><span>04</span><b>Final assembly</b><small>Finished prototype views</small><em>Open gallery ↗</em></button>
         </div>
-      </div>
-    </section>
-
-    <!-- ==================== 09 TESTING PROTOCOL & RESULTS ==================== -->
-    <section class="section section-tinted" id="testing" aria-labelledby="testing-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 09</p>
-          <h2 id="testing-title">Testing Protocols &amp; Experimental Results</h2>
-        </header>
-
-        <div class="result-flag">
-          <strong>Testing Policy &amp; Scientific Integrity:</strong> Measured voltages, step counts, and energy numbers will only be populated after formal testing with calibrated multimeters and digital storage oscilloscopes. Below is the active test matrix.
+        <div class="prototype-upload panel">
+          <div><span class="panel-kicker">PROJECT PHOTO ARCHIVE</span><h3>Add prototype photographs</h3><p>Use the SolidWorks gallery manager as the current image-preview workflow, or place prototype images in <code>assets/images/gallery/</code> and add them to <code>data/gallery.json</code>.</p></div>
+          <a class="button button-secondary" href="#solidworks">Open image manager ↗</a>
         </div>
+      </section>
 
-        <div class="table-wrap" tabindex="0" role="region" aria-labelledby="test-caption">
-          <table class="test-table">
-            <caption id="test-caption">Experimental Evaluation Matrix (Sanjivani University Makerspace Lab)</caption>
-            <thead>
-              <tr>
-                <th scope="col">Test ID</th>
-                <th scope="col">Test Objective</th>
-                <th scope="col">Parameter</th>
-                <th scope="col">Test Conditions</th>
-                <th scope="col">Expected Nominal</th>
-                <th scope="col">Measured Lab Result</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody id="test-rows"></tbody>
-          </table>
+      <section class="content-section section-wrap" id="testing">
+        <div class="section-heading">
+          <div><span class="section-index">09 / TESTING & OBSERVATIONS</span><h2>Measure. Record.<br><em>Improve.</em></h2></div>
+          <p class="section-intro">Report the actual method and observations, including unsuccessful trials and corrective actions. Do not publish estimates as measured results.</p>
         </div>
-      </div>
-    </section>
-
-    <!-- ==================== 10 BILL OF MATERIALS ==================== -->
-    <section class="section" id="bom-section" aria-labelledby="bom-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 10</p>
-          <h2 id="bom-title">Engineering Bill of Materials (BOM)</h2>
-        </header>
-        <p class="section-intro">Complete component inventory, electrical ratings, mechanical stock, unit costs, and procurement status.</p>
-
-        <div class="bom-toolbar">
-          <div class="bom-filters">
-            <button type="button" class="bom-filter-btn active" data-category="all">All Items</button>
-            <button type="button" class="bom-filter-btn" data-category="Mechanical">Mechanical</button>
-            <button type="button" class="bom-filter-btn" data-category="Electrical / Sensors">Sensors &amp; Power</button>
-            <button type="button" class="bom-filter-btn" data-category="Embedded &amp; Display">Embedded &amp; LCD</button>
-            <button type="button" class="bom-filter-btn" data-category="Fasteners &amp; Mounting">Fasteners</button>
-          </div>
-          <input type="search" class="bom-search" id="bom-search-input" placeholder="Search BOM components..." aria-label="Search Bill of Materials">
+        <div class="panel table-panel">
+          <div class="table-top"><div><span class="panel-kicker">TEST LOG</span><h3>Prototype verification record</h3></div><span class="tag tag-amber">PENDING ACTUAL TEST DATA</span></div>
+          <div class="table-scroll"><table><thead><tr><th>TEST</th><th>OBJECTIVE</th><th>CONDITIONS</th><th>OBSERVATION</th><th>STATUS</th></tr></thead><tbody>
+            <tr><td>01</td><td>Piezoelectric output response</td><td>Record test setup</td><td>To be entered from measurement</td><td><span class="status-pending">Pending</span></td></tr>
+            <tr><td>02</td><td>Step detection</td><td>Record sensor interface</td><td>To be entered from measurement</td><td><span class="status-pending">Pending</span></td></tr>
+            <tr><td>03</td><td>LCD display operation</td><td>Record firmware version</td><td>To be entered from test</td><td><span class="status-pending">Pending</span></td></tr>
+            <tr><td>04</td><td>Energy storage / charging</td><td>Record verified charger and test conditions</td><td>To be entered after safe verification</td><td><span class="status-pending">Pending</span></td></tr>
+          </tbody></table></div>
+          <p class="table-note">These are suggested test headings, not claims that tests have been completed.</p>
         </div>
+      </section>
 
-        <div class="bom-table-container">
-          <table class="bom-table">
-            <thead>
-              <tr>
-                <th scope="col">Item</th>
-                <th scope="col">Component Description</th>
-                <th scope="col">Technical Specification</th>
-                <th scope="col">Qty</th>
-                <th scope="col">Unit Cost</th>
-                <th scope="col">Total</th>
-                <th scope="col">Source / Vendor</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody id="bom-rows"></tbody>
-          </table>
+      <section class="content-section section-wrap" id="bom">
+        <div class="section-heading compact">
+          <div><span class="section-index">10 / BILL OF MATERIALS</span><h2>Components & cost<br><em>record.</em></h2></div>
+          <p class="section-intro">Enter the actual quantities and purchase prices to calculate the total project material cost.</p>
         </div>
-
-        <div class="bom-summary-card">
-          <div>
-            <h4 style="margin:0 0 4px;font-size:16px;">Total Estimated Prototype Cost</h4>
-            <p style="margin:0;font-size:14px;color:var(--muted);">All items procured through Sanjivani University Makerspace inventory and verified local vendors.</p>
-          </div>
-          <div style="font-family:var(--mono);font-size:26px;font-weight:800;color:var(--energy-ink);" id="bom-total-amount">₹1,710</div>
+        <div class="panel bom-panel">
+          <div class="table-top"><div><span class="panel-kicker">EDITABLE COST SHEET</span><h3>Bill of materials</h3></div><button class="button button-small" id="addBomRow">＋ Add row</button></div>
+          <div class="table-scroll"><table id="bomTable"><thead><tr><th>COMPONENT</th><th>QTY</th><th>UNIT PRICE (₹)</th><th>LINE TOTAL (₹)</th><th></th></tr></thead><tbody>
+            <tr><td><input aria-label="Component" value="Piezoelectric disc (27 mm)"></td><td><input aria-label="Quantity" type="number" min="0" value="6" class="bom-qty"></td><td><input aria-label="Unit price" type="number" min="0" step="0.01" placeholder="Enter price" class="bom-price"></td><td class="line-total">—</td><td><button class="remove-row" aria-label="Remove row">×</button></td></tr>
+            <tr><td><input aria-label="Component" value="Wooden base plate"></td><td><input aria-label="Quantity" type="number" min="0" value="1" class="bom-qty"></td><td><input aria-label="Unit price" type="number" min="0" step="0.01" placeholder="Enter price" class="bom-price"></td><td class="line-total">—</td><td><button class="remove-row" aria-label="Remove row">×</button></td></tr>
+            <tr><td><input aria-label="Component" value="ESP32 DevKit V1"></td><td><input aria-label="Quantity" type="number" min="0" value="1" class="bom-qty"></td><td><input aria-label="Unit price" type="number" min="0" step="0.01" placeholder="Enter price" class="bom-price"></td><td class="line-total">—</td><td><button class="remove-row" aria-label="Remove row">×</button></td></tr>
+            <tr><td><input aria-label="Component" value="16×2 I²C LCD"></td><td><input aria-label="Quantity" type="number" min="0" value="1" class="bom-qty"></td><td><input aria-label="Unit price" type="number" min="0" step="0.01" placeholder="Enter price" class="bom-price"></td><td class="line-total">—</td><td><button class="remove-row" aria-label="Remove row">×</button></td></tr>
+          </tbody></table></div>
+          <div class="bom-total"><span>CALCULATED TOTAL</span><strong id="bomTotal">₹0.00</strong></div>
+          <p class="table-note">Starter rows are editable. Enter actual purchase prices; blank prices are not included in the total.</p>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ==================== 11 DEMONSTRATION VIDEO ==================== -->
-    <section class="section section-tinted" id="video-section" aria-labelledby="video-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 11</p>
-          <h2 id="video-title">Prototype Demonstration Video</h2>
-        </header>
-
-        <div class="video-card">
-          <div class="video-container">
-            <div class="video-poster-placeholder">
-              <button type="button" class="video-play-btn" aria-label="Play project demonstration video">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-                  <polygon points="5 3 19 12 5 21 5 3"/>
-                </svg>
-              </button>
-              <h3 style="font-size:22px;margin-bottom:8px;color:#fff;">Magic Step Prototype Live Walkthrough</h3>
-              <p style="color:#94a3b8;font-size:15px;max-width:54ch;margin:0 auto;">
-                Demonstrating stepping excitation, bridge rectifier LED pulse indicator, and ESP32 real-time 16×2 LCD step count increments.
-              </p>
-              <p style="font-family:var(--mono);font-size:12px;color:var(--amber);margin-top:14px;">
-                [Video demonstration embed slot for university evaluation]
-              </p>
-            </div>
-          </div>
-          <div class="video-details">
-            <p class="muted" style="margin:0;">
-              <strong>Video Note:</strong> Video file can be linked via local MP4 (e.g. <code>assets/media/magic-step-demo.mp4</code>) or YouTube/Google Drive embed for evaluation presentation.
-            </p>
-          </div>
+      <section class="content-section section-wrap" id="applications">
+        <div class="section-heading compact">
+          <div><span class="section-index">11 / APPLICATIONS & FUTURE SCOPE</span><h2>Where could it<br><em>be explored next?</em></h2></div>
+          <p class="section-intro">Potential applications and future development directions should be presented as possibilities, not as proven outcomes of the current prototype.</p>
         </div>
-      </div>
-    </section>
-
-    <!-- ==================== 12 PROJECT GALLERY ==================== -->
-    <section class="section" id="gallery" aria-labelledby="gallery-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 12</p>
-          <h2 id="gallery-title">Project Gallery &amp; CAD Renders</h2>
-        </header>
-        <p class="section-intro">Workshop assembly photographs, SolidWorks renders, electrical circuit schematics, and laboratory test setups. Click any card to open in the zoomable viewer.</p>
-
-        <div class="gallery-toolbar">
-          <div class="gallery-filters" role="group" aria-label="Filter Gallery">
-            <button class="gallery-filter is-active" type="button" data-filter="all" aria-pressed="true">All</button>
-            <button class="gallery-filter" type="button" data-filter="mechanical" aria-pressed="false">Mechanical</button>
-            <button class="gallery-filter" type="button" data-filter="cad" aria-pressed="false">SolidWorks CAD</button>
-            <button class="gallery-filter" type="button" data-filter="electronics" aria-pressed="false">Electronics</button>
-            <button class="gallery-filter" type="button" data-filter="testing" aria-pressed="false">Testing</button>
-          </div>
-          <p class="gallery-count" id="gallery-count" aria-live="polite"></p>
+        <div class="three-cards future-cards">
+          <article class="mini-card"><span class="number-mark">01</span><h3>Interactive floors</h3><p>Explore energy-harvesting floor tiles in areas with repeated foot traffic.</p></article>
+          <article class="mini-card"><span class="number-mark">02</span><h3>Sensor networks</h3><p>Investigate low-power sensing and monitoring applications where intermittent energy may be useful.</p></article>
+          <article class="mini-card"><span class="number-mark">03</span><h3>Design refinement</h3><p>Study mechanical durability, sensor arrangement, energy conditioning and measured output improvements.</p></article>
         </div>
+      </section>
 
-        <div class="gallery-grid" id="gallery-grid"></div>
-      </div>
-    </section>
-
-    <!-- ==================== 13 BUILD STATUS & ROADMAP ==================== -->
-    <section class="section section-tinted" id="status" aria-labelledby="status-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 13</p>
-          <h2 id="status-title">Prototype Build Status</h2>
-        </header>
-        <div class="status-groups" id="status-groups"></div>
-      </div>
-    </section>
-
-    <!-- ==================== 14 DOWNLOADS & DELIVERABLES ==================== -->
-    <section class="section" id="downloads" aria-labelledby="downloads-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 14</p>
-          <h2 id="downloads-title">Deliverables &amp; Downloads</h2>
-        </header>
-        <p class="section-intro">Download official academic deliverables prepared for the university Makerspace capstone evaluation.</p>
-
-        <div class="download-grid">
-          <div class="download-card">
-            <div>
-              <span class="dl-format dl-pdf">PDF · A1</span>
-              <h3>Academic Project Poster</h3>
-              <p>High-resolution conference poster detailing the mechanical design, energy conversion pathway, electronics schematic, and prototype findings.</p>
-            </div>
-            <button class="button button-quiet" type="button" data-download="Magic_Step_Poster_A1.pdf">Download Poster (PDF)</button>
-          </div>
-
-          <div class="download-card">
-            <div>
-              <span class="dl-format dl-pdf">PDF · DOC</span>
-              <h3>Final Project Report</h3>
-              <p>Comprehensive engineering documentation report with full calculations, transducer specifications, wiring schematics, and evaluation log.</p>
-            </div>
-            <button class="button button-quiet" type="button" data-download="Magic_Step_Project_Report.pdf">Download Report (PDF)</button>
-          </div>
-
-          <div class="download-card">
-            <div>
-              <span class="dl-format dl-zip">ZIP · CAD</span>
-              <h3>SolidWorks CAD Files</h3>
-              <p>Complete 3D assembly models (.SLDASM), part files (.SLDPRT), exploded views, and dimensioned 2D engineering drawings (.SLDDRW).</p>
-            </div>
-            <button class="button button-quiet" type="button" data-download="Magic_Step_SolidWorks_CAD.zip">Download CAD Package (ZIP)</button>
-          </div>
-
-          <div class="download-card">
-            <div>
-              <span class="dl-format dl-code">INO · C++</span>
-              <h3>ESP32 Arduino Firmware</h3>
-              <p>ESP32 telemetry source code with I²C LCD library, non-blocking debounce algorithms, and battery voltage ADC sensing functions.</p>
-            </div>
-            <button class="button button-quiet" type="button" data-download="MagicStep_Telemetry_ESP32.zip">Download Source (ZIP)</button>
-          </div>
+      <section class="content-section section-wrap" id="team">
+        <div class="section-heading">
+          <div><span class="section-index">12 / PEOPLE BEHIND THE PROJECT</span><h2>Team &<br><em>project guidance.</em></h2></div>
+          <p class="section-intro">Group 16 · Department of Mechanical Engineering · Sanjivani University, Kopargaon.</p>
         </div>
-      </div>
-    </section>
-
-    <!-- ==================== 15 REFERENCES ==================== -->
-    <section class="section section-tinted" id="references" aria-labelledby="references-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 15</p>
-          <h2 id="references-title">Documentation &amp; Academic References</h2>
-        </header>
-
-        <div class="ref-layout">
-          <div>
-            <h3 class="subhead">Engineering Records in Repository</h3>
-            <ul class="doc-list">
-              <li><a href="docs/project-overview.md">Project Overview &amp; Abstract ↗</a></li>
-              <li><a href="docs/working-principle.md">Transduction Physics &amp; Formulae ↗</a></li>
-              <li><a href="docs/mechanical-design.md">Mechanical Dimensions &amp; CAD Design ↗</a></li>
-              <li><a href="docs/electronics-and-firmware.md">Electronics, Pinout &amp; ESP32 Firmware ↗</a></li>
-              <li><a href="docs/testing-and-results.md">Testing Protocols &amp; Results Matrix ↗</a></li>
-              <li><a href="docs/safety-and-maintenance.md">Electrical &amp; Lithium-Ion Safety ↗</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 class="subhead">Key Academic References</h3>
-            <ol class="ref-list">
-              <li>S. Roundy, P. K. Wright, and J. Rabaey, <em>Energy Scavenging for Wireless Sensor Networks: with Special Focus on Vibrations</em>, Springer, 2003.</li>
-              <li>H. A. Sodano, D. J. Inman, and G. Park, “A review of power harvesting from piezoelectric materials (1990–2003),” <em>Shock and Vibration Digest</em>, vol. 36, no. 3, pp. 197–206, 2004.</li>
-              <li>G. K. Ottman, H. F. Hofmann, and G. A. Lesieutre, “Optimized piezoelectric energy harvesting circuit using step-down converter in discontinuous conduction mode,” <em>IEEE Trans. Power Electronics</em>, vol. 18, no. 2, 2003.</li>
-              <li>N. S. Shenck and J. A. Paradiso, “Energy scavenging with shoe-mounted piezoelectrics,” <em>IEEE Micro</em>, vol. 21, no. 3, pp. 30–42, 2001.</li>
-              <li>J. G. Rocha et al., “Energy harvesting from human walking for autonomous wearable sensor networks,” <em>IEEE Trans. Industrial Electronics</em>, vol. 57, no. 7, 2010.</li>
-            </ol>
-          </div>
+        <div class="team-grid">
+          <article class="person-card"><span class="person-role">PROJECT TEAM · 01</span><div class="avatar">SG</div><h3>Saish Godage</h3><p>Team member</p></article>
+          <article class="person-card"><span class="person-role">PROJECT TEAM · 02</span><div class="avatar">AJ</div><h3>Ayush Jadhav</h3><p>Team member</p></article>
+          <article class="person-card"><span class="person-role">PROJECT TEAM · 03</span><div class="avatar">GW</div><h3>Gaurav Wavdhane</h3><p>Team member</p></article>
+          <article class="person-card"><span class="person-role">PROJECT TEAM · 04</span><div class="avatar">SG</div><h3>Sai Gholap</h3><p>Team member</p></article>
         </div>
-      </div>
-    </section>
-
-    <!-- ==================== 16 TEAM & ACKNOWLEDGEMENTS ==================== -->
-    <section class="section" id="team" aria-labelledby="team-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 16</p>
-          <h2 id="team-title">Project Team &amp; Acknowledgements</h2>
-        </header>
-
-        <h3 class="subhead">Student Project Members · Group 16</h3>
-        <div class="team-grid" id="team-grid"></div>
-
-        <h3 class="subhead" style="margin-top:44px;">Project Guides &amp; Faculty Supervision</h3>
-        <div class="team-grid" id="guides-grid"></div>
-
-        <div class="callout" style="margin-top:40px;">
-          <h3>Acknowledgements</h3>
-          <p>We express our sincere gratitude to the Department of Mechanical Engineering and the Makerspace / Tinkerers' Lab faculty at Sanjivani University, Kopargaon for providing workshop facilities, machining equipment, testing instrumentation, and valuable guidance throughout the fabrication and evaluation of the Magic Step system.</p>
+        <div class="faculty-grid">
+          <article class="faculty-card"><span class="panel-kicker">DIRECTOR, PROJECTS</span><h3>Dr. Kiran Wakchaure</h3><p>Sanjivani University</p></article>
+          <article class="faculty-card"><span class="panel-kicker">HEAD OF DEPARTMENT</span><h3>Dr. K. C. Bhosale</h3><p>Department of Mechanical Engineering</p></article>
+          <article class="faculty-card"><span class="panel-kicker">PROJECT GUIDE</span><h3>Dr. Vasudeo Singh Singer</h3><p>Project guidance</p></article>
+          <article class="faculty-card"><span class="panel-kicker">PROJECT GUIDE</span><h3>Dr. Prathibha Sinha</h3><p>Project guidance</p></article>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="site-footer">
-    <div class="shell footer-inner">
-      <p><strong>MAGIC STEP — Footstep Power Generation System</strong></p>
-      <p>Group 16 · Department of Mechanical Engineering · Sanjivani University, Kopargaon · Academic Year 2026–27</p>
-      <p class="footer-meta">
-        Prototype Status: <strong>Hardware Assembled · Firmware Running</strong> · Built for University Makerspace Evaluation · 
-        <a href="#top">Back to top ↑</a>
-      </p>
+      <section class="content-section section-wrap" id="resources">
+        <div class="section-heading compact">
+          <div><span class="section-index">13 / PROJECT RESOURCES</span><h2>Files &<br><em>demonstration.</em></h2></div>
+          <p class="section-intro">Add links to the final report, poster, CAD files, source code and video once those files have been prepared and uploaded.</p>
+        </div>
+        <div class="resource-grid">
+          <div class="resource-card"><span>PDF / REPORT</span><b>Final Project Report</b><small>Add report PDF to <code>report/</code></small><em>Link to be added</em></div>
+          <div class="resource-card"><span>PDF / POSTER</span><b>Project Poster</b><small>Add poster PDF to <code>poster/</code></small><em>Link to be added</em></div>
+          <div class="resource-card"><span>CAD / SOLIDWORKS</span><b>CAD Parts & Assembly</b><small>Add native CAD files to <code>cad/</code></small><em>Link to be added</em></div>
+          <div class="resource-card"><span>CODE / ESP32</span><b>ESP32 Source Code</b><small>Add tested .ino file to <code>electronics/code/</code></small><em>Link to be added</em></div>
+          <div class="resource-card"><span>VIDEO / DEMO</span><b>Working Demonstration</b><small>Add or link the one-minute video</small><em>Link to be added</em></div>
+          <div class="resource-card"><span>DOCUMENTATION</span><b>References & Acknowledgements</b><small>Record sources, tools and support</small><em>Content to be added</em></div>
+        </div>
+      </section>
+
+      <footer class="footer section-wrap">
+        <a class="brand" href="#home"><span class="brand-mark">M<span>·</span>S</span><span class="brand-copy"><strong>MAGIC STEP</strong><small>GROUP 16 · MECHANICAL ENGINEERING</small></span></a>
+        <p>MAKERSPACE PROJECT DOCUMENTATION · SANJIVANI UNIVERSITY</p>
+        <a href="#home" class="back-top">BACK TO TOP ↑</a>
+      </footer>
+    </main>
+  </div>
+
+  <dialog class="upload-dialog" id="uploadDialog">
+    <form method="dialog" class="dialog-close-form"><button class="dialog-close" aria-label="Close">×</button></form>
+    <div class="dialog-content">
+      <span class="section-index">GALLERY MANAGER</span><h2>Add a CAD screenshot</h2>
+      <p class="dialog-intro">Choose a screenshot and add its documentation details. This creates a local preview and a downloadable manifest; it does not upload files to GitHub.</p>
+      <form id="galleryForm">
+        <label class="file-drop" for="imageFile"><span class="upload-plus">＋</span><b>Choose image file</b><small>PNG, JPG or WEBP · SolidWorks screenshot or drawing</small><input id="imageFile" type="file" accept="image/png,image/jpeg,image/webp" required></label>
+        <div class="image-preview" id="imagePreview"><span>Image preview will appear here</span></div>
+        <div class="form-grid">
+          <label>Screenshot title<input id="imageTitle" required placeholder="e.g. Base plate — isometric view"></label>
+          <label>Component name<input id="imageComponent" placeholder="e.g. Bottom plate"></label>
+          <label>Dimensions<input id="imageDimensions" placeholder="e.g. 300 × 160 × 10 mm"></label>
+          <label>Drawing / view type<select id="imageView"><option>Part model</option><option>Front view</option><option>Top view</option><option>Side view</option><option>Isometric view</option><option>Dimensioned drawing</option><option>Assembly view</option><option>Exploded view</option><option>Other</option></select></label>
+        </div>
+        <label class="full-label">Description<textarea id="imageDescription" rows="3" placeholder="Describe what this screenshot shows."></textarea></label>
+        <div class="dialog-actions"><button type="button" class="button button-quiet" id="cancelUpload">Cancel</button><button class="button button-primary" type="submit">Add to gallery ↗</button></div>
+      </form>
     </div>
-  </footer>
-
-  <!-- Toast Notification Container -->
-  <p class="toast" id="toast" role="status" aria-live="polite" hidden></p>
-
-  <!-- Photo Lightbox Dialog -->
-  <dialog class="photo-dialog" id="photo-dialog" aria-labelledby="dialog-title">
-    <div class="dialog-bar">
-      <span class="label-chip" id="dialog-kind">IMAGE</span>
-      <strong id="dialog-title">Image Title</strong>
-      <button type="button" class="dialog-btn" id="dialog-zoom" aria-pressed="false">Zoom</button>
-      <button type="button" class="dialog-btn" id="dialog-close" aria-label="Close image viewer">Close ×</button>
-    </div>
-    <div class="dialog-image-wrap" id="dialog-image-wrap">
-      <img id="dialog-image" src="" alt="">
-    </div>
-    <p class="dialog-caption" id="dialog-description"></p>
   </dialog>
+
+  <dialog class="image-dialog" id="imageDialog"><form method="dialog"><button class="dialog-close image-close" aria-label="Close">×</button></form><img id="largeImage" alt="Expanded gallery image"><div id="largeCaption"></div></dialog>
+
+  <script src="./assets/js/app.js"></script>
 </body>
 </html>
