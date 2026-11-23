@@ -155,11 +155,31 @@
   const dialogTitle = $("#dialog-title");
   const dialogKind = $("#dialog-kind");
   const dialogDesc = $("#dialog-description");
+  const dialogGalleryControls = $("#dialog-gallery-controls");
+  const dialogGalleryPosition = $("#dialog-gallery-position");
+  const journeyPhotos = Array.isArray(project.journeySteps) ? project.journeySteps : [];
+  let activeJourneyPhotoIndex = null;
+  let dialogImageUpdate = 0;
+
+  function setDialogImage(item) {
+    const update = ++dialogImageUpdate;
+    const finishTransition = () => {
+      if (update === dialogImageUpdate) dialogImg.classList.remove("is-changing");
+    };
+    dialogImg.classList.add("is-changing");
+    dialogImg.onload = finishTransition;
+    dialogImg.onerror = finishTransition;
+    dialogImg.src = item.src;
+    dialogImg.alt = item.alt || item.title;
+    if (dialogImg.complete) requestAnimationFrame(finishTransition);
+  }
 
   function openLightbox(item) {
     if (!dialog || !item) return;
-    dialogImg.src = item.src;
-    dialogImg.alt = item.alt || item.title;
+    activeJourneyPhotoIndex = null;
+    dialog.classList.remove("is-journey-gallery");
+    if (dialogGalleryControls) dialogGalleryControls.hidden = true;
+    setDialogImage(item);
     if (dialogTitle) dialogTitle.textContent = item.title;
     if (dialogKind) dialogKind.textContent = (item.kind || "Image").toUpperCase();
     if (dialogDesc) dialogDesc.textContent = item.description || "";
@@ -167,6 +187,62 @@
     if (dialogZoom) dialogZoom.textContent = "Zoom";
     if (typeof dialog.showModal === "function") dialog.showModal();
   }
+
+  function openJourneyPhoto(index) {
+    const item = journeyPhotos[index];
+    if (!dialog || !item) return;
+    activeJourneyPhotoIndex = index;
+    dialog.classList.add("is-journey-gallery");
+    if (dialogGalleryControls) dialogGalleryControls.hidden = false;
+    if (dialogTitle) dialogTitle.textContent = item.title;
+    if (dialogKind) dialogKind.textContent = item.stage;
+    if (dialogDesc) dialogDesc.textContent = item.description;
+    if (dialogGalleryPosition) {
+      dialogGalleryPosition.textContent = `${String(index + 1).padStart(2, "0")} / ${String(journeyPhotos.length).padStart(2, "0")}`;
+    }
+    if (dialogWrap) dialogWrap.classList.remove("is-zoomed");
+    if (dialogZoom) {
+      dialogZoom.textContent = "Zoom";
+      dialogZoom.setAttribute("aria-pressed", "false");
+    }
+    setDialogImage(item);
+    if (!dialog.open && typeof dialog.showModal === "function") dialog.showModal();
+  }
+
+  function navigateJourneyPhotos(direction) {
+    if (activeJourneyPhotoIndex === null || journeyPhotos.length === 0) return;
+    const nextIndex = (activeJourneyPhotoIndex + direction + journeyPhotos.length) % journeyPhotos.length;
+    openJourneyPhoto(nextIndex);
+  }
+
+  $("#dialog-previous")?.addEventListener("click", () => navigateJourneyPhotos(-1));
+  $("#dialog-next")?.addEventListener("click", () => navigateJourneyPhotos(1));
+  dialog?.addEventListener("cancel", (event) => {
+    if (activeJourneyPhotoIndex !== null) {
+      event.preventDefault();
+      dialog.close();
+    }
+  });
+  document.addEventListener("keydown", (event) => {
+    if (!dialog?.open || activeJourneyPhotoIndex === null) return;
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      navigateJourneyPhotos(-1);
+    } else if (event.key === "ArrowRight") {
+      event.preventDefault();
+      navigateJourneyPhotos(1);
+    }
+  });
+  dialog?.addEventListener("close", () => {
+    activeJourneyPhotoIndex = null;
+    dialog.classList.remove("is-journey-gallery");
+    if (dialogGalleryControls) dialogGalleryControls.hidden = true;
+    if (dialogWrap) dialogWrap.classList.remove("is-zoomed");
+    if (dialogZoom) {
+      dialogZoom.textContent = "Zoom";
+      dialogZoom.setAttribute("aria-pressed", "false");
+    }
+  });
 
   if (dialogZoom) {
     dialogZoom.addEventListener("click", () => {
@@ -223,50 +299,31 @@
   // ---------------- 9. Render Engineering Journey ----------------
   const journeyList = $("#journey-steps");
   if (journeyList && Array.isArray(project.journeySteps)) {
-    project.journeySteps.forEach((step) => {
-      const li = el("li", "journey-step");
-      const head = el("div", "step-head");
-      head.append(el("span", "step-number", step.number), el("h3", "step-title", step.title));
-      li.append(head);
+    journeyPhotos.forEach((step, index) => {
+      const card = el("li", "journey-step journey-stage-card");
+      const stage = el("div", "journey-stage-head");
+      stage.append(
+        el("span", "journey-stage-number", step.stage),
+        el("span", "journey-stage-label", step.stageTitle)
+      );
 
-      const fig = el("figure", "step-figure");
-      const photoBtn = el("button", "step-photo");
-      photoBtn.type = "button";
-      photoBtn.setAttribute("aria-label", `Enlarge step photo: ${step.title}`);
+      const imageButton = el("button", "journey-stage-photo");
+      imageButton.type = "button";
+      imageButton.setAttribute("aria-label", `Open photo ${index + 1}: ${step.title}`);
+      const image = el("img");
+      image.src = step.src;
+      image.alt = step.alt;
+      image.width = step.width;
+      image.height = step.height;
+      image.loading = "lazy";
+      image.decoding = "async";
+      imageButton.append(image, el("span", "journey-stage-zoom", "View photo"));
+      imageButton.addEventListener("click", () => openJourneyPhoto(index));
 
-      // Map step to photo
-      let photoSrc = "assets/media/photos/assembled-tile.svg";
-      if (step.buildStage === 1) photoSrc = "assets/media/photos/base-plate.svg";
-      else if (step.buildStage === 2 || step.buildStage === 3) photoSrc = "assets/media/photos/piezo-matrix.svg";
-      else if (step.buildStage === 4) photoSrc = "assets/media/diagrams/circuit-diagram.svg";
-      else if (step.buildStage === 5) photoSrc = "assets/media/cad/isometric-view.svg";
-      else if (step.buildStage === 6) photoSrc = "assets/media/photos/esp32-bench.svg";
-      else if (step.buildStage === 7) photoSrc = "assets/media/photos/battery-pack.svg";
-      else if (step.buildStage === 8) photoSrc = "assets/media/photos/oscilloscope-test.svg";
-
-      const img = el("img");
-      img.src = photoSrc;
-      img.alt = step.title;
-      img.loading = "lazy";
-      photoBtn.appendChild(img);
-      photoBtn.addEventListener("click", () => {
-        openLightbox({ title: step.title, src: photoSrc, description: step.notes, kind: "photo" });
-      });
-
-      fig.appendChild(photoBtn);
-      fig.appendChild(el("figcaption", "step-caption", step.notes));
-      li.appendChild(fig);
-
-      const textWrap = el("div", "step-text-wrap");
-      textWrap.appendChild(el("p", "step-text", step.text));
-      if (step.tools) {
-        const toolsP = el("p", "step-tools");
-        toolsP.innerHTML = `<strong>Tools:</strong> ${step.tools} | <strong>Materials:</strong> ${step.materials}`;
-        textWrap.appendChild(toolsP);
-      }
-      li.appendChild(textWrap);
-
-      journeyList.appendChild(li);
+      const copy = el("div", "journey-stage-copy");
+      copy.append(el("h3", "journey-stage-title", step.title), el("p", "journey-stage-description", step.description));
+      card.append(stage, imageButton, copy);
+      journeyList.appendChild(card);
     });
   }
 

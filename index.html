@@ -242,9 +242,9 @@
           <p class="section-number"><span class="tb-label">SEC</span> 04</p>
           <h2 id="journey-title">Engineering Journey &amp; Fabrication Log</h2>
         </header>
-        <p class="section-intro">Chronological fabrication and integration log documented at the Sanjivani University Makerspace carpentry and electronics workshops. Click any photo to enlarge and inspect in the lightbox viewer.</p>
+        <p class="section-intro">Five documented stages of programming, prototype integration, team development and piezoelectric sensor preparation. Select any photograph to view it full screen.</p>
 
-        <ol class="journey-steps" id="journey-steps"></ol>
+        <ol class="journey-steps" id="journey-steps" aria-label="Engineering journey development timeline"></ol>
       </div>
     </section>
 
@@ -833,6 +833,11 @@ void loop() {
     <div class="dialog-bar">
       <span class="label-chip" id="dialog-kind">IMAGE</span>
       <strong id="dialog-title">Image Title</strong>
+      <div class="dialog-gallery-controls" id="dialog-gallery-controls" hidden>
+        <button type="button" class="dialog-btn" id="dialog-previous" aria-label="Previous project photo">←</button>
+        <span id="dialog-gallery-position" aria-live="polite"></span>
+        <button type="button" class="dialog-btn" id="dialog-next" aria-label="Next project photo">→</button>
+      </div>
       <button type="button" class="dialog-btn" id="dialog-zoom" aria-pressed="false">Zoom</button>
       <button type="button" class="dialog-btn" id="dialog-close" aria-label="Close image viewer">Close ×</button>
     </div>

@@ -334,76 +334,54 @@ window.MAGICSTEP_PROJECT = {
 
   journeySteps: [
     {
-      number: "01",
-      title: "Base Plate Dimensioning and Sizing",
-      buildStage: 1,
-      tools: "Band saw, surface planer, vernier calliper",
-      materials: "Seasoned timber / hardwood block",
-      text: "The wooden base plate was measured, marked, and machined to 300 mm length, 160 mm width, and 10 mm thickness. Edges were trued and sanded to provide an unyielding reference plane for piezoelectric mounting.",
-      notes: "A rigid planar surface is essential to ensure that downward footstep energy flexes the piezoelectric ceramic against the base rather than deflecting the platform structure."
+      stage: "Stage 1",
+      stageTitle: "Programming and Display Development",
+      title: "ESP32 Programming and Display Development",
+      description: "Development of the embedded program using Arduino IDE for the ESP32 DevKit V1 microcontroller. The software is intended to monitor the Magic Step system and display relevant electrical information through the LCD interface.",
+      alt: "Arduino IDE code displayed on a laptop during ESP32 programming and display development for the Magic Step project.",
+      src: "assets/images/engineering-journey/esp32-programming.jpg",
+      width: 1280,
+      height: 960
     },
     {
-      number: "02",
-      title: "Transducer Grid Layout & Center Punching",
-      buildStage: 2,
-      tools: "Steel rule, marking gauge, spring divider",
-      materials: "Base plate surface",
-      text: "A 2-row × 3-column matrix grid was marked on the wooden surface. Transducer centers were laid out with equal spacing across the 300 × 160 mm footprint to maximize foot strike capture across the foot's heel-to-ball strike line.",
-      notes: "Grid centers ensure repeatable transducer placement and prevent mechanical point overloading on any single sensor disc."
+      stage: "Stage 2",
+      stageTitle: "Initial Prototype Integration",
+      title: "Initial Prototype Integration",
+      description: "Initial hands-on development of the Magic Step platform, involving the arrangement of electronic components and prototype wiring.",
+      alt: "Student arranging components and wiring on the Magic Step prototype platform at a workshop bench.",
+      src: "assets/images/engineering-journey/prototype-integration-1.jpg",
+      width: 768,
+      height: 1024
     },
     {
-      number: "03",
-      title: "Piezo Disc Surface Mounting & Parallel Harness",
-      buildStage: 3,
-      tools: "Temperature-controlled soldering iron, tweezers",
-      materials: "6× ⌀27 mm brass/PZT discs, double-sided adhesive, AWG26 wire",
-      text: "The six piezoelectric discs were mounted using compliant double-sided adhesive. Lead wires were soldered carefully to the brass substrate (+) and ceramic electrode surface (-) without overheating the fragile piezoelectric crystal layer.",
-      notes: "Lead zirconate titanate (PZT) ceramic loses polarization if subjected to temperatures exceeding its Curie point (~300 °C) during prolonged soldering."
+      stage: "Stage 3",
+      stageTitle: "Electronics Development",
+      title: "Electronics Assembly and Wiring",
+      description: "Working on the physical arrangement and electrical connections of the prototype as part of the system integration process.",
+      alt: "Close view of a student connecting components on the Magic Step prototype platform.",
+      src: "assets/images/engineering-journey/prototype-integration-2.jpg",
+      width: 768,
+      height: 1024
     },
     {
-      number: "04",
-      title: "AC-DC Rectification & Capacitor Buffer Assembly",
-      buildStage: 4,
-      tools: "Digital multimeter, breadboard, wire stripper",
-      materials: "Bridge rectifier, 10 µF 50V electrolytic capacitor, terminal blocks",
-      text: "The parallel transducer output leads were connected to an AC full-wave diode bridge. The rectified positive and negative output leads were connected across a 10 µF electrolytic smoothing capacitor to buffer instantaneous voltage spikes into usable DC charge.",
-      notes: "Each foot strike produces a high-voltage, low-current spike of alternating polarity. Full-wave rectification captures energy from both foot impact and release phases."
+      stage: "Stage 4",
+      stageTitle: "Team Collaboration",
+      title: "Collaborative Prototype Development",
+      description: "Team members working together on the prototype in the workshop, inspecting the assembly and coordinating the mechanical and electronic integration.",
+      alt: "Team members collaborating on and inspecting the Magic Step prototype in the workshop.",
+      src: "assets/images/engineering-journey/team-development.jpg",
+      width: 768,
+      height: 1024
     },
     {
-      number: "05",
-      title: "Force Distribution Layer & Top Tread Plate Integration",
-      buildStage: 5,
-      tools: "Precision drill press, alignment pins",
-      materials: "Top tread plate, high-density rubber buffer spacers",
-      text: "Compliant force distribution pads were positioned directly above each disc. The upper footstep plate was fitted without coil springs, relying on controlled elastomeric flexure to transfer foot pressure evenly without cracking the brittle ceramic crystals.",
-      notes: "Springless direct flexure avoids energy loss through mechanical spring hysteresis, channeling maximum compressive kinetic energy directly into piezoelectric strain."
-    },
-    {
-      number: "06",
-      title: "ESP32 DevKit V1 & 16×2 I²C LCD Wiring",
-      buildStage: 6,
-      tools: "USB logic analyzer, oscilloscope, breadboard",
-      materials: "ESP32 DevKit V1, 16×2 LCD with PCF8574 backpack, voltage divider",
-      text: "The ESP32 was wired on an electronics carrier board. I²C lines (SDA on GPIO 21, SCL on GPIO 22) were connected to the 16×2 LCD. An analog conditioning voltage divider was wired from the rectified buffer to ADC1 (GPIO 34) for step and voltage telemetry.",
-      notes: "ESP32 ADC inputs must strictly not exceed 3.3 V. A protective resistor divider and clamping Zener diode network prevents sensor spike overvoltage."
-    },
-    {
-      number: "07",
-      title: "1S2P Li-ion Storage Pack & Power Routing",
-      buildStage: 7,
-      tools: "Calibrated multimeter, battery capacity tester",
-      materials: "2× 18650 Li-ion cells, dual parallel cell holder, insulated leads",
-      text: "Two matched 18650 lithium-ion cells were connected in parallel (1S2P arrangement) inside an insulated holder. Battery terminal voltage was routed through a high-impedance voltage divider to ESP32 ADC1 GPIO 35 for state-of-charge tracking.",
-      notes: "A battery holder is not a charger. Safe lithium-ion charging requires an appropriate 1S charger circuit with CC/CV regulation and overvoltage cutoff."
-    },
-    {
-      number: "08",
-      title: "Enclosure Packaging & Test Bed Preparation",
-      buildStage: 8,
-      tools: "Benchtop oscilloscope, calibrated DMM, mechanical load rig",
-      materials: "Enclosure housing, strain relief cable glands, testing log sheet",
-      text: "All wiring runs were secured with strain relief. The electronics and display module were packaged into an adjacent protective console. The mechanical tile was mounted on a non-slip calibration mat ready for physical footfall test trials.",
-      notes: "Repeatable test conditions require standardized step cadences, recorded person weights, and calibrated instrumentation."
+      stage: "Stage 5",
+      stageTitle: "Piezoelectric Sensor Preparation",
+      title: "Piezoelectric Sensor Preparation",
+      description: "Preparing the piezoelectric sensor connections through soldering as part of the electrical development and integration process.",
+      alt: "Hands soldering an electrical connection to a round piezoelectric sensor at the workshop bench.",
+      src: "assets/images/engineering-journey/piezo-sensor-soldering.jpg",
+      width: 768,
+      height: 1024
     }
   ],
 
