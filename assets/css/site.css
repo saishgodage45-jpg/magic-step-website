@@ -539,6 +539,46 @@ code {
   .spec-layout { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: start; }
   .spec-layout .note-block { margin-top: 0; }
 }
+.solidworks-gallery {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch; gap: 22px;
+}
+.solidworks-card {
+  min-width: 0; margin: 0; overflow: hidden;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface);
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+.solidworks-card:hover {
+  transform: translateY(-4px); border-color: var(--energy);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+.solidworks-card-featured { grid-column: span 2; grid-row: span 2; }
+.solidworks-image {
+  display: block; width: 100%; padding: 0; overflow: hidden;
+  border: 0; background: var(--plate); cursor: zoom-in;
+}
+.solidworks-image img {
+  display: block; width: 100%; height: auto;
+  transition: transform 350ms ease, filter 220ms ease;
+}
+.solidworks-image:hover img,
+.solidworks-image:focus-visible img { transform: scale(1.025); }
+.solidworks-image:focus-visible { outline: 2px solid var(--energy); outline-offset: -2px; }
+.solidworks-card figcaption { padding: 16px 18px 18px; }
+.solidworks-card h3 {
+  margin: 0 0 7px; font-family: var(--display);
+  font-size: clamp(16px, 1.4vw, 19px); line-height: 1.35;
+}
+.solidworks-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+@media (max-width: 900px) {
+  .solidworks-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .solidworks-card-featured { grid-column: 1 / -1; grid-row: auto; }
+}
+@media (max-width: 560px) {
+  .solidworks-gallery { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .solidworks-card-featured { grid-column: auto; }
+}
 .spec-table {
   width: 100%; border-collapse: collapse; font-size: 16px;
   background: var(--surface); border: 1px solid var(--line);
@@ -597,6 +637,25 @@ code {
   background: var(--bg); border: 1px solid var(--line-strong);
   color: var(--text); padding: 4px 10px; border-radius: 4px;
 }
+.model-load-status {
+  position: absolute; z-index: 12; top: 14px; right: 14px;
+  display: grid; gap: 8px; width: min(280px, calc(100% - 28px));
+  padding: 12px 14px; border: 1px solid var(--line-strong);
+  border-radius: var(--radius); background: var(--surface);
+  color: var(--muted); font-size: 13px;
+}
+.model-load-status[hidden] { display: none; }
+.model-load-status progress {
+  width: 100%; height: 6px; accent-color: var(--energy);
+}
+.model-load-status.is-error {
+  color: var(--text); border-color: var(--amber);
+}
+@media (max-width: 600px) {
+  .model-load-status { top: auto; right: 10px; bottom: 10px; width: min(240px, calc(100% - 20px)); }
+  .stage-notes { max-width: calc(100% - 20px); }
+  .stage-note { font-size: 10px; }
+}
 .part-info {
   background: var(--surface); border: 1px solid var(--line-strong);
   padding: 18px 20px; position: absolute; right: 16px; bottom: 16px;
@@ -651,82 +710,7 @@ code {
   line-height: 1.55; color: #cbd5e1; overflow-x: auto; max-height: 480px;
 }
 
-/* ==================== 08 ENERGY HARVESTING SIMULATOR ==================== */
-.sim-banner {
-  background: var(--surface); border: 1px solid var(--energy);
-  border-left-width: 4px; padding: 14px 18px; margin-bottom: 24px;
-  font-size: 15px; border-radius: 0 var(--radius) var(--radius) 0;
-}
-.sim-panel {
-  background: var(--surface); border: 1px solid var(--line-strong);
-  padding: 24px; border-radius: var(--radius);
-}
-.sim-grid { display: grid; gap: 24px; }
-@media (min-width: 992px) {
-  .sim-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); }
-}
-.sim-stage-block {
-  border: 1px solid var(--line); background: var(--bg);
-  padding: 20px; border-radius: var(--radius);
-}
-.sim-block-title {
-  font-family: var(--mono); font-size: 13px; text-transform: uppercase;
-  letter-spacing: 0.08em; color: var(--muted); margin-bottom: 16px; font-weight: 700;
-}
-.sim-control-row { display: grid; gap: 8px; margin-bottom: 20px; }
-.sim-control-row label { font-size: 15px; font-weight: 600; }
-.sim-input-pair { display: flex; align-items: center; gap: 14px; }
-.sim-input-pair input[type="range"] {
-  flex: 1; min-width: 0; accent-color: var(--energy); height: 28px;
-}
-.sim-input-pair input[type="number"] {
-  width: 90px; font-family: var(--mono); font-size: 15px; padding: 6px 10px;
-  border: 1px solid var(--line-strong); background: var(--surface);
-  color: var(--text); border-radius: 4px;
-}
-.sim-btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
-.sim-action-btn {
-  flex: 1; min-height: 48px; font-family: var(--mono); font-size: 14px;
-  font-weight: 700; border: 1px solid var(--energy); background: var(--surface-2);
-  color: var(--energy-ink); border-radius: var(--radius);
-}
-.sim-action-btn:hover { background: var(--energy); color: var(--on-accent); }
-.sim-action-btn.active { background: var(--energy); color: var(--on-accent); }
-
-/* Virtual Oscilloscope */
-.oscilloscope-canvas {
-  width: 100%; height: 220px; background: #041017;
-  border: 1.5px solid #0b394f; border-radius: 6px; display: block;
-}
-
-/* Virtual 16x2 Character LCD */
-.virtual-lcd {
-  background: #022c22; border: 3px solid #065f46;
-  border-radius: 8px; padding: 18px 22px; margin-top: 18px;
-  box-shadow: inset 0 0 16px rgba(0,0,0,0.8), 0 4px 12px rgba(6,95,70,0.3);
-}
-.lcd-line {
-  font-family: var(--mono); font-size: clamp(16px, 1.8vw, 22px);
-  font-weight: 700; color: #6ee7b7; letter-spacing: 0.12em;
-  line-height: 1.4; text-shadow: 0 0 8px rgba(110,231,183,0.6);
-  white-space: pre;
-}
-
-.sim-metrics-grid {
-  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px; margin-top: 18px;
-}
-.sim-chip {
-  padding: 12px 14px; background: var(--surface-2); border: 1px solid var(--line);
-  border-radius: 6px;
-}
-.sim-chip-label { font-size: 12px; color: var(--muted); font-family: var(--mono); }
-.sim-chip-val {
-  font-family: var(--mono); font-size: 20px; font-weight: 700;
-  color: var(--energy-ink); margin-top: 4px;
-}
-
-/* ==================== 09 TESTING MATRIX ==================== */
+/* ==================== 08 TESTING MATRIX ==================== */
 .result-flag {
   background: var(--surface); border: 1px solid var(--line-strong);
   border-left: 4px solid var(--amber); padding: 16px 20px;
@@ -752,7 +736,7 @@ code {
   font-family: var(--mono); font-size: 12px; border-radius: 4px;
 }
 
-/* ==================== 10 BILL OF MATERIALS ==================== */
+/* ==================== 09 BILL OF MATERIALS ==================== */
 .bom-toolbar {
   display: flex; flex-wrap: wrap; justify-content: space-between;
   align-items: center; gap: 14px; margin-bottom: 20px;
@@ -789,7 +773,7 @@ code {
   display: flex; justify-content: space-between; align-items: center;
 }
 
-/* ==================== 11 VIDEO SECTION ==================== */
+/* ==================== 10 VIDEO SECTION ==================== */
 .video-card {
   background: var(--surface); border: 1px solid var(--line-strong);
   border-radius: var(--radius); overflow: hidden;
@@ -809,7 +793,7 @@ code {
 }
 .video-details { padding: 22px 26px; }
 
-/* ==================== 12 GALLERY ==================== */
+/* ==================== 11 GALLERY ==================== */
 .gallery-toolbar {
   display: flex; flex-wrap: wrap; justify-content: space-between;
   align-items: center; gap: 12px 24px; margin-bottom: 24px;
@@ -838,7 +822,7 @@ code {
 .gallery-card figcaption { padding: 14px 18px; }
 .gallery-title { font-size: 16px; font-weight: 700; margin-top: 6px; display: block; }
 
-/* ==================== 13 STATUS GROUPS ==================== */
+/* ==================== 12 STATUS GROUPS ==================== */
 .status-groups { display: grid; gap: 22px; }
 @media (min-width: 900px) { .status-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .status-group {
@@ -857,7 +841,7 @@ code {
 .status-group ul { padding-left: 20px; margin: 0; }
 .status-group li { margin-bottom: 8px; color: var(--text); font-size: 15px; }
 
-/* ==================== 14 DOWNLOADS ==================== */
+/* ==================== 13 DOWNLOADS ==================== */
 .download-grid {
   display: grid; gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
@@ -880,7 +864,7 @@ code {
 .download-card h3 { font-size: 19px; margin-bottom: 8px; }
 .download-card p { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
 
-/* ==================== 15 REFERENCES ==================== */
+/* ==================== 14 REFERENCES ==================== */
 .ref-layout { display: grid; gap: 32px; }
 @media (min-width: 900px) { .ref-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); } }
 .doc-list { list-style: none; padding: 0; }
@@ -892,7 +876,7 @@ code {
 .ref-list { padding-left: 22px; color: var(--muted); font-size: 15px; }
 .ref-list li { margin-bottom: 10px; }
 
-/* ==================== 16 TEAM & GUIDES ==================== */
+/* ==================== 15 TEAM & GUIDES ==================== */
 .team-grid {
   display: grid; gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
@@ -977,8 +961,7 @@ body.presentation-mode .presentation-toggle {
 body.presentation-mode .title-block h2 { font-size: clamp(38px, 5vw, 62px); }
 body.presentation-mode .shell { width: min(1320px, 100% - 2 * var(--gutter)); }
 body.presentation-mode .step-caption,
-body.presentation-mode .figure-caption,
-body.presentation-mode .sim-chip-val { font-size: 22px; }
+body.presentation-mode .figure-caption { font-size: 22px; }
 
 /* Toast */
 .toast {
@@ -1002,7 +985,7 @@ body.presentation-mode .sim-chip-val { font-size: 22px; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html, body { background: #fff !important; color: #000; font-size: 10.5pt; }
   .site-header, .scroll-progress, .hero-canvas-host, .explorer-toolbar,
-  .sim-panel, .sim-banner, .gallery-toolbar, .photo-dialog, .toast, .copy-btn {
+  .gallery-toolbar, .photo-dialog, .toast, .copy-btn {
     display: none !important;
   }
   .section { padding-block: 16pt; break-inside: auto; }

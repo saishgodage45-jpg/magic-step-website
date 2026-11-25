@@ -445,12 +445,12 @@
   if (guidesGrid && Array.isArray(project.projectGuides)) {
     project.projectGuides.forEach((g) => {
       const card = el("div", "team-card");
-      const avatar = el("div", "avatar", "DR");
+      const avatar = el("div", "avatar", g.avatarText);
       const info = el("div", "team-info");
       info.append(
         el("h4", "", g.name),
-        el("p", "text-amber font-mono text-sm", g.designation),
-        el("p", "text-muted text-xs", `${g.department} · ${g.institution}`)
+        el("p", "role text-amber font-mono text-sm", g.designation),
+        el("p", "dept text-muted text-xs", `${g.department} · ${g.institution}`)
       );
       card.append(avatar, info);
       guidesGrid.append(card);

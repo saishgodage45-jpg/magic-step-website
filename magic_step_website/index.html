@@ -40,7 +40,6 @@
   <script defer src="assets/js/gallery-data.js"></script>
   <script defer src="assets/js/site.js"></script>
   <script defer src="assets/js/explorer-3d.js"></script>
-  <script defer src="assets/js/simulator.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -63,7 +62,6 @@
       <a href="#design">CAD Design</a>
       <a href="#explorer-section">3D Explorer</a>
       <a href="#electronics">Electronics</a>
-      <a href="#simulator-section">Sim Lab</a>
       <a href="#testing">Testing</a>
       <a href="#bom-section">BOM</a>
       <a href="#video-section">Video</a>
@@ -467,102 +465,11 @@ void loop() {
       </div>
     </section>
 
-    <!-- ==================== 08 INTERACTIVE ENERGY HARVESTING SIMULATOR ==================== -->
-    <section class="section" id="simulator-section" aria-labelledby="simulator-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 08</p>
-          <h2 id="simulator-title">Kinetic Energy Harvesting Lab (Simulator)</h2>
-        </header>
-
-        <div class="sim-banner" role="note">
-          <strong>Interactive Theoretical Simulation:</strong> Test the piezoelectric transduction physics, diode bridge rectification, capacitive charging curve, and ESP32 LCD telemetry in real time. Does not read physical hardware.
-        </div>
-
-        <div class="sim-panel">
-          <div class="sim-grid">
-            <!-- Left: Controls & Virtual Oscilloscope -->
-            <div class="sim-stage-block">
-              <p class="sim-block-title">Interactive Walking Controls</p>
-
-              <div class="sim-control-row">
-                <label for="sim-mass-slider">Footstep Force / Body Mass</label>
-                <div class="sim-input-pair">
-                  <input type="range" id="sim-mass-slider" min="40" max="100" step="1" value="70">
-                  <input type="number" id="sim-mass-number" min="40" max="100" step="1" value="70" aria-label="Body mass in kilograms">
-                  <span>kg</span>
-                </div>
-              </div>
-
-              <div class="sim-control-row">
-                <label for="sim-cadence-slider">Walking Cadence / Step Rate</label>
-                <div class="sim-input-pair">
-                  <input type="range" id="sim-cadence-slider" min="30" max="150" step="5" value="75">
-                  <input type="number" id="sim-cadence-number" min="30" max="150" step="5" value="75" aria-label="Steps per minute">
-                  <span>steps/min</span>
-                </div>
-              </div>
-
-              <div class="sim-btn-row">
-                <button type="button" class="sim-action-btn" id="sim-step-btn">STOMP / STEP NOW</button>
-                <button type="button" class="sim-action-btn" id="sim-auto-btn">START CONTINUOUS WALK</button>
-                <button type="button" class="sim-action-btn" id="sim-reset-btn" style="border-style:dashed;">RESET LAB</button>
-              </div>
-
-              <!-- Real-time Oscilloscope Canvas -->
-              <div style="margin-top: 24px;">
-                <p class="sim-block-title">Live Oscilloscope Transduction Display</p>
-                <canvas id="oscilloscope" class="oscilloscope-canvas"></canvas>
-              </div>
-            </div>
-
-            <!-- Right: Telemetry & Virtual 16x2 LCD -->
-            <div class="sim-stage-block">
-              <p class="sim-block-title">ESP32 16×2 I²C LCD Display Emulator</p>
-              
-              <!-- Virtual LCD Screen -->
-              <div class="virtual-lcd">
-                <div class="lcd-line" id="lcd-row-0">STEPS: 0000     </div>
-                <div class="lcd-line" id="lcd-row-1">BAT: 3.74V  IDLE</div>
-              </div>
-
-              <!-- Metrics Grid -->
-              <div class="sim-metrics-grid">
-                <div class="sim-chip">
-                  <span class="sim-chip-label">REGISTERED STEPS</span>
-                  <div class="sim-chip-val" id="sim-val-steps">0</div>
-                </div>
-                <div class="sim-chip">
-                  <span class="sim-chip-label">PEAK PULSE V_PK</span>
-                  <div class="sim-chip-val" id="sim-val-vpeak">0.0 V</div>
-                </div>
-                <div class="sim-chip">
-                  <span class="sim-chip-label">BUFFER CAP V_CAP</span>
-                  <div class="sim-chip-val" id="sim-val-vcap">0.00 V</div>
-                </div>
-                <div class="sim-chip">
-                  <span class="sim-chip-label">1S2P LI-ION V_BAT</span>
-                  <div class="sim-chip-val" id="sim-val-vbat">3.74 V</div>
-                </div>
-              </div>
-
-              <div class="note-block" style="margin-top:20px;">
-                <h4 style="margin:0 0 6px;font-size:15px;color:var(--text);">Telemetry Logic Rule</h4>
-                <p style="font-size:13px;color:var(--muted);margin:0;">
-                  Raw spikes over 450 ADC counts trigger a step increment with a 220 ms debounce window. When buffer voltage exceeds 4.5 V, trickle charging engages.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== 09 TESTING PROTOCOL & RESULTS ==================== -->
+    <!-- ==================== 08 TESTING PROTOCOL & RESULTS ==================== -->
     <section class="section section-tinted" id="testing" aria-labelledby="testing-title">
       <div class="shell">
         <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 09</p>
+          <p class="section-number"><span class="tb-label">SEC</span> 08</p>
           <h2 id="testing-title">Testing Protocols &amp; Experimental Results</h2>
         </header>
 
@@ -590,11 +497,11 @@ void loop() {
       </div>
     </section>
 
-    <!-- ==================== 10 BILL OF MATERIALS ==================== -->
+    <!-- ==================== 09 BILL OF MATERIALS ==================== -->
     <section class="section" id="bom-section" aria-labelledby="bom-title">
       <div class="shell">
         <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 10</p>
+          <p class="section-number"><span class="tb-label">SEC</span> 09</p>
           <h2 id="bom-title">Engineering Bill of Materials (BOM)</h2>
         </header>
         <p class="section-intro">Complete component inventory, electrical ratings, mechanical stock, unit costs, and procurement status.</p>
@@ -638,11 +545,11 @@ void loop() {
       </div>
     </section>
 
-    <!-- ==================== 11 DEMONSTRATION VIDEO ==================== -->
+    <!-- ==================== 10 DEMONSTRATION VIDEO ==================== -->
     <section class="section section-tinted" id="video-section" aria-labelledby="video-title">
       <div class="shell">
         <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 11</p>
+          <p class="section-number"><span class="tb-label">SEC</span> 10</p>
           <h2 id="video-title">Prototype Demonstration Video</h2>
         </header>
 
@@ -672,11 +579,11 @@ void loop() {
       </div>
     </section>
 
-    <!-- ==================== 12 PROJECT GALLERY ==================== -->
+    <!-- ==================== 11 PROJECT GALLERY ==================== -->
     <section class="section" id="gallery" aria-labelledby="gallery-title">
       <div class="shell">
         <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 12</p>
+          <p class="section-number"><span class="tb-label">SEC</span> 11</p>
           <h2 id="gallery-title">Project Gallery &amp; CAD Renders</h2>
         </header>
         <p class="section-intro">Workshop assembly photographs, SolidWorks renders, electrical circuit schematics, and laboratory test setups. Click any card to open in the zoomable viewer.</p>
@@ -696,22 +603,22 @@ void loop() {
       </div>
     </section>
 
-    <!-- ==================== 13 BUILD STATUS & ROADMAP ==================== -->
+    <!-- ==================== 12 BUILD STATUS & ROADMAP ==================== -->
     <section class="section section-tinted" id="status" aria-labelledby="status-title">
       <div class="shell">
         <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 13</p>
+          <p class="section-number"><span class="tb-label">SEC</span> 12</p>
           <h2 id="status-title">Prototype Build Status</h2>
         </header>
         <div class="status-groups" id="status-groups"></div>
       </div>
     </section>
 
-    <!-- ==================== 14 DOWNLOADS & DELIVERABLES ==================== -->
+    <!-- ==================== 13 DOWNLOADS & DELIVERABLES ==================== -->
     <section class="section" id="downloads" aria-labelledby="downloads-title">
       <div class="shell">
         <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 14</p>
+          <p class="section-number"><span class="tb-label">SEC</span> 13</p>
           <h2 id="downloads-title">Deliverables &amp; Downloads</h2>
         </header>
         <p class="section-intro">Download official academic deliverables prepared for the university Makerspace capstone evaluation.</p>
@@ -756,11 +663,11 @@ void loop() {
       </div>
     </section>
 
-    <!-- ==================== 15 REFERENCES ==================== -->
+    <!-- ==================== 14 REFERENCES ==================== -->
     <section class="section section-tinted" id="references" aria-labelledby="references-title">
       <div class="shell">
         <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 15</p>
+          <p class="section-number"><span class="tb-label">SEC</span> 14</p>
           <h2 id="references-title">Documentation &amp; Academic References</h2>
         </header>
 
@@ -791,11 +698,11 @@ void loop() {
       </div>
     </section>
 
-    <!-- ==================== 16 TEAM & ACKNOWLEDGEMENTS ==================== -->
+    <!-- ==================== 15 TEAM & ACKNOWLEDGEMENTS ==================== -->
     <section class="section" id="team" aria-labelledby="team-title">
       <div class="shell">
         <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 16</p>
+          <p class="section-number"><span class="tb-label">SEC</span> 15</p>
           <h2 id="team-title">Project Team &amp; Acknowledgements</h2>
         </header>
 

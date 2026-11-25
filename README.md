@@ -37,7 +37,6 @@ Magic Step is an electro-mechanical energy-harvesting prototype that converts hu
 - **Dual Theme Support:** Dark ("Night Lab") and Light ("Daylight / High-contrast projector") with instant persistence.
 - **Presentation Mode:** One-click projector mode enlarging typography and diagrams for university Makerspace evaluation panels.
 - **Interactive 3D Assembly Explorer:** Procedural 3D WebGL model with orbit rotation, zoom, layer toggles (Top Plate, Dampers, Piezo Discs, Base Plate), exploded view slider, and clickable component inspector.
-- **Kinetic Energy Harvesting Lab (Simulator):** Real-time theoretical simulation with footstep weight and cadence sliders, single-step and continuous walk modes, animated oscilloscope drawing AC and DC waveforms, and virtual 16×2 I²C LCD display emulator.
 - **SolidWorks CAD Showcase:** Dimensioned orthographic drawing sheets, isometric views, exploded stacks, and mechanical tolerances.
 - **Interactive Bill of Materials (BOM):** Searchable and filterable component inventory with unit and total costs.
 - **Verified Electronics & Firmware:** ESP32 pinout allocation table and production-ready Arduino C++ firmware with one-click copy.

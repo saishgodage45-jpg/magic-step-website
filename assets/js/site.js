@@ -263,6 +263,19 @@
   $("#dialog-close")?.addEventListener("click", () => dialog.close());
   dialog?.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });
 
+  $$("[data-sw-lightbox]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const img = $("img", button);
+      openLightbox({
+        title: button.dataset.title,
+        src: img.currentSrc || img.src,
+        alt: img.alt,
+        description: button.dataset.description,
+        kind: "SolidWorks 2026"
+      });
+    });
+  });
+
   // Direct feature button lightboxes
   $("#open-cad-drawing")?.addEventListener("click", () => {
     openLightbox({
@@ -502,12 +515,12 @@
   if (guidesGrid && Array.isArray(project.projectGuides)) {
     project.projectGuides.forEach((g) => {
       const card = el("div", "team-card");
-      const avatar = el("div", "avatar", "DR");
+      const avatar = el("div", "avatar", g.avatarText);
       const info = el("div", "team-info");
       info.append(
         el("h4", "", g.name),
-        el("p", "text-amber font-mono text-sm", g.designation),
-        el("p", "text-muted text-xs", `${g.department} · ${g.institution}`)
+        el("p", "role text-amber font-mono text-sm", g.designation),
+        el("p", "dept text-muted text-xs", `${g.department} · ${g.institution}`)
       );
       card.append(avatar, info);
       guidesGrid.append(card);
