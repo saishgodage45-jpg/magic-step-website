@@ -7,8 +7,12 @@ FILES
 HOW TO OPEN
 1. Extract the ZIP file (if you received the ZIP).
 2. Open the folder named magic_step_website.
-3. Double-click index.html. It will open in your web browser.
-4. The website works offline; it does not require an internet connection.
+3. For the best experience, serve the folder over HTTP with a local web server.
+4. An internet connection is needed for the hosted fonts and Three.js viewer.
+5. Basic static page content and local images may still be available offline.
+
+The canonical GitHub Pages website and complete project documentation are in the
+repository root. See the root README.md for current instructions and project details.
 
 HOW TO EDIT
 1. Right-click index.html and open it with Notepad or Visual Studio Code.
