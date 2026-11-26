@@ -25,10 +25,9 @@ Magic Step is an electro-mechanical energy-harvesting prototype that converts hu
 - **Gaurav Wavdhane** — Student Project Member
 - **Sai Gholap** — Student Project Member
 
-### Project Guides
-- **Dr. Kiran Wakchaure** — Project Guide, Dept. of Mechanical Engineering, Sanjivani University
-- **Dr. Vasudeo Singh Singer** — Project Guide, Dept. of Mechanical Engineering, Sanjivani University
-- **Dr. Prathibha Sinha** — Project Guide, Dept. of Mechanical Engineering, Sanjivani University
+### Faculty Guidance
+- **Dr. K. C. Bhosale** — Head of Department (HOD), Department of Mechanical Engineering, Sanjivani University
+- **Dr. Kiran Wakchaure** — Director – Projects, Sanjivani University
 
 ---
 

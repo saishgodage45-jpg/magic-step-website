@@ -34,5 +34,5 @@ This project investigates a compact, springless piezoelectric footstep harvestin
 
 ### 4. Project Team & Supervision
 - **Team Members:** Saish Godage, Ayush Jadhav, Gaurav Wavdhane, Sai Gholap
-- **Project Guides:** Dr. Kiran Wakchaure, Dr. Vasudeo Singh Singer, Dr. Prathibha Sinha
+- **Faculty Guidance:** Dr. K. C. Bhosale — Head of Department (HOD), Department of Mechanical Engineering, Sanjivani University; Dr. Kiran Wakchaure — Director – Projects, Sanjivani University
 - **Affiliation:** Department of Mechanical Engineering, Sanjivani University, Kopargaon

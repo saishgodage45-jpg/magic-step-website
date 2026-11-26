@@ -52,25 +52,18 @@ window.MAGICSTEP_PROJECT = {
 
   projectGuides: [
     {
+      name: "Dr. K. C. Bhosale",
+      designation: "Head of Department (HOD)",
+      department: "Department of Mechanical Engineering",
+      institution: "Sanjivani University, Kopargaon",
+      avatarText: "KB"
+    },
+    {
       name: "Dr. Kiran Wakchaure",
-      designation: "Project Guide",
+      designation: "Director – Projects",
       department: "Department of Mechanical Engineering",
       institution: "Sanjivani University, Kopargaon",
       avatarText: "KW"
-    },
-    {
-      name: "Dr. Vasudeo Singh Singer",
-      designation: "Project Guide",
-      department: "Department of Mechanical Engineering",
-      institution: "Sanjivani University, Kopargaon",
-      avatarText: "VS"
-    },
-    {
-      name: "Dr. Prathibha Sinha",
-      designation: "Project Guide",
-      department: "Department of Mechanical Engineering",
-      institution: "Sanjivani University, Kopargaon",
-      avatarText: "PS"
     }
   ],
 
