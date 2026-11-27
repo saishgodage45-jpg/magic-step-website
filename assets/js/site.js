@@ -271,7 +271,7 @@
         src: img.currentSrc || img.src,
         alt: img.alt,
         description: button.dataset.description,
-        kind: "SolidWorks 2026"
+        kind: button.dataset.kind || "SolidWorks 2026"
       });
     });
   });
@@ -281,17 +281,17 @@
     openLightbox({
       title: "SolidWorks Dimensioned Drawing Sheet",
       src: "assets/media/cad/dimensioned-drawing.svg",
-      description: "First-angle orthographic engineering drawing sheet with complete dimensional tolerances: 300 mm length, 160 mm width, 10 mm thickness, and 27 mm transducer pitch locations.",
+      description: "Dimensioned platform drawing with project-record dimensions of 300 mm × 160 mm × 10 mm; verified manufacturing tolerances are not specified.",
       kind: "CAD Drawing"
     });
   });
 
   $("#open-circuit-diagram")?.addEventListener("click", () => {
     openLightbox({
-      title: "Verified Electrical Circuit Schematic",
-      src: "assets/media/diagrams/circuit-diagram.svg",
-      description: "Detailed wiring schematic displaying DB107 diode bridge, 10 µF electrolytic smoothing capacitor, resistor voltage dividers, ESP32 GPIO pinout, and PCF8574 I²C LCD backpack connections.",
-      kind: "Schematic"
+      title: "Energy-Conversion Functional Flow",
+      src: "assets/media/diagrams/system-schematic.svg",
+      description: "Functional component sequence only. It is not a wiring schematic and does not establish charger compatibility or electrical safety.",
+      kind: "Functional Concept"
     });
   });
 
@@ -342,7 +342,6 @@
 
   // ---------------- 10. Render Bill of Materials (BOM) ----------------
   const bomRows = $("#bom-rows");
-  const bomTotal = $("#bom-total-amount");
   const bomSearch = $("#bom-search-input");
   let activeBomFilter = "all";
 
@@ -350,29 +349,25 @@
     if (!bomRows || !Array.isArray(project.billOfMaterials)) return;
     bomRows.replaceChildren();
     const query = bomSearch ? bomSearch.value.trim().toLowerCase() : "";
-    let total = 0;
 
     project.billOfMaterials.forEach((item) => {
-      const matchCat = activeBomFilter === "all" || item.category === activeBomFilter;
-      const matchQuery = !query || item.description.toLowerCase().includes(query) || item.spec.toLowerCase().includes(query);
+      const matchCat = activeBomFilter === "all"
+        || item.category === activeBomFilter;
+      const searchable = `${item.serial} ${item.name} ${item.category} ${item.quantity} ${item.purpose}`.toLowerCase();
+      const matchQuery = !query || searchable.includes(query);
       if (matchCat && matchQuery) {
-        total += item.totalCost;
         const tr = el("tr");
         tr.append(
-          el("td", "", item.item),
-          el("td", "", item.description),
-          el("td", "muted", item.spec),
-          el("td", "", `${item.qty} ${item.unit}`),
-          el("td", "", `₹${item.unitCost}`),
-          el("td", "font-mono font-bold", `₹${item.totalCost}`),
-          el("td", "", item.source),
-          el("td", "", item.status)
+          el("td", "font-mono", item.serial),
+          el("td", "font-bold", item.name),
+          el("td", "", item.quantity),
+          el("td", "muted", item.category),
+          el("td", "", item.purpose),
+          el("td", "", item.approximatePrice)
         );
         bomRows.append(tr);
       }
     });
-
-    if (bomTotal) bomTotal.textContent = `₹${total.toLocaleString("en-IN")}`;
   }
 
   $$(".bom-filter-btn").forEach((btn) => {
@@ -428,21 +423,6 @@
         art.append(ul);
       }
       statusContainer.append(art);
-    });
-  }
-
-  // ---------------- 13. Render Pinout Table ----------------
-  const pinoutRows = $("#pinout-rows");
-  if (pinoutRows && Array.isArray(project.esp32Pinout)) {
-    project.esp32Pinout.forEach((p) => {
-      const tr = el("tr");
-      tr.append(
-        el("td", "font-mono font-bold text-energy", p.pin),
-        el("td", "", p.function),
-        el("td", "", p.connectedTo),
-        el("td", "muted", p.note)
-      );
-      pinoutRows.append(tr);
     });
   }
 
@@ -527,26 +507,4 @@
     });
   }
 
-  // ---------------- 16. Copy Code Button ----------------
-  const copyCodeBtn = $("#copy-code-btn");
-  if (copyCodeBtn && project.codeSnippet) {
-    copyCodeBtn.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(project.codeSnippet);
-        copyCodeBtn.textContent = "Copied!";
-        showToast("ESP32 Arduino code copied to clipboard");
-        setTimeout(() => { copyCodeBtn.textContent = "Copy Code"; }, 2000);
-      } catch (err) {
-        showToast("Unable to copy code automatically");
-      }
-    });
-  }
-
-  // ---------------- 17. Download Placeholders ----------------
-  $$("[data-download]").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      const target = btn.dataset.download;
-      showToast(`Preparing download: ${target}...`);
-    });
-  });
 })();

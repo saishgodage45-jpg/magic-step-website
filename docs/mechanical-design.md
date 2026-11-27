@@ -1,31 +1,27 @@
-# Mechanical Design & Prototype Structure
-## Magic Step — Footstep Power Generation System
-**Group 16** · Department of Mechanical Engineering · Sanjivani University, Kopargaon
+# Mechanical Design and CAD
 
----
+**Magic Step · Group 16 · Sanjivani University**
 
-### 1. Dimensional Specifications
-- **Base Plate Dimensions:** 300 mm (Length) × 160 mm (Width) × 10 mm (Thickness)
-- **Base Material:** Seasoned hardwood / planar timber block
-- **Active Area:** $48,000\text{ mm}^2$ ($0.048\text{ m}^2$)
-- **Sensor Matrix:** 6 Piezoelectric Discs (2 rows × 3 columns)
-- **Transducer Pitch:** Longitudinal pitch = 100 mm; Transverse pitch = 80 mm
-- **Disc Diameter:** 27.0 mm (Outer brass substrate)
-- **Ceramic Diameter:** 20.0 mm (Inner PZT active layer)
-- **Total Assembly Height:** Approximately 18–22 mm including base, transducers, and upper tread plate.
+## Design record
 
----
+Project records identify a wooden sensor platform with nominal dimensions of **300 mm × 160 mm × 10 mm** and six piezoelectric discs, with an outer diameter recorded as **27 mm** in the project data. Treat these as design-record values, not independently measured production tolerances; verify them against the physical prototype before fabrication or evaluation.
 
-### 2. Design Rationale & Springless Architecture
-Many conventional footstep energy harvesters incorporate mechanical coil springs. In the Magic Step prototype:
-- **No Helical Springs Are Used:** Coil springs absorb a large portion of footstep kinetic energy through mechanical compliance and elastic rebound hysteresis, reducing the peak compressive force delivered to the piezoelectric elements.
-- **Direct Flexure Design:** The platform utilizes an upper tread plate supported by elastomeric neoprene damper pads. When a person steps on the tile, mechanical force is directly channeled into compressive and flexural stress across the ceramic discs.
-- **Transducer Protection:** PZT ceramic is extremely brittle and vulnerable to shear stresses and point loads. The 6 force-distribution buffer pads distribute foot pressure across the entire surface of each disc, preventing localized stress concentrations that could crack the ceramic.
+The 3D CAD and SolidWorks gallery combines individual component models, the mechanical layout, engineering drawing, and prototype-development photographs. SolidWorks was used for 3D modelling, component design, and assembly development.
 
----
+## Mechanical and CAD documentation
 
-### 3. SolidWorks CAD Files
-- Assembly Part: `Magic_Step_Assembly.sldasm`
-- Base Plate Drawing: `Base_Plate_300x160x10.sldprt`
-- Dimensioned Sheet: `Drawing_Sheet_Orthographic_1.slddrw`
-- Exploded View: `Magic_Step_Exploded_Stack.sldasm`
+- Wooden platform model and the six-disc sensor arrangement.
+- Component models for the piezoelectric discs and listed electronics.
+- Electronics tray and breadboard layout as design records.
+- Dimensioned drawing and CAD-style isometric and exploded illustrations.
+- Project photographs documenting prototype integration and sensor preparation.
+
+The available model images document design intent; they do not prove that every depicted detail matches the final physical build. Check physical dimensions, material, mounting, and component fit against the prototype.
+
+## Assembly configuration
+
+The electronics are described as separate from the wooden sensor platform. The current bill of materials lists one 3.7 V lithium-ion battery and one holder. A retained historical assembly image is not used as the current configuration reference; the current gallery presents the component-level models and project records relevant to the documented design.
+
+## Drawings and source records
+
+The website includes a dimensioned drawing and CAD-style assembly illustrations under `assets/media/cad/`, together with SolidWorks component screenshots under `assets/solidworks/`. Native `.sldprt`, `.sldasm`, and `.slddrw` source files are not included in the repository.
