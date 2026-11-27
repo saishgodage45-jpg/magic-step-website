@@ -21,7 +21,7 @@
   --energy-ink: #38bdf8;
   --amber: #f59e0b;         /* Amber Gold: piezo brass transducers & warnings */
   --amber-ink: #f59e0b;
-  --ok: #10b981;            /* Emerald Green: storage, completed status & LCD */
+  --ok: #10b981;            /* Emerald green for positive status */
   --ok-ink: #10b981;
   --danger: #ef4444;
   --on-accent: #0b111a;
@@ -206,14 +206,26 @@ code {
 }
 .main-nav.is-open a { font-size: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); color: var(--text); }
 
-@media (min-width: 1280px) {
+@media (min-width: 2800px) {
   .main-nav { display: flex; gap: clamp(10px, 1.1vw, 20px); }
   .menu-toggle { display: none; }
 }
-@media (max-width: 767px) { .presentation-toggle { display: none; } }
+@media (max-width: 767px) {
+  .presentation-toggle { display: none; }
+  .main-nav.is-open a { white-space: normal; overflow-wrap: anywhere; }
+}
 @media (max-width: 991px) {
   .theme-toggle-text, .share-text { display: none; }
   .theme-toggle, .share-button { min-width: 40px; justify-content: center; }
+}
+@media (max-width: 560px) {
+  .site-header { gap: 8px; }
+  .brand { gap: 8px; }
+  .brand-type small { display: none; }
+  .brand-type strong { font-size: 15px; letter-spacing: 0; }
+  .header-actions { flex-shrink: 0; gap: 6px; }
+  .theme-toggle, .share-button { width: 36px; min-width: 36px; padding: 0; }
+  .menu-toggle { width: 36px; height: 36px; flex-shrink: 0; }
 }
 
 /* ==================== SHARED LAYOUT & TITLE BLOCKS ==================== */
@@ -273,6 +285,7 @@ code {
 }
 .label-chip-warn { border-color: var(--amber); color: var(--amber-ink); }
 .label-chip-ok { border-color: var(--ok); color: var(--ok-ink); }
+@media (max-width: 560px) { .label-chip { white-space: normal; } }
 
 .button {
   display: inline-flex; align-items: center; justify-content: center;
@@ -465,11 +478,254 @@ code {
   }
 }
 
-/* ==================== 05 DESIGN & SPECIFICATIONS ==================== */
+#journey-steps {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start; gap: 34px 22px;
+}
+#journey-steps > .journey-step {
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: none;
+  grid-template-rows: none; gap: 0; align-content: start; min-width: 0;
+  padding: 0; margin: 0; border: 0;
+}
+.journey-stage-head {
+  display: flex; align-items: baseline; gap: 12px; min-height: 28px;
+  padding-bottom: 9px; border-bottom: 1px solid var(--line);
+}
+.journey-stage-number {
+  flex: 0 0 auto; color: var(--energy-ink); font-family: var(--mono);
+  font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
+}
+.journey-stage-label {
+  overflow: hidden; color: var(--muted); font-size: 12px;
+  text-overflow: ellipsis; white-space: nowrap;
+}
+.journey-stage-photo {
+  position: relative; display: block; width: 100%; aspect-ratio: 4 / 3;
+  margin: 14px 0 0; padding: 0; overflow: hidden;
+  border: 1px solid var(--line-strong); border-radius: var(--radius);
+  background: var(--surface); cursor: zoom-in; isolation: isolate;
+}
+.journey-stage-photo::after {
+  position: absolute; z-index: 1; inset: 45% 0 0; content: "";
+  background: linear-gradient(transparent, rgba(4, 8, 14, 0.66));
+  opacity: 0; transition: opacity 220ms ease;
+}
+.journey-stage-photo img {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+  transition: transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1), filter 220ms ease;
+}
+.journey-stage-card:hover .journey-stage-photo img,
+.journey-stage-photo:focus-visible img { transform: scale(1.045); }
+.journey-stage-card:hover .journey-stage-photo::after,
+.journey-stage-photo:focus-visible::after { opacity: 1; }
+.journey-stage-zoom {
+  position: absolute; z-index: 2; right: 12px; bottom: 12px;
+  padding: 7px 10px; border: 1px solid rgba(255,255,255,.32);
+  border-radius: 4px; background: rgba(11,17,26,.76); color: #fff;
+  font-family: var(--mono); font-size: 11px; opacity: 0;
+  transform: translateY(5px); transition: opacity 180ms ease, transform 180ms ease;
+}
+.journey-stage-card:hover .journey-stage-zoom,
+.journey-stage-photo:focus-visible .journey-stage-zoom { opacity: 1; transform: translateY(0); }
+.journey-stage-photo:focus-visible { outline: 2px solid var(--energy); outline-offset: 3px; }
+.journey-stage-copy { padding-top: 16px; }
+.journey-stage-title {
+  margin: 0 0 8px; font-family: var(--display); font-size: clamp(17px, 1.7vw, 21px);
+  font-weight: 600; line-height: 1.3;
+}
+.journey-stage-description {
+  max-width: 52ch; margin: 0; color: var(--muted);
+  font-size: 13px; line-height: 1.7;
+}
+@media (max-width: 900px) {
+  #journey-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 18px; }
+}
+@media (max-width: 560px) {
+  #journey-steps { grid-template-columns: 1fr; gap: 28px; }
+  .journey-stage-zoom { opacity: 1; transform: none; }
+  .journey-stage-photo::after { opacity: .8; }
+}
+
+/* ==================== 05 HANDS-ON SKILL LEARNING ==================== */
+.manufacturing-experiences { display: grid; gap: 24px; }
+.manufacturing-card {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 52px); align-items: center; min-width: 0;
+  padding: clamp(20px, 3vw, 34px); border: 1px solid var(--line);
+  border-radius: 12px; background: var(--surface);
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+.manufacturing-card:hover {
+  transform: translateY(-3px); border-color: var(--line-strong);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, .2);
+}
+.manufacturing-photo-card {
+  min-width: 0; margin: 0; overflow: hidden;
+  border: 1px solid var(--line); border-radius: 9px; background: var(--plate);
+}
+.manufacturing-photo-image { background: var(--plate); }
+.manufacturing-photo-image img {
+  max-width: 100%; max-height: 440px; height: auto; margin: 0 auto;
+  object-fit: contain;
+}
+.manufacturing-photo-card figcaption { display: grid; gap: 7px; padding: 15px 17px 17px; }
+.manufacturing-photo-card figcaption strong { font-family: var(--display); font-size: 15px; line-height: 1.45; }
+.manufacturing-photo-card figcaption p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+.figure-number {
+  color: var(--energy-ink); font-family: var(--mono); font-size: 10px;
+  font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+}
+.solidworks-card .figure-number { display: block; margin-bottom: 9px; }
+.manufacturing-photo-card:hover { border-color: var(--energy); }
+.manufacturing-output-gallery {
+  margin-top: 40px; padding: 24px; border: 1px solid var(--line);
+  border-radius: var(--radius); background: var(--surface);
+}
+.manufacturing-output-gallery-inline { grid-column: 1 / -1; margin-top: 0; }
+.manufacturing-output-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px; margin-top: 18px;
+}
+.manufacturing-output-empty {
+  grid-column: 1 / -1; margin: 0; padding: 22px;
+  border: 1px dashed var(--line-strong); border-radius: var(--radius);
+  color: var(--muted); text-align: center;
+}
+.manufacturing-copy { min-width: 0; }
+.skill-learning-label {
+  margin-bottom: 7px; color: var(--energy-ink); font-family: var(--mono);
+  font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+}
+.manufacturing-copy h3 { margin-bottom: 12px; font-size: clamp(23px, 2.5vw, 30px); line-height: 1.2; }
+.manufacturing-intro { max-width: 58ch; margin-bottom: 20px; color: var(--muted); font-size: 15px; }
+.manufacturing-copy h4 { margin: 19px 0 7px; font-family: var(--display); font-size: 14px; }
+.manufacturing-applications { margin-bottom: 12px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+.manufacturing-applications span { padding-inline: 3px; color: var(--energy-ink); }
+.manufacturing-learning-list { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.manufacturing-learning-list li { position: relative; padding-left: 19px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+.manufacturing-learning-list li::before {
+  position: absolute; top: .68em; left: 1px; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--energy); content: "";
+}
+.practical-label {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+  padding: 7px 10px; border: 1px solid var(--line-strong); border-radius: 4px;
+  color: var(--energy-ink); font-family: var(--mono); font-size: 10px;
+  font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+}
+.practical-label span { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+.manufacturing-skills { margin-top: clamp(52px, 7vw, 84px); }
+.manufacturing-subheading { margin-bottom: 20px; }
+.manufacturing-subheading h3, .manufacturing-workflow h3 { margin-bottom: 0; font-size: clamp(23px, 2.5vw, 30px); }
+.manufacturing-skill-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.manufacturing-skill {
+  min-width: 0; padding: 20px; border: 1px solid var(--line);
+  border-radius: 8px; background: var(--surface);
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+.manufacturing-skill:hover { transform: translateY(-3px); border-color: var(--energy); }
+.manufacturing-skill svg {
+  width: 30px; height: 30px; margin-bottom: 15px; fill: none;
+  stroke: var(--energy-ink); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.6;
+}
+.manufacturing-skill h4 { margin: 0 0 6px; font-family: var(--display); font-size: 15px; line-height: 1.35; }
+.manufacturing-skill p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.manufacturing-workflow {
+  margin-top: clamp(48px, 6vw, 72px); padding: clamp(22px, 3vw, 34px);
+  border: 1px solid var(--line); border-radius: 10px;
+  background: linear-gradient(135deg, var(--surface), var(--bg-alt));
+}
+.manufacturing-workflow-heading {
+  display: flex; align-items: end; justify-content: space-between;
+  gap: 24px; margin-bottom: 26px;
+}
+.manufacturing-workflow-heading > p { max-width: 46ch; margin: 0; color: var(--muted); font-size: 13px; }
+.manufacturing-workflow-steps {
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px; margin: 0; padding: 0; list-style: none;
+}
+.manufacturing-workflow-steps li {
+  position: relative; display: grid; align-content: start; gap: 10px;
+  min-height: 96px; padding: 16px 14px;
+  border: 1px solid var(--line); border-radius: 6px; background: var(--bg);
+}
+.manufacturing-workflow-steps li:not(:last-child)::after {
+  position: absolute; top: 50%; right: -17px; z-index: 1; width: 20px;
+  color: var(--energy-ink); content: "→"; font-family: var(--mono); font-size: 16px; text-align: center;
+}
+.manufacturing-workflow-steps li > span { color: var(--energy-ink); font-family: var(--mono); font-size: 10px; }
+.manufacturing-workflow-steps strong { font-family: var(--display); font-size: 13px; line-height: 1.35; }
+@media (max-width: 980px) {
+  .manufacturing-card { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .manufacturing-workflow-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .manufacturing-workflow-steps li:nth-child(3)::after { display: none; }
+}
+@media (max-width: 700px) {
+  .manufacturing-skill-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .manufacturing-workflow-heading { display: grid; align-items: start; gap: 12px; }
+}
+@media (max-width: 560px) {
+  .manufacturing-card { padding: 16px; gap: 22px; }
+  .manufacturing-skill-grid { gap: 8px; }
+  .manufacturing-skill { padding: 15px 12px; }
+  .manufacturing-workflow-steps { grid-template-columns: 1fr; gap: 8px; }
+  .manufacturing-workflow-steps li { min-height: 0; grid-template-columns: 28px 1fr; align-items: center; gap: 8px; padding: 12px; }
+  .manufacturing-workflow-steps li:not(:last-child)::after { display: none; }
+}
+
+/* ==================== 06 DESIGN & SPECIFICATIONS ==================== */
 .spec-layout { display: grid; gap: 32px; }
 @media (min-width: 960px) {
   .spec-layout { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: start; }
   .spec-layout .note-block { margin-top: 0; }
+}
+.solidworks-gallery {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch; gap: 22px;
+}
+.solidworks-category-label {
+  grid-column: 1 / -1; margin: 18px 0 0;
+  padding-bottom: 10px; border-bottom: 1px solid var(--line);
+  color: var(--energy-ink); font-family: var(--display);
+}
+.solidworks-card {
+  min-width: 0; margin: 0; overflow: hidden;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface);
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+.solidworks-card:hover {
+  transform: translateY(-4px); border-color: var(--energy);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+.solidworks-card-featured { grid-column: span 2; grid-row: span 2; }
+.solidworks-image {
+  display: block; width: 100%; padding: 0; overflow: hidden;
+  border: 0; background: var(--plate); cursor: zoom-in;
+}
+.solidworks-image img {
+  display: block; width: 100%; height: auto;
+  transition: transform 350ms ease, filter 220ms ease;
+}
+.solidworks-image:hover img,
+.solidworks-image:focus-visible img { transform: scale(1.025); }
+.solidworks-image:focus-visible { outline: 2px solid var(--energy); outline-offset: -2px; }
+.solidworks-card figcaption { padding: 16px 18px 18px; }
+.solidworks-card h3 {
+  margin: 0 0 7px; font-family: var(--display);
+  font-size: clamp(16px, 1.4vw, 19px); line-height: 1.35;
+}
+.solidworks-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+@media (max-width: 900px) {
+  .solidworks-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .solidworks-card-featured { grid-column: 1 / -1; grid-row: auto; }
+}
+@media (max-width: 560px) {
+  .solidworks-gallery { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .solidworks-card-featured { grid-column: auto; }
 }
 .spec-table {
   width: 100%; border-collapse: collapse; font-size: 16px;
@@ -529,6 +785,25 @@ code {
   background: var(--bg); border: 1px solid var(--line-strong);
   color: var(--text); padding: 4px 10px; border-radius: 4px;
 }
+.model-load-status {
+  position: absolute; z-index: 12; top: 14px; right: 14px;
+  display: grid; gap: 8px; width: min(280px, calc(100% - 28px));
+  padding: 12px 14px; border: 1px solid var(--line-strong);
+  border-radius: var(--radius); background: var(--surface);
+  color: var(--muted); font-size: 13px;
+}
+.model-load-status[hidden] { display: none; }
+.model-load-status progress {
+  width: 100%; height: 6px; accent-color: var(--energy);
+}
+.model-load-status.is-error {
+  color: var(--text); border-color: var(--amber);
+}
+@media (max-width: 600px) {
+  .model-load-status { top: auto; right: 10px; bottom: 10px; width: min(240px, calc(100% - 20px)); }
+  .stage-notes { max-width: calc(100% - 20px); }
+  .stage-note { font-size: 10px; }
+}
 .part-info {
   background: var(--surface); border: 1px solid var(--line-strong);
   padding: 18px 20px; position: absolute; right: 16px; bottom: 16px;
@@ -548,19 +823,7 @@ code {
 .part-name { font-size: 19px; margin-bottom: 6px; }
 .part-text { font-size: 14px; color: var(--muted); margin: 0; line-height: 1.5; }
 
-/* ==================== 07 ELECTRONICS & ESP32 CODE ==================== */
-.pinout-table {
-  width: 100%; border-collapse: collapse; font-family: var(--mono);
-  font-size: 14px; background: var(--surface); border: 1px solid var(--line);
-  margin-bottom: 28px; border-radius: var(--radius); overflow: hidden;
-}
-.pinout-table th, .pinout-table td {
-  text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line);
-}
-.pinout-table thead th {
-  background: var(--surface-2); font-size: 12px; font-weight: 700;
-  color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em;
-}
+/* ==================== ELECTRONICS DOCUMENTATION ==================== */
 .code-container {
   background: #070d17; border: 1px solid var(--line-strong);
   border-radius: var(--radius); overflow: hidden; margin-top: 24px;
@@ -583,82 +846,7 @@ code {
   line-height: 1.55; color: #cbd5e1; overflow-x: auto; max-height: 480px;
 }
 
-/* ==================== 08 ENERGY HARVESTING SIMULATOR ==================== */
-.sim-banner {
-  background: var(--surface); border: 1px solid var(--energy);
-  border-left-width: 4px; padding: 14px 18px; margin-bottom: 24px;
-  font-size: 15px; border-radius: 0 var(--radius) var(--radius) 0;
-}
-.sim-panel {
-  background: var(--surface); border: 1px solid var(--line-strong);
-  padding: 24px; border-radius: var(--radius);
-}
-.sim-grid { display: grid; gap: 24px; }
-@media (min-width: 992px) {
-  .sim-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); }
-}
-.sim-stage-block {
-  border: 1px solid var(--line); background: var(--bg);
-  padding: 20px; border-radius: var(--radius);
-}
-.sim-block-title {
-  font-family: var(--mono); font-size: 13px; text-transform: uppercase;
-  letter-spacing: 0.08em; color: var(--muted); margin-bottom: 16px; font-weight: 700;
-}
-.sim-control-row { display: grid; gap: 8px; margin-bottom: 20px; }
-.sim-control-row label { font-size: 15px; font-weight: 600; }
-.sim-input-pair { display: flex; align-items: center; gap: 14px; }
-.sim-input-pair input[type="range"] {
-  flex: 1; min-width: 0; accent-color: var(--energy); height: 28px;
-}
-.sim-input-pair input[type="number"] {
-  width: 90px; font-family: var(--mono); font-size: 15px; padding: 6px 10px;
-  border: 1px solid var(--line-strong); background: var(--surface);
-  color: var(--text); border-radius: 4px;
-}
-.sim-btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
-.sim-action-btn {
-  flex: 1; min-height: 48px; font-family: var(--mono); font-size: 14px;
-  font-weight: 700; border: 1px solid var(--energy); background: var(--surface-2);
-  color: var(--energy-ink); border-radius: var(--radius);
-}
-.sim-action-btn:hover { background: var(--energy); color: var(--on-accent); }
-.sim-action-btn.active { background: var(--energy); color: var(--on-accent); }
-
-/* Virtual Oscilloscope */
-.oscilloscope-canvas {
-  width: 100%; height: 220px; background: #041017;
-  border: 1.5px solid #0b394f; border-radius: 6px; display: block;
-}
-
-/* Virtual 16x2 Character LCD */
-.virtual-lcd {
-  background: #022c22; border: 3px solid #065f46;
-  border-radius: 8px; padding: 18px 22px; margin-top: 18px;
-  box-shadow: inset 0 0 16px rgba(0,0,0,0.8), 0 4px 12px rgba(6,95,70,0.3);
-}
-.lcd-line {
-  font-family: var(--mono); font-size: clamp(16px, 1.8vw, 22px);
-  font-weight: 700; color: #6ee7b7; letter-spacing: 0.12em;
-  line-height: 1.4; text-shadow: 0 0 8px rgba(110,231,183,0.6);
-  white-space: pre;
-}
-
-.sim-metrics-grid {
-  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px; margin-top: 18px;
-}
-.sim-chip {
-  padding: 12px 14px; background: var(--surface-2); border: 1px solid var(--line);
-  border-radius: 6px;
-}
-.sim-chip-label { font-size: 12px; color: var(--muted); font-family: var(--mono); }
-.sim-chip-val {
-  font-family: var(--mono); font-size: 20px; font-weight: 700;
-  color: var(--energy-ink); margin-top: 4px;
-}
-
-/* ==================== 09 TESTING MATRIX ==================== */
+/* ==================== 08 TESTING MATRIX ==================== */
 .result-flag {
   background: var(--surface); border: 1px solid var(--line-strong);
   border-left: 4px solid var(--amber); padding: 16px 20px;
@@ -684,7 +872,7 @@ code {
   font-family: var(--mono); font-size: 12px; border-radius: 4px;
 }
 
-/* ==================== 10 BILL OF MATERIALS ==================== */
+/* ==================== 09 BILL OF MATERIALS ==================== */
 .bom-toolbar {
   display: flex; flex-wrap: wrap; justify-content: space-between;
   align-items: center; gap: 14px; margin-bottom: 20px;
@@ -707,7 +895,7 @@ code {
   overflow-x: auto; border: 1px solid var(--line);
   border-radius: var(--radius); background: var(--surface);
 }
-.bom-table { width: 100%; min-width: 800px; border-collapse: collapse; font-size: 15px; }
+.bom-table { width: 100%; min-width: 1040px; border-collapse: collapse; font-size: 15px; }
 .bom-table th, .bom-table td {
   padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--line);
 }
@@ -721,7 +909,7 @@ code {
   display: flex; justify-content: space-between; align-items: center;
 }
 
-/* ==================== 11 VIDEO SECTION ==================== */
+/* ==================== 10 VIDEO SECTION ==================== */
 .video-card {
   background: var(--surface); border: 1px solid var(--line-strong);
   border-radius: var(--radius); overflow: hidden;
@@ -741,7 +929,7 @@ code {
 }
 .video-details { padding: 22px 26px; }
 
-/* ==================== 12 GALLERY ==================== */
+/* ==================== 11 GALLERY ==================== */
 .gallery-toolbar {
   display: flex; flex-wrap: wrap; justify-content: space-between;
   align-items: center; gap: 12px 24px; margin-bottom: 24px;
@@ -770,7 +958,7 @@ code {
 .gallery-card figcaption { padding: 14px 18px; }
 .gallery-title { font-size: 16px; font-weight: 700; margin-top: 6px; display: block; }
 
-/* ==================== 13 STATUS GROUPS ==================== */
+/* ==================== 12 STATUS GROUPS ==================== */
 .status-groups { display: grid; gap: 22px; }
 @media (min-width: 900px) { .status-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .status-group {
@@ -789,7 +977,7 @@ code {
 .status-group ul { padding-left: 20px; margin: 0; }
 .status-group li { margin-bottom: 8px; color: var(--text); font-size: 15px; }
 
-/* ==================== 14 DOWNLOADS ==================== */
+/* ==================== 13 DOWNLOADS ==================== */
 .download-grid {
   display: grid; gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
@@ -812,7 +1000,7 @@ code {
 .download-card h3 { font-size: 19px; margin-bottom: 8px; }
 .download-card p { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
 
-/* ==================== 15 REFERENCES ==================== */
+/* ==================== 14 REFERENCES ==================== */
 .ref-layout { display: grid; gap: 32px; }
 @media (min-width: 900px) { .ref-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); } }
 .doc-list { list-style: none; padding: 0; }
@@ -824,7 +1012,7 @@ code {
 .ref-list { padding-left: 22px; color: var(--muted); font-size: 15px; }
 .ref-list li { margin-bottom: 10px; }
 
-/* ==================== 16 TEAM & GUIDES ==================== */
+/* ==================== 15 TEAM & GUIDES ==================== */
 .team-grid {
   display: grid; gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
@@ -864,6 +1052,9 @@ code {
   display: flex; align-items: center; gap: 12px; padding: 12px 18px;
   border-bottom: 1px solid var(--line);
 }
+.dialog-gallery-controls { display: flex; align-items: center; gap: 8px; }
+.dialog-gallery-controls[hidden] { display: none; }
+.dialog-gallery-controls span { min-width: 48px; color: var(--muted); font-family: var(--mono); font-size: 12px; text-align: center; }
 .dialog-bar strong {
   flex: 1; font-family: var(--display); font-size: 17px;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
@@ -876,11 +1067,24 @@ code {
 .dialog-image-wrap { overflow: auto; display: grid; place-items: center; background: var(--bg); }
 .dialog-image-wrap img {
   max-width: 100%; max-height: 100%; object-fit: contain; cursor: zoom-in;
+  transition: opacity 180ms ease, transform 220ms ease;
 }
+.dialog-image-wrap img.is-changing { opacity: 0; }
 .dialog-image-wrap.is-zoomed img { max-width: none; width: 200%; cursor: zoom-out; }
 .dialog-caption {
   margin: 0; padding: 12px 18px; font-size: 14px; color: var(--muted);
   border-top: 1px solid var(--line);
+}
+.photo-dialog.is-journey-gallery {
+  inset: 0; width: 100vw; height: 100vh; height: 100dvh;
+  max-width: none; max-height: none; margin: 0; border: 0; border-radius: 0;
+}
+@media (max-width: 600px) {
+  .photo-dialog.is-journey-gallery { width: 100vw; height: 100vh; height: 100dvh; }
+  .photo-dialog.is-journey-gallery .dialog-bar { flex-wrap: wrap; gap: 8px; padding: 10px; }
+  .photo-dialog.is-journey-gallery .dialog-bar strong { order: 2; flex: 1 0 100%; white-space: normal; }
+  .photo-dialog.is-journey-gallery .dialog-gallery-controls { order: 3; margin-right: auto; }
+  .photo-dialog.is-journey-gallery .dialog-caption { padding: 10px; font-size: 13px; }
 }
 
 /* ==================== PRESENTATION MODE (PROJECTOR) ==================== */
@@ -893,8 +1097,7 @@ body.presentation-mode .presentation-toggle {
 body.presentation-mode .title-block h2 { font-size: clamp(38px, 5vw, 62px); }
 body.presentation-mode .shell { width: min(1320px, 100% - 2 * var(--gutter)); }
 body.presentation-mode .step-caption,
-body.presentation-mode .figure-caption,
-body.presentation-mode .sim-chip-val { font-size: 22px; }
+body.presentation-mode .figure-caption { font-size: 22px; }
 
 /* Toast */
 .toast {
@@ -918,12 +1121,12 @@ body.presentation-mode .sim-chip-val { font-size: 22px; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html, body { background: #fff !important; color: #000; font-size: 10.5pt; }
   .site-header, .scroll-progress, .hero-canvas-host, .explorer-toolbar,
-  .sim-panel, .sim-banner, .gallery-toolbar, .photo-dialog, .toast, .copy-btn {
+  .gallery-toolbar, .photo-dialog, .toast, .copy-btn {
     display: none !important;
   }
   .section { padding-block: 16pt; break-inside: auto; }
   .title-block { break-after: avoid; background-image: none; }
-  .spec-table, .pinout-table, .test-table, .bom-table, .status-group, figure {
+  .spec-table, .test-table, .bom-table, .status-group, figure {
     break-inside: avoid;
   }
   a[href^="http"]::after {

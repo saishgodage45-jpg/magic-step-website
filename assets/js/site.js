@@ -155,11 +155,31 @@
   const dialogTitle = $("#dialog-title");
   const dialogKind = $("#dialog-kind");
   const dialogDesc = $("#dialog-description");
+  const dialogGalleryControls = $("#dialog-gallery-controls");
+  const dialogGalleryPosition = $("#dialog-gallery-position");
+  const journeyPhotos = Array.isArray(project.journeySteps) ? project.journeySteps : [];
+  let activeJourneyPhotoIndex = null;
+  let dialogImageUpdate = 0;
+
+  function setDialogImage(item) {
+    const update = ++dialogImageUpdate;
+    const finishTransition = () => {
+      if (update === dialogImageUpdate) dialogImg.classList.remove("is-changing");
+    };
+    dialogImg.classList.add("is-changing");
+    dialogImg.onload = finishTransition;
+    dialogImg.onerror = finishTransition;
+    dialogImg.src = item.src;
+    dialogImg.alt = item.alt || item.title;
+    if (dialogImg.complete) requestAnimationFrame(finishTransition);
+  }
 
   function openLightbox(item) {
     if (!dialog || !item) return;
-    dialogImg.src = item.src;
-    dialogImg.alt = item.alt || item.title;
+    activeJourneyPhotoIndex = null;
+    dialog.classList.remove("is-journey-gallery");
+    if (dialogGalleryControls) dialogGalleryControls.hidden = true;
+    setDialogImage(item);
     if (dialogTitle) dialogTitle.textContent = item.title;
     if (dialogKind) dialogKind.textContent = (item.kind || "Image").toUpperCase();
     if (dialogDesc) dialogDesc.textContent = item.description || "";
@@ -167,6 +187,62 @@
     if (dialogZoom) dialogZoom.textContent = "Zoom";
     if (typeof dialog.showModal === "function") dialog.showModal();
   }
+
+  function openJourneyPhoto(index) {
+    const item = journeyPhotos[index];
+    if (!dialog || !item) return;
+    activeJourneyPhotoIndex = index;
+    dialog.classList.add("is-journey-gallery");
+    if (dialogGalleryControls) dialogGalleryControls.hidden = false;
+    if (dialogTitle) dialogTitle.textContent = item.title;
+    if (dialogKind) dialogKind.textContent = item.stage;
+    if (dialogDesc) dialogDesc.textContent = item.description;
+    if (dialogGalleryPosition) {
+      dialogGalleryPosition.textContent = `${String(index + 1).padStart(2, "0")} / ${String(journeyPhotos.length).padStart(2, "0")}`;
+    }
+    if (dialogWrap) dialogWrap.classList.remove("is-zoomed");
+    if (dialogZoom) {
+      dialogZoom.textContent = "Zoom";
+      dialogZoom.setAttribute("aria-pressed", "false");
+    }
+    setDialogImage(item);
+    if (!dialog.open && typeof dialog.showModal === "function") dialog.showModal();
+  }
+
+  function navigateJourneyPhotos(direction) {
+    if (activeJourneyPhotoIndex === null || journeyPhotos.length === 0) return;
+    const nextIndex = (activeJourneyPhotoIndex + direction + journeyPhotos.length) % journeyPhotos.length;
+    openJourneyPhoto(nextIndex);
+  }
+
+  $("#dialog-previous")?.addEventListener("click", () => navigateJourneyPhotos(-1));
+  $("#dialog-next")?.addEventListener("click", () => navigateJourneyPhotos(1));
+  dialog?.addEventListener("cancel", (event) => {
+    if (activeJourneyPhotoIndex !== null) {
+      event.preventDefault();
+      dialog.close();
+    }
+  });
+  document.addEventListener("keydown", (event) => {
+    if (!dialog?.open || activeJourneyPhotoIndex === null) return;
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      navigateJourneyPhotos(-1);
+    } else if (event.key === "ArrowRight") {
+      event.preventDefault();
+      navigateJourneyPhotos(1);
+    }
+  });
+  dialog?.addEventListener("close", () => {
+    activeJourneyPhotoIndex = null;
+    dialog.classList.remove("is-journey-gallery");
+    if (dialogGalleryControls) dialogGalleryControls.hidden = true;
+    if (dialogWrap) dialogWrap.classList.remove("is-zoomed");
+    if (dialogZoom) {
+      dialogZoom.textContent = "Zoom";
+      dialogZoom.setAttribute("aria-pressed", "false");
+    }
+  });
 
   if (dialogZoom) {
     dialogZoom.addEventListener("click", () => {
@@ -187,22 +263,35 @@
   $("#dialog-close")?.addEventListener("click", () => dialog.close());
   dialog?.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });
 
+  $$("[data-sw-lightbox]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const img = $("img", button);
+      openLightbox({
+        title: button.dataset.title,
+        src: img.currentSrc || img.src,
+        alt: img.alt,
+        description: button.dataset.description,
+        kind: button.dataset.kind || "SolidWorks 2026"
+      });
+    });
+  });
+
   // Direct feature button lightboxes
   $("#open-cad-drawing")?.addEventListener("click", () => {
     openLightbox({
       title: "SolidWorks Dimensioned Drawing Sheet",
       src: "assets/media/cad/dimensioned-drawing.svg",
-      description: "First-angle orthographic engineering drawing sheet with complete dimensional tolerances: 300 mm length, 160 mm width, 10 mm thickness, and 27 mm transducer pitch locations.",
+      description: "Dimensioned platform drawing with project-record dimensions of 300 mm × 160 mm × 10 mm; verified manufacturing tolerances are not specified.",
       kind: "CAD Drawing"
     });
   });
 
   $("#open-circuit-diagram")?.addEventListener("click", () => {
     openLightbox({
-      title: "Verified Electrical Circuit Schematic",
-      src: "assets/media/diagrams/circuit-diagram.svg",
-      description: "Detailed wiring schematic displaying DB107 diode bridge, 10 µF electrolytic smoothing capacitor, resistor voltage dividers, ESP32 GPIO pinout, and PCF8574 I²C LCD backpack connections.",
-      kind: "Schematic"
+      title: "Energy-Conversion Functional Flow",
+      src: "assets/media/diagrams/system-schematic.svg",
+      description: "Functional component sequence only. It is not a wiring schematic and does not establish charger compatibility or electrical safety.",
+      kind: "Functional Concept"
     });
   });
 
@@ -223,56 +312,36 @@
   // ---------------- 9. Render Engineering Journey ----------------
   const journeyList = $("#journey-steps");
   if (journeyList && Array.isArray(project.journeySteps)) {
-    project.journeySteps.forEach((step) => {
-      const li = el("li", "journey-step");
-      const head = el("div", "step-head");
-      head.append(el("span", "step-number", step.number), el("h3", "step-title", step.title));
-      li.append(head);
+    journeyPhotos.forEach((step, index) => {
+      const card = el("li", "journey-step journey-stage-card");
+      const stage = el("div", "journey-stage-head");
+      stage.append(
+        el("span", "journey-stage-number", step.stage),
+        el("span", "journey-stage-label", step.stageTitle)
+      );
 
-      const fig = el("figure", "step-figure");
-      const photoBtn = el("button", "step-photo");
-      photoBtn.type = "button";
-      photoBtn.setAttribute("aria-label", `Enlarge step photo: ${step.title}`);
+      const imageButton = el("button", "journey-stage-photo");
+      imageButton.type = "button";
+      imageButton.setAttribute("aria-label", `Open photo ${index + 1}: ${step.title}`);
+      const image = el("img");
+      image.src = step.src;
+      image.alt = step.alt;
+      image.width = step.width;
+      image.height = step.height;
+      image.loading = "lazy";
+      image.decoding = "async";
+      imageButton.append(image, el("span", "journey-stage-zoom", "View photo"));
+      imageButton.addEventListener("click", () => openJourneyPhoto(index));
 
-      // Map step to photo
-      let photoSrc = "assets/media/photos/assembled-tile.svg";
-      if (step.buildStage === 1) photoSrc = "assets/media/photos/base-plate.svg";
-      else if (step.buildStage === 2 || step.buildStage === 3) photoSrc = "assets/media/photos/piezo-matrix.svg";
-      else if (step.buildStage === 4) photoSrc = "assets/media/diagrams/circuit-diagram.svg";
-      else if (step.buildStage === 5) photoSrc = "assets/media/cad/isometric-view.svg";
-      else if (step.buildStage === 6) photoSrc = "assets/media/photos/esp32-bench.svg";
-      else if (step.buildStage === 7) photoSrc = "assets/media/photos/battery-pack.svg";
-      else if (step.buildStage === 8) photoSrc = "assets/media/photos/oscilloscope-test.svg";
-
-      const img = el("img");
-      img.src = photoSrc;
-      img.alt = step.title;
-      img.loading = "lazy";
-      photoBtn.appendChild(img);
-      photoBtn.addEventListener("click", () => {
-        openLightbox({ title: step.title, src: photoSrc, description: step.notes, kind: "photo" });
-      });
-
-      fig.appendChild(photoBtn);
-      fig.appendChild(el("figcaption", "step-caption", step.notes));
-      li.appendChild(fig);
-
-      const textWrap = el("div", "step-text-wrap");
-      textWrap.appendChild(el("p", "step-text", step.text));
-      if (step.tools) {
-        const toolsP = el("p", "step-tools");
-        toolsP.innerHTML = `<strong>Tools:</strong> ${step.tools} | <strong>Materials:</strong> ${step.materials}`;
-        textWrap.appendChild(toolsP);
-      }
-      li.appendChild(textWrap);
-
-      journeyList.appendChild(li);
+      const copy = el("div", "journey-stage-copy");
+      copy.append(el("h3", "journey-stage-title", step.title), el("p", "journey-stage-description", step.description));
+      card.append(stage, imageButton, copy);
+      journeyList.appendChild(card);
     });
   }
 
   // ---------------- 10. Render Bill of Materials (BOM) ----------------
   const bomRows = $("#bom-rows");
-  const bomTotal = $("#bom-total-amount");
   const bomSearch = $("#bom-search-input");
   let activeBomFilter = "all";
 
@@ -280,29 +349,25 @@
     if (!bomRows || !Array.isArray(project.billOfMaterials)) return;
     bomRows.replaceChildren();
     const query = bomSearch ? bomSearch.value.trim().toLowerCase() : "";
-    let total = 0;
 
     project.billOfMaterials.forEach((item) => {
-      const matchCat = activeBomFilter === "all" || item.category === activeBomFilter;
-      const matchQuery = !query || item.description.toLowerCase().includes(query) || item.spec.toLowerCase().includes(query);
+      const matchCat = activeBomFilter === "all"
+        || item.category === activeBomFilter;
+      const searchable = `${item.serial} ${item.name} ${item.category} ${item.quantity} ${item.purpose}`.toLowerCase();
+      const matchQuery = !query || searchable.includes(query);
       if (matchCat && matchQuery) {
-        total += item.totalCost;
         const tr = el("tr");
         tr.append(
-          el("td", "", item.item),
-          el("td", "", item.description),
-          el("td", "muted", item.spec),
-          el("td", "", `${item.qty} ${item.unit}`),
-          el("td", "", `₹${item.unitCost}`),
-          el("td", "font-mono font-bold", `₹${item.totalCost}`),
-          el("td", "", item.source),
-          el("td", "", item.status)
+          el("td", "font-mono", item.serial),
+          el("td", "font-bold", item.name),
+          el("td", "", item.quantity),
+          el("td", "muted", item.category),
+          el("td", "", item.purpose),
+          el("td", "", item.approximatePrice)
         );
         bomRows.append(tr);
       }
     });
-
-    if (bomTotal) bomTotal.textContent = `₹${total.toLocaleString("en-IN")}`;
   }
 
   $$(".bom-filter-btn").forEach((btn) => {
@@ -358,21 +423,6 @@
         art.append(ul);
       }
       statusContainer.append(art);
-    });
-  }
-
-  // ---------------- 13. Render Pinout Table ----------------
-  const pinoutRows = $("#pinout-rows");
-  if (pinoutRows && Array.isArray(project.esp32Pinout)) {
-    project.esp32Pinout.forEach((p) => {
-      const tr = el("tr");
-      tr.append(
-        el("td", "font-mono font-bold text-energy", p.pin),
-        el("td", "", p.function),
-        el("td", "", p.connectedTo),
-        el("td", "muted", p.note)
-      );
-      pinoutRows.append(tr);
     });
   }
 
@@ -445,38 +495,16 @@
   if (guidesGrid && Array.isArray(project.projectGuides)) {
     project.projectGuides.forEach((g) => {
       const card = el("div", "team-card");
-      const avatar = el("div", "avatar", "DR");
+      const avatar = el("div", "avatar", g.avatarText);
       const info = el("div", "team-info");
       info.append(
         el("h4", "", g.name),
-        el("p", "text-amber font-mono text-sm", g.designation),
-        el("p", "text-muted text-xs", `${g.department} · ${g.institution}`)
+        el("p", "role text-amber font-mono text-sm", g.designation),
+        el("p", "dept text-muted text-xs", `${g.department} · ${g.institution}`)
       );
       card.append(avatar, info);
       guidesGrid.append(card);
     });
   }
 
-  // ---------------- 16. Copy Code Button ----------------
-  const copyCodeBtn = $("#copy-code-btn");
-  if (copyCodeBtn && project.codeSnippet) {
-    copyCodeBtn.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(project.codeSnippet);
-        copyCodeBtn.textContent = "Copied!";
-        showToast("ESP32 Arduino code copied to clipboard");
-        setTimeout(() => { copyCodeBtn.textContent = "Copy Code"; }, 2000);
-      } catch (err) {
-        showToast("Unable to copy code automatically");
-      }
-    });
-  }
-
-  // ---------------- 17. Download Placeholders ----------------
-  $$("[data-download]").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      const target = btn.dataset.download;
-      showToast(`Preparing download: ${target}...`);
-    });
-  });
 })();

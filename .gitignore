@@ -1,0 +1,24 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor settings
+.vscode/
+.idea/
+
+# Temporary files and logs
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Local dependency/build artifacts
+node_modules/
+_site/
+.jekyll-cache/
+
+# Local environment secrets
+.env
+.env.*
+!.env.example
