@@ -1,153 +1,156 @@
-# Magic Step — Footstep Power Generation System
+# MAGIC STEP — Footstep Power Generation System
 
-**Engineering project documentation website** · Sanjivani University, Kopargaon · Department of Mechanical Engineering
+**Group 16 · Department of Mechanical Engineering · Sanjivani University, Kopargaon**
 
-[Open the live website](https://saishgodage45-jpg.github.io/magic-step-website/)
+Magic Step is an engineering project exploring how piezoelectric sensors can convert footstep pressure into electrical energy. The project records a six-disc wooden sensor platform, a separate breadboard-based electronics assembly, SolidWorks component modelling, prototype integration, and supervised manufacturing learning at Tinkerers Lab.
 
-![SolidWorks assembly screenshot of the Magic Step prototype](assets/solidworks/complete-assembly.png)
+**Project status:** Prototype and design records are documented. Electrical output, charging behavior, and battery performance have not been independently validated; no measured performance is claimed.
 
-*SolidWorks assembly showing the wooden footplate and separate electronics tray.*
+[Open the published website](https://saishgodage45-jpg.github.io/magic-step-website/)
 
 ## Project overview
 
-Magic Step is a student engineering project exploring how mechanical energy from human footsteps can be converted into electrical energy. Six piezoelectric discs mounted beneath a wooden platform produce electrical pulses when mechanically strained. The proposed electronics rectify and condition those pulses, then route energy toward rechargeable battery storage. An ESP32 development board is included in the documented electronics system.
+The project investigates a possible energy-conversion path from footstep pressure through piezoelectric generation, bridge rectification and energy conditioning toward battery storage. An ESP32 development board is listed separately for monitoring and control where implemented. The functional diagram is an architecture concept, not a wire-level circuit; it does not establish component compatibility or safe battery charging.
 
-The website is a static project journal and technical reference. It contains project descriptions, design documentation, SolidWorks screenshots, prototype-development photos, and an interactive Three.js representation of the assembly. It does not report fabricated experimental results; measurements in the testing documentation remain clearly identified as pending or requiring confirmation.
+### Objectives
 
-## Problem statement
+- Explore piezoelectric energy conversion under footstep pressure.
+- Develop and document the mechanical sensor platform and component models.
+- Record the intended electronics sequence without inventing unverified connections.
+- Demonstrate the design-to-product workflow and document manufacturing learning.
+- Identify the testing and safety reviews needed before reporting results.
 
-Footsteps transfer mechanical energy into walking surfaces. This project investigates whether a small part of that otherwise dissipated mechanical energy can be captured with piezoelectric sensors and made available to an electrical storage system. It also documents the mechanical, electrical, embedded-software, and fabrication considerations involved in exploring that approach.
+### Hardware inventory
 
-## Proposed solution
+| Component | Quantity | Purpose |
+|---|---:|---|
+| Piezoelectric discs | 6 | Convert applied mechanical strain into electrical output. |
+| Wooden platform | 1 | Supports the six discs as a separate sensor platform. |
+| Rectifier diodes | 4 | Form the bridge-rectification stage in the documented concept. |
+| Capacitor, 50 µF | 1 | Included after rectification in the documented concept. |
+| ESP32 development board | 1 | Monitoring and control where implemented; pin-level connections are not specified. |
+| Boost converter | 1 | Listed voltage-conditioning stage; output compatibility is unverified. |
+| TP4056 charging module | 1 | Listed charging module; cell compatibility and protection require review. |
+| 3.7 V lithium-ion battery | 1 | Listed energy-storage component; confirm requirements before charging. |
+| Battery holder | 1 | Holds the listed battery. |
+| 400-point mini breadboard | 1 | Separate electronics prototyping base. |
+| Jumper wires | As required | Interconnect stock; exact wiring is not documented. |
 
-The documented system uses a 300 × 160 × 10 mm wooden platform with six 27 mm piezoelectric discs arranged in a 2 × 3 array underneath. A four-diode bridge rectifier converts the sensor output to unidirectional pulses; a capacitor buffers the output, and a boost-converter/TP4056 charging path is included in the proposed energy-management arrangement for lithium-ion storage. The ESP32 development board supports the project's embedded monitoring and control work.
+No purchase prices were provided. See the [Bill of Materials](docs/bill-of-materials.md) for the itemized list.
 
-**Capacitor value needs reconciliation:** the hardware list supplied for this README specifies **50 µF**, while the existing website and detailed circuit documents specify **10 µF**. Confirm the value against the assembled hardware and update the circuit, BOM, CAD caption, and documentation together before treating either value as final.
+### Functional energy path
 
-## Hardware components
+**Footstep pressure → Piezoelectric energy generation → Bridge rectification → Energy storage / conditioning → Charging module → Lithium-ion battery**
 
-| Component | Documented role |
-|---|---|
-| Six 27 mm piezoelectric discs | Convert mechanical strain into electrical pulses |
-| Wooden footstep platform | Applies footstep force to the sensor array |
-| Four diodes / bridge rectifier | Rectify the piezoelectric output |
-| Capacitor | Buffer and smooth rectified output; value requires reconciliation (see above) |
-| Boost converter | DC–DC conditioning stage |
-| TP4056 charging module | Lithium-ion charging stage |
-| Lithium-ion cells and battery holder | Rechargeable energy storage |
-| ESP32 development board | Embedded monitoring and control |
-| 400-point mini breadboard | Circuit prototyping and interconnection |
-| Jumper wires | Electrical connections between modules |
+The listed capacitor and boost converter are shown in the detailed block diagram. The ESP32 is separate and is not represented as charging the battery. Exact wiring, charger input suitability, cell compatibility, and protection must be checked with the project supervisor before connecting or charging the battery.
 
-The model viewer depicts the tray, breadboard, controller, rectifier diodes, capacitor, converter, charging module, battery holder, two cells, and external leads as separate components. It intentionally does not include an LCD or springs.
+## Design and manufacturing records
+
+SolidWorks was used for 3D modelling, component design, and assembly development. The combined [3D CAD and SolidWorks gallery](https://saishgodage45-jpg.github.io/magic-step-website/#cad-design) includes individual component models, mechanical drawings, and project development photographs. A historical full-assembly screenshot is retained in the asset archive but not shown in the website gallery because its depicted configuration conflicts with the current component record.
+
+The project fabrication record covers CAD work, preparation of the wooden sensor platform, piezoelectric sensor preparation, separate electronics assembly, and prototype integration. The following photographs document additional Tinkerers Lab learning activities; they are not claimed as Magic Step prototype components.
+
+### Website features
+
+- Responsive project portfolio with section navigation and print support.
+- Combined CAD and SolidWorks gallery with click-to-expand image viewing.
+- Interactive 3D concept explorer, functional system-architecture diagram, and searchable/filterable BOM.
+- Technical documentation, prototype-development photos, and the Tinkerers Lab manufacturing gallery.
+
+### Project development photographs
+
+![Prototype integration during project development](assets/images/engineering-journey/prototype-integration-1.jpg)
+
+*Prototype integration work recorded during project development.*
+
+![Piezoelectric sensor preparation](assets/images/engineering-journey/piezo-sensor-soldering.jpg)
+
+*Piezoelectric sensor preparation documented at the workshop bench.*
+
+### FDM 3D printing
+
+![Bambu Lab A1 FDM printer at Tinkerers Lab](assets/images/manufacturing/3d-printing/bambu-lab-a1.jpg)
+
+*Bambu Lab A1 FDM 3D printer at Tinkerers Lab, Sanjivani University.*
+
+![FDM-printed Benchy test model](assets/images/manufacturing/outputs/3d-printed-benchy.jpg)
+
+*Benchy test model manufactured using FDM 3D printing.*
+
+### Laser cutting and engraving
+
+![Laser cutting machine at Tinkerers Lab](assets/images/manufacturing/laser-cutting/laser-cutting-machine.jpg)
+
+*Laser cutting machine at Tinkerers Lab, Sanjivani University.*
+
+![Laser-engraved SAISH acrylic nameplate](assets/images/manufacturing/laser-cutting/saish-acrylic-nameplate.jpg)
+
+*Customized SAISH acrylic nameplate — laser-cutting and engraving output.*
 
 ## Project team and faculty guidance
 
-**Project team**
+**Student project members — Group 16**
 
 - Saish Godage
 - Ayush Jadhav
 
-The website also lists student contributors Gaurav Wavdhane and Sai Gholap.
-
 **Faculty guidance**
 
-- Dr. K. C. Bhosale — Head of Department (HOD), Department of Mechanical Engineering, Sanjivani University, Kopargaon
-- Dr. Kiran Wakchaure — Director – Projects, Sanjivani University, Kopargaon
+- Dr. K. C. Bhosale — HOD, Department of Mechanical Engineering
+- Dr. Kiran Wakchaure — Project Guide
+- Dr. Vasudeo Singh Singer — Project Guide
 
-## Software, design tools, and practical skills
+## Technical documentation
 
-**Tools and technologies:** SolidWorks, Visual Studio Code, GitHub, GitHub Copilot, HTML, CSS, JavaScript, and Three.js.
-
-**Manufacturing and hands-on learning topics:** laser cutting, 3D printing, CAD modelling, prototype assembly, and basic electronics integration.
-
-The repository currently contains no actual laser-cutting or 3D-printing photographs; the corresponding website cards use explicitly labelled placeholders. No photos have been fabricated. Add project photographs under `assets/images/` when they are available.
-
-## Website features
-
-- Interactive Three.js prototype viewer with assembled/exploded views, part inspection, layer visibility, dimensions, orbit, pan, zoom, and reset controls.
-- Responsive SolidWorks gallery with 11 actual assembly/component screenshots and click-to-enlarge viewing.
-- Engineering development timeline with prototype and electronics photographs.
-- Project overview, working-principle diagrams, electronics documentation, testing matrix, BOM, and academic references.
-- Hands-on learning section for laser cutting and 3D printing.
-- Faculty and student information, print support, and dark/light themes.
-
-The interactive viewer builds its geometry directly in JavaScript and does not fetch the retained `assets/models/piezo_footstep.glb` file. Three.js r128 and its matching OrbitControls script are loaded from CDNs by `index.html`; a network connection is required for those scripts and the hosted web fonts.
-
-## Project photographs and design gallery
-
-The following are real project assets stored in the repository:
-
-![Prototype integration photograph](assets/images/engineering-journey/prototype-integration-1.jpg)
-
-*Prototype integration during project development.*
-
-![Piezo sensor preparation photograph](assets/images/engineering-journey/piezo-sensor-soldering.jpg)
-
-*Piezoelectric sensor preparation.*
-
-All 11 SolidWorks screenshots are in [`assets/solidworks/`](assets/solidworks/):
-
-`complete-assembly.png` · `wooden-footplate.png` · `mini-breadboard.png` · `electronics-tray.png` · `piezoelectric-disc.png` · `axial-diode.png` · `18650-cell.png` · `twin-cell-cradle.png` · `external-lead.png` · `capacitor.png` · `esp32-controller.png`
-
-Other real development photographs are in [`assets/images/engineering-journey/`](assets/images/engineering-journey/). The schematic, CAD-style diagrams, and illustrative media are organized under `assets/media/`.
-
-No demonstration video files are currently included in the repository. Add a video only when a suitable project recording is available; large media can be linked from an appropriate hosting service instead of committed as a repository asset.
-
-## Documentation
-
-| Document | Contents |
+| Document | Coverage |
 |---|---|
-| [Project overview](docs/project-overview.md) | Abstract, problem statement, objectives, team, and supervision |
-| [Working principle](docs/working-principle.md) | Piezoelectric operation and energy-flow description |
-| [Mechanical design](docs/mechanical-design.md) | Platform and mechanical design notes |
-| [Electronics and firmware](docs/electronics-and-firmware.md) | Circuit, ESP32 connections, and firmware notes |
-| [Testing and results](docs/testing-and-results.md) | Test matrix and result-recording guidance |
-| [Safety and maintenance](docs/safety-and-maintenance.md) | Electrical and battery safety notes |
+| [Project overview](docs/project-overview.md) | Project summary, team, and scope |
+| [Objectives, scope, and limitations](docs/objectives-and-scope.md) | Goals, boundaries, and future work |
+| [Working principle](docs/working-principle.md) | Piezoelectric principle and conceptual energy flow |
+| [System architecture](docs/system-architecture.md) | Functional blocks and diagram limits |
+| [Mechanical design and CAD](docs/mechanical-design.md) | Project-record dimensions, SolidWorks, and verification notes |
+| [Electronics and circuit documentation](docs/electronics-and-firmware.md) | Component roles, functional flow, and unknown connections |
+| [Bill of Materials](docs/bill-of-materials.md) | Quantities, purposes, and unreported prices |
+| [Manufacturing and fabrication](docs/manufacturing-and-fabrication.md) | Project build record versus Tinkerers Lab activities |
+| [Hardware and software](docs/hardware-and-software.md) | Project hardware and website/tool requirements |
+| [Team and acknowledgements](docs/team-and-acknowledgements.md) | Student members, faculty, and acknowledgements |
+| [Testing and results](docs/testing-and-results.md) | Test-record template; no measured results claimed |
+| [Safety and maintenance](docs/safety-and-maintenance.md) | Electrical, battery, and mechanical precautions |
+| [Website setup and deployment](docs/software-and-deployment.md) | Local preview and existing GitHub Pages configuration |
 
-The root `index.html` and `assets/` tree are the canonical GitHub Pages site. `magic_step_website/` is a retained legacy copy and is not the Pages deployment source.
+## Website setup
 
-## Run locally
-
-This is a static site: it has no build step, package manager, or local runtime dependency to install. From the repository root, start a local HTTP server:
+The website is a static HTML, CSS, and JavaScript project with no package installation or build step. From the repository root, start a local server:
 
 ```powershell
 python -m http.server 8000
 ```
 
-Then open <http://localhost:8000/>. Alternatively, use the Visual Studio Code Live Server extension. Serving the files over HTTP is recommended for consistent browser behaviour; the Three.js and OrbitControls CDN scripts require internet access.
+Open <http://localhost:8000/>. A modern browser and an internet connection are needed for the hosted Three.js scripts and Google Fonts. The local website itself does not require credentials or a backend service.
 
-## Repository layout
+## Repository structure
 
 ```text
 .
 ├── index.html
-├── README.md
-├── .gitignore
 ├── assets/
-│   ├── css/site.css
-│   ├── images/engineering-journey/   # Prototype and development photographs
-│   ├── js/                            # Project data, site UI, gallery, 3D viewer
-│   ├── media/
-│   │   ├── cad/
-│   │   ├── diagrams/
-│   │   └── photos/                    # SVG illustrative media
-│   ├── models/piezo_footstep.glb      # Retained model asset; not fetched by viewer
-│   └── solidworks/                    # 11 SolidWorks screenshots
-├── docs/                              # Technical project documentation
-└── magic_step_website/                # Retained legacy site copy
+│   ├── css/                    # Responsive website styles
+│   ├── images/
+│   │   ├── cad/                # Retained original CAD development record
+│   │   ├── engineering-journey/
+│   │   └── manufacturing/      # Tinkerers Lab photographs and outputs
+│   ├── js/                     # Project data, site UI, gallery, 3D explorer
+│   ├── media/                  # Functional diagrams and design illustrations
+│   ├── models/                 # Retained 3D model assets
+│   └── solidworks/             # Component modelling screenshots
+├── docs/                       # Technical project documentation
+└── magic_step_website/         # Retained legacy mirror, not the Pages source
 ```
-
-The folder names used by the running site are kept as-is so its relative asset paths continue to work. No `assets/videos/` folder is present because no video files are currently available.
 
 ## GitHub Pages
 
-The repository's Pages configuration deploys the **root (`/`) of the `main` branch**. The live site is [saishgodage45-jpg.github.io/magic-step-website](https://saishgodage45-jpg.github.io/magic-step-website/).
+GitHub Pages is already configured to publish the repository root (`/`) from the `main` branch. The current deployment mode is the existing branch-based configuration; no parallel Actions workflow was added. Changes on another branch do not appear on the public site until they are merged into the configured source branch and Pages completes a build. See [website setup and deployment](docs/software-and-deployment.md).
 
-## Future scope
+## References and acknowledgements
 
-Possible future work includes characterizing energy-conversion performance with documented test conditions, improving power-conditioning and storage integration, adding battery monitoring and sensor integration, collecting and presenting measured system data, and evaluating the design at larger scales. These are future possibilities, not claims of completed work or measured performance.
-
-## Credits and licensing
-
-Project credits are listed above and on the website. No `LICENSE` file has been added because no project license was specified. The site uses Three.js r128 and Google Fonts through their published CDN endpoints.
+The site includes references on piezoelectric energy harvesting and acknowledges the Department of Mechanical Engineering and Tinkerers Lab at Sanjivani University for facilities and guidance. See the [website references section](https://saishgodage45-jpg.github.io/magic-step-website/#references).

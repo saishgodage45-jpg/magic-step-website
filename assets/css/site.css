@@ -21,7 +21,7 @@
   --energy-ink: #38bdf8;
   --amber: #f59e0b;         /* Amber Gold: piezo brass transducers & warnings */
   --amber-ink: #f59e0b;
-  --ok: #10b981;            /* Emerald Green: storage, completed status & LCD */
+  --ok: #10b981;            /* Emerald green for positive status */
   --ok-ink: #10b981;
   --danger: #ef4444;
   --on-accent: #0b111a;
@@ -206,14 +206,26 @@ code {
 }
 .main-nav.is-open a { font-size: 16px; padding: 10px 0; border-bottom: 1px solid var(--line); color: var(--text); }
 
-@media (min-width: 1280px) {
+@media (min-width: 2800px) {
   .main-nav { display: flex; gap: clamp(10px, 1.1vw, 20px); }
   .menu-toggle { display: none; }
 }
-@media (max-width: 767px) { .presentation-toggle { display: none; } }
+@media (max-width: 767px) {
+  .presentation-toggle { display: none; }
+  .main-nav.is-open a { white-space: normal; overflow-wrap: anywhere; }
+}
 @media (max-width: 991px) {
   .theme-toggle-text, .share-text { display: none; }
   .theme-toggle, .share-button { min-width: 40px; justify-content: center; }
+}
+@media (max-width: 560px) {
+  .site-header { gap: 8px; }
+  .brand { gap: 8px; }
+  .brand-type small { display: none; }
+  .brand-type strong { font-size: 15px; letter-spacing: 0; }
+  .header-actions { flex-shrink: 0; gap: 6px; }
+  .theme-toggle, .share-button { width: 36px; min-width: 36px; padding: 0; }
+  .menu-toggle { width: 36px; height: 36px; flex-shrink: 0; }
 }
 
 /* ==================== SHARED LAYOUT & TITLE BLOCKS ==================== */
@@ -273,6 +285,7 @@ code {
 }
 .label-chip-warn { border-color: var(--amber); color: var(--amber-ink); }
 .label-chip-ok { border-color: var(--ok); color: var(--ok-ink); }
+@media (max-width: 560px) { .label-chip { white-space: normal; } }
 
 .button {
   display: inline-flex; align-items: center; justify-content: center;
@@ -534,80 +547,133 @@ code {
 }
 
 /* ==================== 05 HANDS-ON SKILL LEARNING ==================== */
-.skill-learning-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+.manufacturing-experiences { display: grid; gap: 24px; }
+.manufacturing-card {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 52px); align-items: center; min-width: 0;
+  padding: clamp(20px, 3vw, 34px); border: 1px solid var(--line);
+  border-radius: 12px; background: var(--surface);
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
 }
-.skill-learning-card {
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+.manufacturing-card:hover {
+  transform: translateY(-3px); border-color: var(--line-strong);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, .2);
 }
-.skill-learning-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--line-strong);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+.manufacturing-photo-card {
+  min-width: 0; margin: 0; overflow: hidden;
+  border: 1px solid var(--line); border-radius: 9px; background: var(--plate);
 }
-.skill-learning-visual {
-  position: relative;
-  display: grid;
-  min-height: 190px;
-  margin: 0;
-  place-items: center;
-  overflow: hidden;
-  border-bottom: 1px solid var(--line);
-  background-color: var(--plate);
-  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 24px 24px;
+.manufacturing-photo-image { background: var(--plate); }
+.manufacturing-photo-image img {
+  max-width: 100%; max-height: 440px; height: auto; margin: 0 auto;
+  object-fit: contain;
 }
-.skill-learning-visual svg {
-  width: 150px;
-  height: 104px;
-  fill: none;
-  stroke: var(--energy-ink);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 2;
-  opacity: 0.78;
-  transition: transform 220ms ease, opacity 220ms ease;
+.manufacturing-photo-card figcaption { display: grid; gap: 7px; padding: 15px 17px 17px; }
+.manufacturing-photo-card figcaption strong { font-family: var(--display); font-size: 15px; line-height: 1.45; }
+.manufacturing-photo-card figcaption p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+.figure-number {
+  color: var(--energy-ink); font-family: var(--mono); font-size: 10px;
+  font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
 }
-.skill-learning-card:hover .skill-learning-visual svg {
-  transform: scale(1.05);
-  opacity: 1;
+.solidworks-card .figure-number { display: block; margin-bottom: 9px; }
+.manufacturing-photo-card:hover { border-color: var(--energy); }
+.manufacturing-output-gallery {
+  margin-top: 40px; padding: 24px; border: 1px solid var(--line);
+  border-radius: var(--radius); background: var(--surface);
 }
-.skill-learning-placeholder {
-  position: absolute;
-  right: 12px;
-  bottom: 10px;
-  padding: 4px 8px;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  background: var(--surface);
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.03em;
+.manufacturing-output-gallery-inline { grid-column: 1 / -1; margin-top: 0; }
+.manufacturing-output-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px; margin-top: 18px;
 }
-.skill-learning-copy { padding: 22px 24px 24px; }
+.manufacturing-output-empty {
+  grid-column: 1 / -1; margin: 0; padding: 22px;
+  border: 1px dashed var(--line-strong); border-radius: var(--radius);
+  color: var(--muted); text-align: center;
+}
+.manufacturing-copy { min-width: 0; }
 .skill-learning-label {
-  margin-bottom: 6px;
-  color: var(--energy-ink);
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  margin-bottom: 7px; color: var(--energy-ink); font-family: var(--mono);
+  font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
 }
-.skill-learning-copy h3 { margin-bottom: 12px; font-size: 24px; }
-.skill-learning-copy ul { margin: 0; padding-left: 20px; color: var(--muted); }
-.skill-learning-copy li { padding-left: 3px; }
-.skill-learning-copy li + li { margin-top: 7px; }
+.manufacturing-copy h3 { margin-bottom: 12px; font-size: clamp(23px, 2.5vw, 30px); line-height: 1.2; }
+.manufacturing-intro { max-width: 58ch; margin-bottom: 20px; color: var(--muted); font-size: 15px; }
+.manufacturing-copy h4 { margin: 19px 0 7px; font-family: var(--display); font-size: 14px; }
+.manufacturing-applications { margin-bottom: 12px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+.manufacturing-applications span { padding-inline: 3px; color: var(--energy-ink); }
+.manufacturing-learning-list { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.manufacturing-learning-list li { position: relative; padding-left: 19px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+.manufacturing-learning-list li::before {
+  position: absolute; top: .68em; left: 1px; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--energy); content: "";
+}
+.practical-label {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+  padding: 7px 10px; border: 1px solid var(--line-strong); border-radius: 4px;
+  color: var(--energy-ink); font-family: var(--mono); font-size: 10px;
+  font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+}
+.practical-label span { width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+.manufacturing-skills { margin-top: clamp(52px, 7vw, 84px); }
+.manufacturing-subheading { margin-bottom: 20px; }
+.manufacturing-subheading h3, .manufacturing-workflow h3 { margin-bottom: 0; font-size: clamp(23px, 2.5vw, 30px); }
+.manufacturing-skill-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.manufacturing-skill {
+  min-width: 0; padding: 20px; border: 1px solid var(--line);
+  border-radius: 8px; background: var(--surface);
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+.manufacturing-skill:hover { transform: translateY(-3px); border-color: var(--energy); }
+.manufacturing-skill svg {
+  width: 30px; height: 30px; margin-bottom: 15px; fill: none;
+  stroke: var(--energy-ink); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.6;
+}
+.manufacturing-skill h4 { margin: 0 0 6px; font-family: var(--display); font-size: 15px; line-height: 1.35; }
+.manufacturing-skill p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.manufacturing-workflow {
+  margin-top: clamp(48px, 6vw, 72px); padding: clamp(22px, 3vw, 34px);
+  border: 1px solid var(--line); border-radius: 10px;
+  background: linear-gradient(135deg, var(--surface), var(--bg-alt));
+}
+.manufacturing-workflow-heading {
+  display: flex; align-items: end; justify-content: space-between;
+  gap: 24px; margin-bottom: 26px;
+}
+.manufacturing-workflow-heading > p { max-width: 46ch; margin: 0; color: var(--muted); font-size: 13px; }
+.manufacturing-workflow-steps {
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px; margin: 0; padding: 0; list-style: none;
+}
+.manufacturing-workflow-steps li {
+  position: relative; display: grid; align-content: start; gap: 10px;
+  min-height: 96px; padding: 16px 14px;
+  border: 1px solid var(--line); border-radius: 6px; background: var(--bg);
+}
+.manufacturing-workflow-steps li:not(:last-child)::after {
+  position: absolute; top: 50%; right: -17px; z-index: 1; width: 20px;
+  color: var(--energy-ink); content: "→"; font-family: var(--mono); font-size: 16px; text-align: center;
+}
+.manufacturing-workflow-steps li > span { color: var(--energy-ink); font-family: var(--mono); font-size: 10px; }
+.manufacturing-workflow-steps strong { font-family: var(--display); font-size: 13px; line-height: 1.35; }
+@media (max-width: 980px) {
+  .manufacturing-card { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .manufacturing-workflow-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .manufacturing-workflow-steps li:nth-child(3)::after { display: none; }
+}
 @media (max-width: 700px) {
-  .skill-learning-grid { grid-template-columns: 1fr; gap: 18px; }
-  .skill-learning-copy { padding: 20px; }
+  .manufacturing-skill-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .manufacturing-workflow-heading { display: grid; align-items: start; gap: 12px; }
+}
+@media (max-width: 560px) {
+  .manufacturing-card { padding: 16px; gap: 22px; }
+  .manufacturing-skill-grid { gap: 8px; }
+  .manufacturing-skill { padding: 15px 12px; }
+  .manufacturing-workflow-steps { grid-template-columns: 1fr; gap: 8px; }
+  .manufacturing-workflow-steps li { min-height: 0; grid-template-columns: 28px 1fr; align-items: center; gap: 8px; padding: 12px; }
+  .manufacturing-workflow-steps li:not(:last-child)::after { display: none; }
 }
 
 /* ==================== 06 DESIGN & SPECIFICATIONS ==================== */
@@ -619,6 +685,11 @@ code {
 .solidworks-gallery {
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: stretch; gap: 22px;
+}
+.solidworks-category-label {
+  grid-column: 1 / -1; margin: 18px 0 0;
+  padding-bottom: 10px; border-bottom: 1px solid var(--line);
+  color: var(--energy-ink); font-family: var(--display);
 }
 .solidworks-card {
   min-width: 0; margin: 0; overflow: hidden;
@@ -752,19 +823,7 @@ code {
 .part-name { font-size: 19px; margin-bottom: 6px; }
 .part-text { font-size: 14px; color: var(--muted); margin: 0; line-height: 1.5; }
 
-/* ==================== 07 ELECTRONICS & ESP32 CODE ==================== */
-.pinout-table {
-  width: 100%; border-collapse: collapse; font-family: var(--mono);
-  font-size: 14px; background: var(--surface); border: 1px solid var(--line);
-  margin-bottom: 28px; border-radius: var(--radius); overflow: hidden;
-}
-.pinout-table th, .pinout-table td {
-  text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line);
-}
-.pinout-table thead th {
-  background: var(--surface-2); font-size: 12px; font-weight: 700;
-  color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em;
-}
+/* ==================== ELECTRONICS DOCUMENTATION ==================== */
 .code-container {
   background: #070d17; border: 1px solid var(--line-strong);
   border-radius: var(--radius); overflow: hidden; margin-top: 24px;
@@ -836,7 +895,7 @@ code {
   overflow-x: auto; border: 1px solid var(--line);
   border-radius: var(--radius); background: var(--surface);
 }
-.bom-table { width: 100%; min-width: 800px; border-collapse: collapse; font-size: 15px; }
+.bom-table { width: 100%; min-width: 1040px; border-collapse: collapse; font-size: 15px; }
 .bom-table th, .bom-table td {
   padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--line);
 }
@@ -1067,7 +1126,7 @@ body.presentation-mode .figure-caption { font-size: 22px; }
   }
   .section { padding-block: 16pt; break-inside: auto; }
   .title-block { break-after: avoid; background-image: none; }
-  .spec-table, .pinout-table, .test-table, .bom-table, .status-group, figure {
+  .spec-table, .test-table, .bom-table, .status-group, figure {
     break-inside: avoid;
   }
   a[href^="http"]::after {

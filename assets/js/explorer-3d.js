@@ -53,17 +53,17 @@
     charger: {
       name: "TP4056 Charging Module",
       status: "CELL CHARGING",
-      text: "Charging module for the rechargeable lithium-ion battery pack."
+      text: "Charging module listed in the prototype inventory; compatibility and protection requirements need supervisor verification."
     },
     holder: {
-      name: "Twin-Cell Battery Holder",
-      status: "2 × 18650 CELLS",
-      text: "Holds two cylindrical lithium-ion cells together as the project's energy-storage pack."
+      name: "Battery Holder",
+      status: "ONE CELL",
+      text: "Holds the single listed 3.7 V lithium-ion battery."
     },
     cell: {
-      name: "18650 Lithium-Ion Cell",
+      name: "3.7 V Lithium-Ion Battery",
       status: "RECHARGEABLE STORAGE",
-      text: "One of two cylindrical cells used to store electrical energy from the prototype."
+      text: "Single listed energy-storage component; confirm the cell and protection requirements before charging."
     },
     wire: {
       name: "External Connecting Wire",
@@ -392,13 +392,11 @@
         box(holder, [0.003, 0.007, 0.062], [0.020, 0.005, z], blackPlastic);
       });
 
-      [-0.011, 0.011].forEach((x, index) => {
-        const cell = makePart("cell", "electronics", [0.296 + x, 0.0255, -0.012], [x, 0.045, 0]);
-        cylinder(cell, 0.0088, 0.0088, 0.065, [0, 0, 0], blue, 28, Math.PI / 2);
-        cylinder(cell, 0.0075, 0.0075, 0.001, [0, 0, 0.033], metal, 24, Math.PI / 2);
-        cylinder(cell, 0.002, 0.002, 0.001, [0, 0, 0.034], gold, 16, Math.PI / 2);
-        cell.name = `18650-cell-${index + 1}`;
-      });
+      const cell = makePart("cell", "electronics", [0.296, 0.0255, -0.012], [0, 0.045, 0]);
+      cylinder(cell, 0.0088, 0.0088, 0.065, [0, 0, 0], blue, 28, Math.PI / 2);
+      cylinder(cell, 0.0075, 0.0075, 0.001, [0, 0, 0.033], metal, 24, Math.PI / 2);
+      cylinder(cell, 0.002, 0.002, 0.001, [0, 0, 0.034], gold, 16, Math.PI / 2);
+      cell.name = "3.7V-lithium-ion-cell";
 
       const wires = makePart("wire", "leads", [0, 0, 0], [0.014, 0.012, 0]);
       const addWire = (parent, points, material) => {

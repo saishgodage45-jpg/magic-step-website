@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b111a">
-  <meta name="description" content="Magic Step: A footstep power generation prototype converting kinetic foot pressure into electrical energy using piezoelectric transducers. Sanjivani University Makerspace Group 16.">
+  <meta name="description" content="Magic Step: A footstep power generation prototype using six piezoelectric sensors. Sanjivani University Mechanical Engineering, Group 16.">
   <title>Magic Step — Footstep Power Generation System | Engineering Documentation</title>
 
   <!-- Open Graph / Meta -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Magic Step">
   <meta property="og:title" content="Magic Step — Footstep Power Generation System">
-  <meta property="og:description" content="Group 16, Sanjivani University Mechanical Engineering Makerspace: Footstep power generation prototype with 6 piezoelectric discs, full-wave rectification, ESP32 telemetry, and 1S2P Li-ion storage.">
+  <meta property="og:description" content="Group 16, Sanjivani University Mechanical Engineering: a footstep power generation prototype using six piezoelectric discs and a separate electronics assembly.">
 
   <!-- Self-contained theme initialization before first paint -->
   <script>
@@ -34,6 +34,7 @@
 
   <!-- Three.js CDN for 3D Interactive Explorer -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
   <!-- Project Data & Scripts -->
   <script defer src="assets/js/project-data.js"></script>
@@ -56,19 +57,22 @@
     </a>
 
     <nav class="main-nav" id="main-nav" aria-label="Main navigation">
-      <a href="#overview">Overview</a>
-      <a href="#working">Working</a>
-      <a href="#journey">Journey</a>
-      <a href="#design">CAD Design</a>
-      <a href="#explorer-section">3D Explorer</a>
-      <a href="#electronics">Electronics</a>
-      <a href="#testing">Testing</a>
-      <a href="#bom-section">BOM</a>
-      <a href="#video-section">Video</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#status">Status</a>
-      <a href="#downloads">Downloads</a>
-      <a href="#team">Team</a>
+      <a href="#top">Home</a>
+      <a href="#overview">Project Overview</a>
+      <a href="#problem-statement">Problem Statement</a>
+      <a href="#project-objectives">Objectives</a>
+      <a href="#proposed-solution">Proposed Solution</a>
+      <a href="#working">Working Principle</a>
+      <a href="#system-architecture">System Architecture</a>
+      <a href="#mechanical-design">Mechanical Design</a>
+      <a href="#cad-design">3D CAD Design &amp; SolidWorks Gallery</a>
+      <a href="#electronics">Electronics &amp; Circuit Diagram</a>
+      <a href="#bom-section">Bill of Materials</a>
+      <a href="#manufacturing">Manufacturing &amp; Fabrication</a>
+      <a href="#hands-on-skills">3D Printing &amp; Laser Cutting</a>
+      <a href="#team">Team &amp; Faculty</a>
+      <a href="#references">Documentation</a>
+      <a href="#future-scope">Future Scope</a>
     </nav>
 
     <div class="header-actions">
@@ -98,22 +102,22 @@
         <div class="hero-copy">
           <p class="eyebrow">Group 16 · Sanjivani University · Mechanical Engineering · Makerspace · 2026–27</p>
           <h1 id="hero-title">MAGIC STEP<span class="h1-sub">— Footstep Power Generation System</span></h1>
-          <p class="hero-lede">An electro-mechanical prototype investigating the conversion of human footstep pressure into conditioned electrical energy using a 2×3 matrix of piezoelectric transducers. Features a springless direct-flexure platform (300 × 160 × 10 mm), full-wave rectification, ESP32 embedded telemetry, and a 1S2P lithium-ion storage testbed.</p>
+          <p class="hero-lede">An engineering prototype exploring how piezoelectric sensors can convert footstep pressure into electrical energy. The separate wooden sensor platform and breadboard-based electronics include a four-diode rectifier, 50 µF capacitor, boost converter, TP4056 charging module, 3.7 V lithium-ion battery, and an ESP32 monitoring and control unit.</p>
 
           <div class="hero-actions">
             <a class="button button-primary" href="#overview">Explore the Project <span aria-hidden="true">↓</span></a>
-            <a class="button button-quiet" href="#explorer-section">3D CAD Explorer</a>
+            <a class="button button-quiet" href="#cad-design">Explore CAD &amp; Models</a>
             <button class="button button-outline" type="button" onclick="window.print()">Print / Save as PDF</button>
           </div>
 
           <div class="hero-metadata">
             <div class="hero-meta-row">
               <span class="hero-meta-label">Students:</span>
-              <span>Saish Godage · Ayush Jadhav · Gaurav Wavdhane · Sai Gholap</span>
+              <span>Saish Godage · Ayush Jadhav</span>
             </div>
             <div class="hero-meta-row">
               <span class="hero-meta-label">Faculty &amp; Project Guides:</span>
-              <span>Dr. K. C. Bhosale · Dr. Kiran Wakchaure</span>
+              <span>Dr. K. C. Bhosale · Dr. Kiran Wakchaure · Dr. Vasudeo Singh Singer</span>
             </div>
             <div class="hero-meta-row">
               <span class="hero-meta-label">Department:</span>
@@ -124,7 +128,7 @@
 
         <p class="hero-figure-badge">
           <span class="label-chip label-chip-ok">Hardware Assembled</span>
-          300 × 160 × 10 mm base · 6× ⌀27 mm PZT discs · ESP32 + 16×2 I²C LCD · Measured test results pending.
+          Separate wooden platform · 6 piezoelectric discs · Breadboard electronics · Electrical validation pending.
         </p>
       </div>
     </section>
@@ -134,64 +138,38 @@
       <div class="shell">
         <header class="title-block">
           <p class="section-number"><span class="tb-label">SEC</span> 02</p>
-          <h2 id="overview-title">The Challenge &amp; Harvesting Opportunity</h2>
+          <h2 id="overview-title">About the Magic Step Project</h2>
         </header>
 
-        <div class="prose">
-          <p class="lede">During our engineering capstone at Sanjivani University Makerspace, our team set out to capture a fraction of the mechanical kinetic energy dissipated daily on high-traffic university walkways, corridors, and stairs.</p>
-          <p>We evaluated multiple kinetic energy harvesting methodologies — electromagnetic dynamos with gear-trains, triboelectric nanogenerators (TENG), and piezoelectric ceramics. We selected a direct-transduction piezoelectric platform utilizing six ⌀27 mm Lead Zirconate Titanate (PZT) ceramic elements embedded beneath a 300 × 160 × 10 mm wooden platform without coil springs, ensuring maximum compressive strain transfer directly into electrical charge pulses.</p>
+        <div class="prose" id="problem-statement">
+          <h3>Problem Statement</h3>
+          <p class="lede">Conventional walking surfaces do not utilize the mechanical energy generated by human footsteps. This project explores converting footstep pressure into electrical energy using piezoelectric sensors and storing the harvested energy for potential low-power applications.</p>
         </div>
 
-        <div class="table-wrap" tabindex="0" role="region" aria-labelledby="compare-caption">
-          <table class="compare-table">
-            <caption id="compare-caption">Kinetic Energy Harvesting Technologies Compared</caption>
-            <thead>
-              <tr>
-                <th scope="col">Transduction Approach</th>
-                <th scope="col">Potential Advantages</th>
-                <th scope="col">Limitations &amp; Mechanical Considerations</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Electromagnetic Dynamo (Rack &amp; Pinion)</th>
-                <td>High continuous power output; established rotary generator technology.</td>
-                <td>Requires mechanical gear-trains, rack-and-pinion linkages; high mechanical wear; noisy operation and large vertical floor clearance required.</td>
-              </tr>
-              <tr>
-                <th scope="row">Triboelectric Nanogenerator (TENG)</th>
-                <td>Extremely high open-circuit voltages (>100 V); lightweight material layers.</td>
-                <td>Extremely low current (micro-amperes); delicate contact-separation surface wear; performance deteriorates under ambient humidity and dust.</td>
-              </tr>
-              <tr>
-                <th scope="row">Photovoltaic / Solar Tile</th>
-                <td>High power density during peak daytime sunlight.</td>
-                <td>Ineffective indoors, at night, or in covered staircases; vulnerable to surface scratching and dirt accumulation.</td>
-              </tr>
-              <tr class="row-highlight">
-                <th scope="row">Magic Step (Piezoelectric Matrix)</th>
-                <td>Solid-state electromechanical transduction; ultra-slim profile (18 mm); springless direct flexure; no moving gears; highly responsive to foot pressure.</td>
-                <td>High electrical impedance; generates short transient AC spikes requiring full-wave rectification and capacitive smoothing before storage. Measured power pending.</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="prose" id="project-objectives" style="margin-top:28px;">
+          <h3>Project Objectives</h3>
+          <ul class="manufacturing-learning-list">
+            <li>Explore piezoelectric energy conversion under footstep pressure.</li>
+            <li>Develop a mechanical platform that carries six piezoelectric discs.</li>
+            <li>Document the intended rectification, conditioning, and storage stages without asserting unverified wiring.</li>
+            <li>Use CAD and prototype records to communicate the design and assembly process.</li>
+            <li>Identify the measurements and safety checks needed before performance claims or battery charging.</li>
+          </ul>
         </div>
 
-        <blockquote class="question">
-          <p class="eyebrow">The Engineering Question We Are Investigating</p>
-          <p>Can an array of six PZT piezoelectric discs embedded within a compact 300 × 160 × 10 mm footstep tile reliably generate sufficient electrical charge to buffer an energy storage cell, while an ESP32 provides real-time telemetry of step activity and battery condition?</p>
-        </blockquote>
+        <div class="prose" id="proposed-solution" style="margin-top:28px;">
+          <h3>Proposed Solution</h3>
+          <p>A prototype uses six piezoelectric sensors on a separate wooden platform. A separate 400-point mini breadboard holds the electronics: four rectifier diodes, a 50 µF capacitor, boost converter, TP4056 charging module, 3.7 V lithium-ion battery and holder, jumper wires, and an ESP32 development board for monitoring and control where implemented.</p>
+        </div>
 
-        <div class="spec-layout" style="margin-top: 36px;">
-          <div class="note-block">
-            <h3>Project Scope &amp; Testing Integrity</h3>
-            <p>Magic Step is built to engineering lab standards. In strict accordance with university guidelines, no test voltages, power outputs, or battery percentages are invented. The hardware is physically assembled, the ESP32 telemetry logic is operational, and scientific measurements are being logged under defined test conditions.</p>
-          </div>
+        <div class="note-block" style="margin-top:28px;">
+          <h3>Project Scope &amp; Testing Integrity</h3>
+          <p>Electrical output, charging behavior, and battery performance have not been independently validated here. No performance figures or working-circuit claims are presented as measured results.</p>
         </div>
       </div>
     </section>
 
-    <!-- ==================== 03 WORKING PRINCIPLE & SYSTEM ARCHITECTURE ==================== -->
+    <!-- ==================== 03 WORKING PRINCIPLE ==================== -->
     <section class="section section-tinted" id="working" aria-labelledby="working-title">
       <div class="shell">
         <header class="title-block">
@@ -201,20 +179,16 @@
 
         <div class="prose">
           <p>When a person steps on the Magic Step platform, mechanical force compresses the piezoelectric ceramic elements. Through the direct piezoelectric effect, the mechanical strain displaces positive and negative ions in the crystal lattice, generating an alternating voltage spike. Because footfalls involve both impact (compression) and release (expansion), the transducer generates bidirectional AC pulses.</p>
-          <p>A full-wave diode bridge rectifier (DB107) converts these alternating pulses into unidirectional DC. A 10 µF capacitor buffers the high-impedance transient spikes, accumulating charge. This charge is routed to a lithium-ion management stage, while an ESP32 microcontroller samples scaled analog voltages to count steps and monitor the 1S2P battery pack on a 16×2 I²C LCD.</p>
+          <ol class="manufacturing-learning-list">
+            <li>Footstep pressure acts on the wooden platform.</li>
+            <li>Six piezoelectric sensors generate electrical output.</li>
+            <li>Four diodes form the bridge-rectification stage.</li>
+            <li>A 50 µF capacitor is included in the documented concept.</li>
+            <li>A boost converter precedes the TP4056 charging module.</li>
+            <li>The arrangement identifies a 3.7 V lithium-ion battery as storage.</li>
+          </ol>
+          <p>The ESP32 is a separate monitoring and control unit where implemented; its pin mapping and electrical connections are not specified here.</p>
         </div>
-
-        <!-- System Architecture Vector Schematic -->
-        <figure class="schematic">
-          <figcaption class="figure-label">
-            <span class="label-chip label-chip-ok">Verified Hardware Architecture</span>
-            FIG. 1 — Full Electro-Mechanical Transduction &amp; Telemetry Pathway
-          </figcaption>
-          <div class="schematic-box">
-            <img src="assets/media/diagrams/system-schematic.svg" width="1200" height="640" alt="Magic Step System Architecture Diagram" loading="lazy">
-          </div>
-          <p class="figure-caption">The physical prototype routes kinetic foot strikes through the 6-disc matrix, DB107 bridge rectifier, and 10 µF buffer. A scaled resistive voltage divider feeds the ESP32 ADC1, driving telemetry on the 16×2 I²C LCD screen.</p>
-        </figure>
 
         <!-- Transduction Physics Graphic -->
         <figure class="schematic" style="margin-top: 48px;">
@@ -228,66 +202,196 @@
         </figure>
 
         <div class="warning-block">
-          <strong>Electrical Safety &amp; Isolation Protocol:</strong> Piezoelectric discs generate high instantaneous open-circuit voltages (>30 V) with very high source impedance. Never connect raw piezo outputs directly to ESP32 GPIO pins or lithium-ion cells without rectification, capacitive buffering, and resistive voltage division.
+          <strong>Supervisor verification required:</strong> Confirm that the selected boost-converter and TP4056 arrangement is suitable for the intermittent input and the specific cell, and verify any required cell protection before charging. This page does not certify electrical safety or a working charging circuit.
         </div>
       </div>
     </section>
 
-    <!-- ==================== 04 ENGINEERING JOURNEY ==================== -->
-    <section class="section" id="journey" aria-labelledby="journey-title">
+    <!-- ==================== 04 SYSTEM ARCHITECTURE ==================== -->
+    <section class="section" id="system-architecture" aria-labelledby="system-architecture-title">
       <div class="shell">
         <header class="title-block">
           <p class="section-number"><span class="tb-label">SEC</span> 04</p>
-          <h2 id="journey-title">Engineering Journey &amp; Fabrication Log</h2>
+          <h2 id="system-architecture-title">System Architecture</h2>
         </header>
-        <p class="section-intro">Chronological fabrication and integration log documented at the Sanjivani University Makerspace carpentry and electronics workshops. Click any photo to enlarge and inspect in the lightbox viewer.</p>
-
-        <ol class="journey-steps" id="journey-steps"></ol>
+        <p class="section-intro">The block-level view follows the intended energy path from footstep pressure toward storage. The ESP32 is shown separately as a monitoring and control unit; no unverified connection to the charging path is implied.</p>
+        <figure class="fig-primary">
+          <button class="step-photo" type="button" id="open-circuit-diagram" aria-label="Open system architecture diagram in lightbox">
+            <img src="assets/media/diagrams/system-schematic.svg" width="1200" height="460" loading="lazy" alt="Functional system architecture: footstep pressure, piezoelectric generation, bridge rectification, capacitor, boost converter, TP4056 module, and lithium-ion battery, with ESP32 shown separately">
+          </button>
+          <figcaption class="step-caption">
+            <span class="label-chip label-chip-warn">Functional Concept · Not a Wiring Schematic</span>
+            Footstep pressure → piezoelectric generation → bridge rectification → energy conditioning → charging module → lithium-ion battery.
+          </figcaption>
+        </figure>
+        <p class="figure-caption">Exact wiring, charging compatibility, and cell protection requirements have not been verified. See the <a href="docs/electronics-and-firmware.md">electronics documentation</a> before interpreting this as a circuit.</p>
       </div>
     </section>
 
-    <!-- ==================== 05 DESIGN & SOLIDWORKS CAD ==================== -->
-    <section class="section section-tinted" id="design" aria-labelledby="design-title">
+    <!-- ==================== 05 MECHANICAL DESIGN ==================== -->
+    <section class="section section-tinted" id="mechanical-design" aria-labelledby="mechanical-design-title">
       <div class="shell">
         <header class="title-block">
           <p class="section-number"><span class="tb-label">SEC</span> 05</p>
-          <h2 id="design-title">SolidWorks CAD Design &amp; Specifications</h2>
+          <h2 id="mechanical-design-title">Mechanical Design</h2>
         </header>
-        <p class="section-intro">Engineering CAD models, dimensional orthographic sheets, and mechanical specifications for the 300 × 160 × 10 mm footstep generation platform.</p>
-
+        <p class="section-intro">The project design record identifies a wooden platform and six piezoelectric discs. The drawing and component data should be checked against the completed physical prototype.</p>
         <figure class="fig-primary">
           <button class="step-photo" type="button" id="open-cad-drawing" aria-label="Open dimensioned drawing in lightbox">
-            <img src="assets/media/cad/dimensioned-drawing.svg" width="1400" height="950" loading="lazy" alt="SolidWorks Dimensioned Drawing Sheet">
+            <img src="assets/media/cad/dimensioned-drawing.svg" width="1400" height="950" loading="lazy" alt="Dimensioned orthographic drawing of the Magic Step wooden sensor platform">
           </button>
           <figcaption class="step-caption">
             <span class="label-chip">Engineering Drawing</span>
-            DWG NO: MS-2026-ENG-001 — Orthographic dimensioned views (300 × 160 × 10 mm). Click to enlarge.
+            DWG NO: MS-2026-ENG-001 — Project-record dimensions of 300 × 160 × 10 mm. Click to enlarge.
           </figcaption>
         </figure>
-
         <div class="spec-layout">
           <div>
             <table class="spec-table">
-              <caption>Confirmed Mechanical &amp; Electrical Specifications</caption>
+              <caption>Documented Design and Component Specifications</caption>
               <tbody id="spec-rows"></tbody>
             </table>
           </div>
           <div class="note-block">
-            <h3>Springless Mechanical Rationale</h3>
-            <p>The Magic Step design deliberately omits helical coil springs. Conventional spring designs absorb mechanical energy into spring deflection and introduce damping losses. Our direct-flexure platform uses compliant neoprene damper pads above each disc, transferring the user's kinetic energy directly into piezoelectric crystal strain while protecting the ceramic from destructive point impact.</p>
+            <h3>Design Record</h3>
+            <p>The dimensions and six-disc arrangement shown here come from the project design records. Confirm physical dimensions and sensor mounting against the completed hardware before fabrication or evaluation; the CAD record alone does not establish material properties or measured mechanical performance.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== 06 3D INTERACTIVE EXPLORER ==================== -->
-    <section class="section" id="explorer-section" aria-labelledby="explorer-title">
-      <div class="shell shell-wide">
+    <!-- ==================== 06 3D CAD DESIGN & SOLIDWORKS GALLERY ==================== -->
+    <section class="section section-tinted" id="cad-design" aria-labelledby="design-title">
+      <div class="shell">
         <header class="title-block">
           <p class="section-number"><span class="tb-label">SEC</span> 06</p>
-          <h2 id="explorer-title">Interactive 3D Assembly Explorer</h2>
+          <h2 id="design-title">3D CAD DESIGN &amp; SOLIDWORKS GALLERY</h2>
         </header>
-        <p class="section-intro">Drag to orbit the 3D model, scroll to zoom, and toggle layers or exploded view to inspect internal components. Click any part to view its mechanical specifications and fabrication status.</p>
+        <p class="section-intro">Component modelling, assembly development, mechanical design, engineering drawings, and prototype records document the design process from individual parts to an integrated concept.</p>
+        <p class="figure-caption">A historical full-assembly screenshot is preserved as a source asset but is not presented as the current configuration because its depicted components differ from the documented bill of materials.</p>
+
+        <div class="cad-subsection" id="solidworks-gallery" aria-labelledby="solidworks-gallery-title">
+        <h3 class="subhead" id="solidworks-gallery-title">SolidWorks Modelling &amp; Components</h3>
+        <p class="section-intro">Individual component modelling, assembly design, mechanical layouts, and engineering drawings.</p>
+
+        <div class="solidworks-gallery" aria-label="SolidWorks 2026 project models">
+          <h4 class="solidworks-category-label">CAD Modelling</h4>
+          <figure class="solidworks-card">
+            <button class="solidworks-image" type="button" data-sw-lightbox data-title="Wooden Footplate Design" data-description="3D model of the wooden platform with six piezoelectric sensor positions." aria-label="Enlarge SolidWorks wooden footplate design">
+              <img src="assets/solidworks/wooden-footplate.png" width="1732" height="1078" alt="Wooden footplate model with six piezoelectric sensor positions" loading="lazy">
+            </button>
+            <figcaption>
+              <h3>Wooden Footplate Design</h3>
+              <p>Platform model with six defined piezoelectric sensor positions.</p>
+            </figcaption>
+          </figure>
+
+          <h4 class="solidworks-category-label">Individual Components</h4>
+          <figure class="solidworks-card">
+            <button class="solidworks-image" type="button" data-sw-lightbox data-title="400-Point Mini Breadboard" data-description="Individual 400-point mini breadboard model." aria-label="Enlarge SolidWorks 400-point mini breadboard model">
+              <img src="assets/solidworks/mini-breadboard.png" width="1722" height="1078" alt="SolidWorks model of a 400-point mini breadboard" loading="lazy">
+            </button>
+            <figcaption>
+              <h3>400-Point Mini Breadboard</h3>
+              <p>Individual 400-point breadboard model for the electronics assembly.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="solidworks-card">
+            <button class="solidworks-image" type="button" data-sw-lightbox data-title="Electronics Enclosure / Tray" data-description="Housing tray designed for the project's electronic circuit." aria-label="Enlarge SolidWorks electronics enclosure model">
+              <img src="assets/solidworks/electronics-tray.png" width="1731" height="1078" alt="Electronics enclosure tray model for the project circuit" loading="lazy">
+            </button>
+            <figcaption>
+              <h3>Electronics Enclosure / Tray</h3>
+              <p>Housing designed to contain the electronic circuit components.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="solidworks-card">
+            <button class="solidworks-image" type="button" data-sw-lightbox data-title="Piezoelectric Disc" data-description="Individual 3D model of a piezoelectric sensor disc." aria-label="Enlarge SolidWorks piezoelectric disc model">
+              <img src="assets/solidworks/piezoelectric-disc.png" width="1761" height="1078" alt="Individual piezoelectric disc sensor model" loading="lazy">
+            </button>
+            <figcaption>
+              <h3>Piezoelectric Disc</h3>
+              <p>Individual model of the piezoelectric sensor used in the footplate.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="solidworks-card">
+            <button class="solidworks-image" type="button" data-sw-lightbox data-title="Axial Diode" data-description="Individual axial diode model used in the rectifier circuit." aria-label="Enlarge SolidWorks axial diode model">
+              <img src="assets/solidworks/axial-diode.png" width="1762" height="1078" alt="Axial diode model for the rectifier circuit" loading="lazy">
+            </button>
+            <figcaption>
+              <h3>Axial Diode</h3>
+              <p>Individual diode model used in the rectifier circuit.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="solidworks-card">
+            <button class="solidworks-image" type="button" data-sw-lightbox data-title="External Connecting Lead" data-description="Model of an insulated electrical connecting wire." aria-label="Enlarge SolidWorks external connecting lead model">
+              <img src="assets/solidworks/external-lead.png" width="1766" height="1078" alt="Model of an insulated external electrical connecting lead" loading="lazy">
+            </button>
+            <figcaption>
+              <h3>External Connecting Lead</h3>
+              <p>Model of an insulated electrical connecting wire.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="solidworks-card">
+            <button class="solidworks-image" type="button" data-sw-lightbox data-title="50 µF Capacitor" data-description="Capacitor component model representing the documented 50 µF part." aria-label="Enlarge SolidWorks 50 microfarad capacitor model">
+              <img src="assets/solidworks/capacitor.png" width="1820" height="1078" alt="Component model representing the documented 50 microfarad capacitor" loading="lazy">
+            </button>
+            <figcaption>
+              <h3>50 µF Capacitor</h3>
+              <p>Component model representing the listed 50 µF capacitor.</p>
+            </figcaption>
+          </figure>
+
+          <figure class="solidworks-card">
+            <button class="solidworks-image" type="button" data-sw-lightbox data-title="ESP32 Controller Module" data-description="3D model of the ESP32 development board used as the system controller." aria-label="Enlarge SolidWorks ESP32 controller module">
+              <img src="assets/solidworks/esp32-controller.png" width="1777" height="1078" alt="ESP32 development board controller module model" loading="lazy">
+            </button>
+            <figcaption>
+              <h3>ESP32 Controller Module</h3>
+              <p>Model of the ESP32 development board used as the system controller.</p>
+            </figcaption>
+          </figure>
+
+          <h4 class="solidworks-category-label">Assembly Design</h4>
+          <figure class="solidworks-card">
+            <button class="solidworks-image" type="button" data-sw-lightbox data-title="Assembly Isometric View" data-description="Isometric design illustration of the Magic Step mechanical platform." aria-label="Enlarge assembly isometric design view">
+              <img src="assets/media/cad/isometric-view.svg" width="1200" height="800" alt="Isometric CAD-style design illustration of the Magic Step platform" loading="lazy">
+            </button>
+            <figcaption><h3>Assembly Isometric View</h3><p>CAD-style view of the platform assembly.</p></figcaption>
+          </figure>
+          <figure class="solidworks-card">
+            <button class="solidworks-image" type="button" data-sw-lightbox data-title="Exploded Assembly View" data-description="Exploded design illustration showing the mechanical platform layers." aria-label="Enlarge exploded assembly design view">
+              <img src="assets/media/cad/exploded-view.svg" width="1200" height="800" alt="Exploded CAD-style design illustration of the platform layers" loading="lazy">
+            </button>
+            <figcaption><h3>Exploded Assembly View</h3><p>Illustrates the mechanical platform layers.</p></figcaption>
+          </figure>
+          <h4 class="solidworks-category-label">Final Prototype Design</h4>
+          <figure class="solidworks-card">
+            <button class="solidworks-image" type="button" data-sw-lightbox data-title="Prototype Integration" data-description="Project photograph documenting integration work on the Magic Step wooden platform." aria-label="Enlarge prototype integration photograph">
+              <img src="assets/images/engineering-journey/prototype-integration-1.jpg" width="768" height="1024" alt="Student working on the wooden Magic Step prototype and its separate electronics assembly" loading="lazy">
+            </button>
+            <figcaption><h3>Physical Prototype Integration</h3><p>Project photograph documenting hands-on work on the prototype.</p></figcaption>
+          </figure>
+          <figure class="solidworks-card">
+            <button class="solidworks-image" type="button" data-sw-lightbox data-title="Prototype Assembly Work" data-description="Project photograph documenting prototype assembly and inspection." aria-label="Enlarge prototype assembly work photograph">
+              <img src="assets/images/engineering-journey/prototype-integration-2.jpg" width="768" height="1024" alt="Student inspecting and assembling the Magic Step prototype on a workbench" loading="lazy">
+            </button>
+            <figcaption><h3>Prototype Assembly Work</h3><p>Project photograph documenting assembly and inspection.</p></figcaption>
+          </figure>
+        </div>
+        </div>
+
+        <div class="cad-subsection" id="explorer-section" aria-labelledby="explorer-title">
+      <div class="shell shell-wide">
+        <header class="title-block">
+          <h3 class="subhead" id="explorer-title">Interactive 3D Assembly Explorer</h3>
+        </header>
+        <p class="section-intro">Drag to rotate, right-drag to pan, and scroll or pinch to zoom. Toggle component layers or exploded view to inspect the separate platform and electronics tray. Click a component to view its function and role in the system.</p>
 
         <div class="explorer" id="explorer">
           <div class="explorer-toolbar" role="toolbar" aria-label="3D Explorer Controls">
@@ -296,10 +400,10 @@
               <button type="button" class="tool" data-explode="1" aria-pressed="false">Exploded View</button>
             </div>
             <div class="tool-group" role="group" aria-label="Component Layers">
-              <button type="button" class="tool" data-layer="topPlate" aria-pressed="true">Upper Tread Plate</button>
-              <button type="button" class="tool" data-layer="dampers" aria-pressed="true">Damper Pads</button>
-              <button type="button" class="tool" data-layer="piezo" aria-pressed="true">6× Piezo Discs</button>
-              <button type="button" class="tool" data-layer="basePlate" aria-pressed="true">Wooden Base</button>
+              <button type="button" class="tool" data-layer="footplate" aria-pressed="true">Footplate</button>
+              <button type="button" class="tool" data-layer="piezo" aria-pressed="true">Piezo Discs (6)</button>
+              <button type="button" class="tool" data-layer="electronics" aria-pressed="true">Electronics Tray</button>
+              <button type="button" class="tool" data-layer="leads" aria-pressed="true">External Leads</button>
             </div>
             <div class="tool-group" role="group" aria-label="Overlays">
               <button type="button" class="tool" data-toggle="dims" aria-pressed="false">Dimensions</button>
@@ -309,12 +413,14 @@
 
           <div class="explorer-stage" id="explorer-stage" tabindex="0" aria-label="3D model viewer. Drag to orbit, scroll to zoom.">
             <div class="stage-notes">
-              <p class="stage-note">Interactive 3D Procedural CAD View · Drag to Rotate · Scroll to Zoom</p>
+              <p class="stage-note">Interactive 3D Prototype Model · Drag to Rotate · Right-Drag to Pan · Scroll / Pinch to Zoom</p>
+            </div>
+            <div class="model-load-status" id="explorer-load-status" role="status" aria-live="polite">
+              <span id="explorer-load-message">Preparing the interactive 3D prototype…</span>
+              <progress id="explorer-load-progress" max="100" value="0" aria-label="3D model loading progress"></progress>
             </div>
             <div id="explorer-dims-overlay" hidden style="position:absolute;inset:0;pointer-events:none;z-index:15;">
-              <span class="label-chip label-chip-ok" style="position:absolute;top:20%;left:25%;">Length: 300 mm</span>
-              <span class="label-chip label-chip-ok" style="position:absolute;top:60%;right:25%;">Width: 160 mm</span>
-              <span class="label-chip label-chip-warn" style="position:absolute;bottom:20%;left:45%;">Base Thickness: 10 mm</span>
+              <span class="label-chip label-chip-ok" id="explorer-overall-dimensions" style="position:absolute;top:20%;left:25%;">Overall model bounds: loading…</span>
             </div>
           </div>
 
@@ -326,155 +432,256 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- ==================== 07 ELECTRONICS & ESP32 FIRMWARE ==================== -->
-    <section class="section section-tinted" id="electronics" aria-labelledby="electronics-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 07</p>
-          <h2 id="electronics-title">Electronics, Circuitry &amp; ESP32 Firmware</h2>
-        </header>
-        <p class="section-intro">Complete wiring layout, microcontroller pinout mapping, and verified Arduino C++ firmware running on the ESP32 DevKit V1.</p>
-
-        <!-- Circuit Diagram -->
-        <figure class="fig-primary">
-          <button class="step-photo" type="button" id="open-circuit-diagram" aria-label="Open circuit diagram in lightbox">
-            <img src="assets/media/diagrams/circuit-diagram.svg" width="1200" height="700" loading="lazy" alt="Magic Step Electrical Circuit Diagram">
-          </button>
-          <figcaption class="step-caption">
-            <span class="label-chip">Electrical Schematic</span>
-            DWG NO: MS-ELEC-01 — Power conditioning, sensing dividers, ESP32 GPIO pinout, and 16×2 I²C display.
-          </figcaption>
-        </figure>
-
-        <!-- ESP32 Pinout Mapping -->
-        <h3 class="subhead">ESP32 DevKit V1 Pin Allocation</h3>
-        <table class="pinout-table">
-          <thead>
-            <tr>
-              <th scope="col">ESP32 Pin</th>
-              <th scope="col">Function / Mode</th>
-              <th scope="col">Connected Device</th>
-              <th scope="col">Technical Notes</th>
-            </tr>
-          </thead>
-          <tbody id="pinout-rows"></tbody>
-        </table>
-
-        <!-- Production-Ready Code Viewer -->
-        <div class="code-container">
-          <div class="code-header">
-            <span class="code-title">Firmware: MagicStep_Telemetry_ESP32.ino (C++ / Arduino IDE)</span>
-            <button class="copy-btn" id="copy-code-btn" type="button">Copy Code</button>
-          </div>
-          <pre class="code-block"><code>/*
- * MAGIC STEP — Footstep Power Generation Telemetry Firmware
- * Group 16 · Department of Mechanical Engineering · Sanjivani University
- * Platform: ESP32 DevKit V1 | Display: 16x2 I2C LCD (0x27)
- */
-
-#include &lt;Wire.h&gt;
-#include &lt;LiquidCrystal_I2C.h&gt;
-
-// Pin Definitions
-#define PIN_PIEZO_ADC   34  // Analog pulse sense (ADC1_CH6)
-#define PIN_BATTERY_ADC 35  // Battery divider sense (ADC1_CH7)
-#define PIN_CHRG_STAT   32  // Charger IC status pin (Active LOW)
-
-// Calibration Constants
-const int PIEZO_THRESHOLD = 450;        // ADC threshold for step registration
-const unsigned long DEBOUNCE_MS = 220;  // Minimum ms between consecutive steps
-const float VREF = 3.30;                // ESP32 calibrated ADC reference
-const float BATTERY_DIVIDER_RATIO = 2.0;// (R1 + R2) / R2 for 100k/100k divider
-
-// Telemetry State
-volatile unsigned long stepCount = 0;
-unsigned long lastStepTime = 0;
-float batteryVoltage = 0.0;
-bool isCharging = false;
-bool pulseDetected = false;
-
-LiquidCrystal_I2C lcd(0x27, 16, 2);
-
-void setup() {
-  Serial.begin(115200);
-  Wire.begin(21, 22); // SDA = GPIO 21, SCL = GPIO 22
-
-  lcd.init();
-  lcd.backlight();
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("  MAGIC STEP  ");
-  lcd.setCursor(0, 1);
-  lcd.print("Group 16 SU 26-27");
-  delay(1800);
-  lcd.clear();
-
-  pinMode(PIN_CHRG_STAT, INPUT_PULLUP);
-  analogReadResolution(12); // 12-bit ADC (0-4095)
-}
-
-void loop() {
-  unsigned long currentMillis = millis();
-
-  // 1. Read Rectified Piezo Voltage Pulse
-  int piezoRaw = analogRead(PIN_PIEZO_ADC);
-  if (piezoRaw > PIEZO_THRESHOLD &amp;&amp; (currentMillis - lastStepTime > DEBOUNCE_MS)) {
-    stepCount++;
-    lastStepTime = currentMillis;
-    pulseDetected = true;
-    Serial.printf("[STEP] Count: %lu | Raw ADC: %d\\n", stepCount, piezoRaw);
-  } else {
-    pulseDetected = false;
-  }
-
-  // 2. Read Battery Voltage (every 500 ms)
-  static unsigned long lastBatteryRead = 0;
-  if (currentMillis - lastBatteryRead > 500) {
-    lastBatteryRead = currentMillis;
-    int batRaw = analogRead(PIN_BATTERY_ADC);
-    batteryVoltage = (batRaw / 4095.0) * VREF * BATTERY_DIVIDER_RATIO;
-    isCharging = (digitalRead(PIN_CHRG_STAT) == LOW);
-  }
-
-  // 3. Update 16x2 I2C Display
-  static unsigned long lastLcdUpdate = 0;
-  if (currentMillis - lastLcdUpdate > 150) {
-    lastLcdUpdate = currentMillis;
-    
-    // Row 0: Step Counter and Live Pulse Indicator
-    lcd.setCursor(0, 0);
-    lcd.print("STEPS: ");
-    char stepStr[8];
-    sprintf(stepStr, "%-5lu", stepCount);
-    lcd.print(stepStr);
-    lcd.setCursor(14, 0);
-    lcd.print(pulseDetected ? "[*]" : "   ");
-
-    // Row 1: Battery Voltage &amp; Charge State
-    lcd.setCursor(0, 1);
-    lcd.print("BAT: ");
-    lcd.print(batteryVoltage, 2);
-    lcd.print("V ");
-    lcd.setCursor(11, 1);
-    lcd.print(isCharging ? "CHRG" : "IDLE");
-  }
-}</code></pre>
         </div>
       </div>
     </section>
 
-    <!-- ==================== 08 TESTING PROTOCOL & RESULTS ==================== -->
-    <section class="section section-tinted" id="testing" aria-labelledby="testing-title">
+    <!-- ==================== 07 ELECTRONICS & CIRCUIT DOCUMENTATION ==================== -->
+    <section class="section section-tinted" id="electronics" aria-labelledby="electronics-title">
+      <div class="shell">
+        <header class="title-block">
+          <p class="section-number"><span class="tb-label">SEC</span> 07</p>
+          <h2 id="electronics-title">Electronics &amp; Circuit Diagram</h2>
+        </header>
+        <p class="section-intro">The system architecture above is a functional block diagram, not a wiring schematic. This section documents the listed electronics without inventing pin assignments or interconnections.</p>
+
+        <div class="warning-block">
+          <strong>Circuit documentation limitation:</strong> A verified wire-level circuit diagram and ESP32 pin map are not available in the project records. Do not infer direct battery charging by the ESP32. The boost-converter output, charging-module requirements, cell compatibility, and protection must be reviewed before battery charging.
+        </div>
+        <p class="figure-caption">See the <a href="docs/electronics-and-firmware.md">electronics and functional energy-flow record</a> for the component roles and verification limits.</p>
+      </div>
+    </section>
+
+    <!-- ==================== 08 BILL OF MATERIALS ==================== -->
+    <section class="section" id="bom-section" aria-labelledby="bom-title">
       <div class="shell">
         <header class="title-block">
           <p class="section-number"><span class="tb-label">SEC</span> 08</p>
+          <h2 id="bom-title">Bill of Materials</h2>
+        </header>
+        <p class="section-intro">Documented prototype components, quantities, and roles. No purchase prices were provided; the INR column is marked accordingly.</p>
+        <div class="bom-toolbar">
+          <div class="bom-filters" role="group" aria-label="Filter bill of materials">
+            <button type="button" class="bom-filter-btn active" data-category="all">All Items</button>
+            <button type="button" class="bom-filter-btn" data-category="Mechanical">Mechanical</button>
+            <button type="button" class="bom-filter-btn" data-category="Sensors">Sensors</button>
+            <button type="button" class="bom-filter-btn" data-category="Electronics">Electronics</button>
+            <button type="button" class="bom-filter-btn" data-category="Storage">Storage</button>
+            <button type="button" class="bom-filter-btn" data-category="Prototyping">Prototyping</button>
+          </div>
+          <input type="search" class="bom-search" id="bom-search-input" placeholder="Search BOM components..." aria-label="Search Bill of Materials">
+        </div>
+        <div class="bom-table-container">
+          <table class="bom-table">
+            <thead>
+              <tr><th scope="col">No.</th><th scope="col">Component</th><th scope="col">Quantity</th><th scope="col">Category</th><th scope="col">Purpose</th><th scope="col">Approx. Price (INR)</th></tr>
+            </thead>
+            <tbody id="bom-rows"></tbody>
+          </table>
+        </div>
+        <div class="warning-block">Supervisor verification is required for battery charging input, cell compatibility, and protection before connecting or charging the battery.</div>
+      </div>
+    </section>
+
+    <!-- ==================== 09 MANUFACTURING & FABRICATION ==================== -->
+    <section class="section" id="manufacturing" aria-labelledby="manufacturing-title">
+      <div class="shell">
+        <header class="title-block">
+          <p class="section-number"><span class="tb-label">SEC</span> 09</p>
+          <h2 id="manufacturing-title">Manufacturing and Fabrication</h2>
+        </header>
+        <p class="section-intro">The project records cover the mechanical design, wooden sensor platform, separate electronics assembly, and prototype integration. Makerspace demonstrations shown in the following gallery are identified separately and are not represented as Magic Step prototype parts.</p>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Magic Step manufacturing and fabrication stages">
+          <table class="spec-table">
+            <thead><tr><th scope="col">Stage</th><th scope="col">Project activity</th><th scope="col">Documentation</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">1 · Design</th><td>SolidWorks component modelling, mechanical layout, and design drawings.</td><td><a href="#cad-design">Combined CAD and SolidWorks gallery</a></td></tr>
+              <tr><th scope="row">2 · Platform</th><td>Prepare the wooden platform identified in project records for the six-disc sensor arrangement.</td><td>Physical dimensions and mounting details should be confirmed against the completed hardware.</td></tr>
+              <tr><th scope="row">3 · Sensors</th><td>Prepare and place the piezoelectric discs; the project photo record includes sensor soldering.</td><td><a href="#journey">Prototype and fabrication log</a></td></tr>
+              <tr><th scope="row">4 · Electronics</th><td>Arrange the listed components on a separate 400-point mini breadboard and inspect the assembly.</td><td>Exact wiring and battery-charging compatibility remain unverified.</td></tr>
+              <tr><th scope="row">5 · Integration</th><td>Bring the wooden sensor platform and separate electronics assembly together for prototype review.</td><td>Do not treat the functional energy-flow diagram as a wiring schematic.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note-block" style="margin-top:24px;">
+          <h3>Project fabrication versus Makerspace exposure</h3>
+          <p>The Bambu Lab A1, Benchy test model, laser-cutting machine, and laser-engraved nameplate are documented as Tinkerers Lab learning activities and outputs. The gallery does not claim that these items were used to fabricate Magic Step prototype components.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 10 3D PRINTING & LASER CUTTING ==================== -->
+    <section class="section section-tinted" id="hands-on-skills" aria-labelledby="hands-on-skills-title">
+      <div class="shell">
+        <header class="title-block">
+          <p class="section-number"><span class="tb-label">SEC</span> 10</p>
+          <h2 id="hands-on-skills-title">HANDS-ON MANUFACTURING EXPERIENCE AT TINKERERS LAB</h2>
+        </header>
+        <p class="section-intro">3D Printing and Laser Cutting at Tinkerers Lab, Sanjivani University, documented through the supplied machine and output photographs.</p>
+        <div class="manufacturing-experiences">
+          <article class="manufacturing-card" aria-labelledby="printing-title">
+            <figure class="manufacturing-photo-card">
+              <button class="solidworks-image manufacturing-photo-image" type="button" data-sw-lightbox data-kind="Manufacturing photograph" data-title="Figure 2: Bambu Lab A1 FDM 3D Printer at Tinkerers Lab" data-description="Bambu Lab A1 FDM 3D printer at Tinkerers Lab." aria-label="Enlarge Figure 2: Bambu Lab A1 FDM 3D printer">
+                <img src="assets/images/manufacturing/3d-printing/bambu-lab-a1.jpg" width="960" height="1280" alt="Bambu Lab A1 FDM 3D printer at the Tinkerers Lab" loading="lazy" decoding="async">
+              </button>
+              <figcaption><span class="figure-number">Figure 2</span><strong>Bambu Lab A1 FDM 3D Printer at Tinkerers Lab.</strong></figcaption>
+            </figure>
+            <div class="manufacturing-copy">
+              <p class="skill-learning-label">A · Additive manufacturing</p>
+              <h3 id="printing-title">3D Printing Technology</h3>
+              <p class="manufacturing-intro">The Bambu Lab A1 uses Fused Deposition Modeling (FDM) to build parts layer by layer by depositing filament along paths prepared from a 3D model and its sliced print file.</p>
+              <h4>Preparation &amp; Applications</h4>
+              <p class="manufacturing-applications">STL preparation <span>·</span> Slicing <span>·</span> Filament setup <span>·</span> Rapid prototyping</p>
+              <h4>What We Learned</h4>
+              <ul class="manufacturing-learning-list">
+                <li>Understanding FDM and filament-based additive manufacturing.</li>
+                <li>Preparing 3D models and STL files for slicing.</li>
+                <li>Following basic slicing, filament loading, and printer setup steps.</li>
+                <li>Observing layer-by-layer printing, print quality, and geometric accuracy.</li>
+                <li>Connecting design preparation with rapid prototyping and finished parts.</li>
+              </ul>
+              <span class="practical-label"><span aria-hidden="true"></span> Practical Experience</span>
+            </div>
+            <section class="manufacturing-output-gallery manufacturing-output-gallery-inline" aria-labelledby="manufactured-outputs-title">
+              <div class="manufacturing-workflow-heading">
+                <div><p class="skill-learning-label">FDM output</p><h4 id="manufactured-outputs-title">3D-Printed Test Model</h4></div>
+                <p>The Benchy photograph documents a physical FDM test model and the design-to-product learning process.</p>
+              </div>
+              <div class="manufacturing-output-grid">
+                <figure class="manufacturing-photo-card">
+                  <button class="solidworks-image manufacturing-photo-image" type="button" data-sw-lightbox data-kind="Manufacturing output" data-title="Figure 4: Benchy Test Model Manufactured Using FDM 3D Printing" data-description="A Benchy test model demonstrating layer-by-layer FDM manufacturing, print quality, geometric accuracy, and rapid prototyping." aria-label="Enlarge Figure 4: FDM 3D-printed Benchy test model">
+                    <img src="assets/images/manufacturing/outputs/3d-printed-benchy.jpg" width="960" height="1280" alt="White 3D-printed Benchy test model showing hull, cabin, and deck details" loading="lazy" decoding="async">
+                  </button>
+                  <figcaption><span class="figure-number">Figure 4</span><strong>Benchy Test Model Manufactured Using FDM 3D Printing.</strong><p>The physical Benchy demonstrates layer-by-layer manufacturing and provides a practical reference for observing print quality, geometric accuracy, and rapid prototyping.</p></figcaption>
+                </figure>
+              </div>
+            </section>
+          </article>
+          <article class="manufacturing-card" aria-labelledby="laser-title">
+            <figure class="manufacturing-photo-card">
+              <button class="solidworks-image manufacturing-photo-image" type="button" data-sw-lightbox data-kind="Manufacturing photograph" data-title="Figure 3: Laser Cutting Machine at Tinkerers Lab, Sanjivani University" data-description="Photograph of the laser cutting machine at Tinkerers Lab, Sanjivani University." aria-label="Enlarge Figure 3: Laser cutting machine at Tinkerers Lab">
+                <img src="assets/images/manufacturing/laser-cutting/laser-cutting-machine.jpg" width="960" height="1280" alt="Blue-and-grey laser cutting machine in the Tinkerers Lab at Sanjivani University" loading="lazy" decoding="async">
+              </button>
+              <figcaption><span class="figure-number">Figure 3</span><strong>Laser Cutting Machine at Tinkerers Lab, Sanjivani University.</strong></figcaption>
+            </figure>
+            <div class="manufacturing-copy">
+              <p class="skill-learning-label">B · Subtractive manufacturing</p>
+              <h3 id="laser-title">Laser Cutting Technology</h3>
+              <p class="manufacturing-intro">Laser cutting uses a focused beam guided by a prepared digital design to cut or engrave suitable material. The machine overview introduced its major components and how digital geometry guides fabrication.</p>
+              <h4>Applications</h4>
+              <p class="manufacturing-applications">Rapid prototyping <span>·</span> Material cutting <span>·</span> Engraving <span>·</span> Fabrication</p>
+              <h4>What We Learned</h4>
+              <ul class="manufacturing-learning-list">
+                <li>Understanding laser cutting machine components.</li>
+                <li>Understanding material placement and machine setup.</li>
+                <li>Preparing digital designs for the selected material and operation.</li>
+                <li>Understanding cutting and engraving concepts and applications.</li>
+                <li>Following machine-safety procedures and working with supervision.</li>
+              </ul>
+              <span class="practical-label"><span aria-hidden="true"></span> Practical Experience</span>
+            </div>
+            <section class="manufacturing-output-gallery manufacturing-output-gallery-inline" aria-labelledby="laser-output-title">
+              <div class="manufacturing-workflow-heading">
+                <div><p class="skill-learning-label">Laser cutting and engraving output</p><h4 id="laser-output-title">Customized SAISH Nameplate</h4></div>
+                <p>The supplied photograph documents an acrylic nameplate produced through laser cutting and engraving.</p>
+              </div>
+              <div class="manufacturing-output-grid">
+                <figure class="manufacturing-photo-card">
+                  <button class="solidworks-image manufacturing-photo-image" type="button" data-sw-lightbox data-kind="Laser-engraved output" data-title="Figure 5: Customized SAISH Nameplate — Digital Manufacturing Output" data-description="Laser-engraved acrylic nameplate demonstrating customized product design, lettering and geometry, personalized manufacturing, and a digital design-to-product workflow." aria-label="Enlarge Figure 5: Laser-engraved acrylic SAISH nameplate">
+                    <img src="assets/images/manufacturing/laser-cutting/saish-acrylic-nameplate.jpg" width="960" height="1280" alt="Laser-engraved acrylic nameplate displaying SAISH, held in a hand" loading="lazy" decoding="async">
+                  </button>
+                  <figcaption><span class="figure-number">Figure 5</span><strong>Customized SAISH Nameplate – Digital Manufacturing Output.</strong><p>The acrylic nameplate demonstrates customized product design, lettering and geometry, personalized manufacturing, and a digital design-to-product workflow.</p></figcaption>
+                </figure>
+              </div>
+            </section>
+          </article>
+        </div>
+
+        <section class="manufacturing-skills" aria-labelledby="skills-developed-title">
+          <header class="manufacturing-subheading"><p class="skill-learning-label">Learning journey</p><h3 id="skills-developed-title">Practical Skills &amp; Learning Outcomes</h3></header>
+          <div class="manufacturing-skill-grid">
+            <article class="manufacturing-skill"><h4>CAD Design Understanding</h4><p>Connect digital geometry with how a part will be made.</p></article>
+            <article class="manufacturing-skill"><h4>Digital Manufacturing</h4><p>Prepare digital files for machine-based production.</p></article>
+            <article class="manufacturing-skill"><h4>Rapid Prototyping</h4><p>Use quick physical models to explore design ideas.</p></article>
+            <article class="manufacturing-skill"><h4>Machine Operation Awareness</h4><p>Understand setup expectations and follow supervised safety procedures.</p></article>
+            <article class="manufacturing-skill"><h4>Design-to-Product Workflow</h4><p>Follow designs from preparation through final output.</p></article>
+            <article class="manufacturing-skill"><h4>Engineering Problem-Solving</h4><p>Observe results, assess quality, and think through practical design challenges.</p></article>
+          </div>
+        </section>
+        <section class="manufacturing-workflow" aria-labelledby="manufacturing-workflow-title">
+          <div class="manufacturing-workflow-heading"><div><p class="skill-learning-label">From concept to component</p><h3 id="manufacturing-workflow-title">Manufacturing Workflow</h3></div><p>Digital designs are converted into physical components through preparation, machine setup, and manufacturing.</p></div>
+          <ol class="manufacturing-workflow-steps"><li><span>01</span><strong>CAD Model</strong></li><li><span>02</span><strong>Design Preparation</strong></li><li><span>03</span><strong>Machine Setup</strong></li><li><span>04</span><strong>Manufacturing</strong></li><li><span>05</span><strong>Final Product</strong></li></ol>
+        </section>
+      </div>
+    </section>
+
+    <!-- ==================== 11 TEAM MEMBERS ==================== -->
+    <section class="section" id="team" aria-labelledby="team-title">
+      <div class="shell">
+        <header class="title-block"><p class="section-number"><span class="tb-label">SEC</span> 11</p><h2 id="team-title">Team Members &amp; Acknowledgements</h2></header>
+        <h3 class="subhead">Student Project Members · Group 16</h3><div class="team-grid" id="team-grid"></div>
+        <h3 class="subhead" style="margin-top:44px;">Faculty Guidance</h3><div class="team-grid" id="guides-grid"></div>
+        <div class="callout" style="margin-top:40px;"><h3>Acknowledgements</h3><p>We thank the Department of Mechanical Engineering and the Makerspace / Tinkerers' Lab faculty at Sanjivani University, Kopargaon, for workshop facilities and guidance throughout the Magic Step project.</p></div>
+      </div>
+    </section>
+
+    <!-- ==================== 12 DOCUMENTATION ==================== -->
+    <section class="section section-tinted" id="references" aria-labelledby="references-title">
+      <div class="shell">
+        <header class="title-block"><p class="section-number"><span class="tb-label">SEC</span> 12</p><h2 id="references-title">Documentation &amp; Academic References</h2></header>
+        <div class="ref-layout">
+          <div><h3 class="subhead">Engineering Records</h3><ul class="doc-list">
+            <li><a href="docs/project-overview.md">Project Overview ↗</a></li>
+            <li><a href="docs/objectives-and-scope.md">Objectives, Scope &amp; Limitations ↗</a></li>
+            <li><a href="docs/working-principle.md">Working Principle ↗</a></li>
+            <li><a href="docs/system-architecture.md">System Architecture ↗</a></li>
+            <li><a href="docs/mechanical-design.md">Mechanical Design &amp; CAD ↗</a></li>
+            <li><a href="docs/electronics-and-firmware.md">Electronics &amp; Circuit Documentation ↗</a></li>
+            <li><a href="docs/bill-of-materials.md">Bill of Materials ↗</a></li>
+            <li><a href="docs/manufacturing-and-fabrication.md">Manufacturing &amp; Fabrication ↗</a></li>
+            <li><a href="docs/hardware-and-software.md">Hardware &amp; Software ↗</a></li>
+            <li><a href="docs/team-and-acknowledgements.md">Team &amp; Acknowledgements ↗</a></li>
+            <li><a href="docs/testing-and-results.md">Testing Protocols &amp; Results ↗</a></li>
+            <li><a href="docs/safety-and-maintenance.md">Electrical &amp; Lithium-Ion Safety ↗</a></li>
+            <li><a href="docs/software-and-deployment.md">Website Setup &amp; Deployment ↗</a></li>
+          </ul></div>
+          <div><h3 class="subhead">Academic References</h3><ol class="ref-list">
+            <li>S. Roundy, P. K. Wright, and J. Rabaey, <em>Energy Scavenging for Wireless Sensor Networks</em>, Springer, 2003.</li>
+            <li>H. A. Sodano, D. J. Inman, and G. Park, “A review of power harvesting from piezoelectric materials (1990–2003),” <em>Shock and Vibration Digest</em>, 2004.</li>
+            <li>N. S. Shenck and J. A. Paradiso, “Energy scavenging with shoe-mounted piezoelectrics,” <em>IEEE Micro</em>, 2001.</li>
+          </ol></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 13 FUTURE SCOPE ==================== -->
+    <section class="section section-tinted" id="future-scope" aria-labelledby="future-scope-title">
+      <div class="shell">
+        <header class="title-block"><p class="section-number"><span class="tb-label">SEC</span> 13</p><h2 id="future-scope-title">Future Scope</h2></header>
+        <p class="section-intro">Future development will focus on safely validating the energy-conversion path, improving the mechanical platform, and documenting measured results before making performance claims.</p>
+        <ul class="manufacturing-learning-list"><li>Review battery charging and protection with the project supervisor.</li><li>Characterize energy-conversion stages using a reviewed test procedure.</li><li>Refine the mechanical design and evaluate durable materials.</li><li>Document only measured results and confirmed ESP32 features.</li></ul>
+      </div>
+    </section>
+
+    <!-- ==================== 14 SUPPLEMENTARY ENGINEERING JOURNEY ==================== -->
+    <section class="section" id="journey" aria-labelledby="journey-title">
+      <div class="shell">
+        <header class="title-block"><p class="section-number"><span class="tb-label">SEC</span> 14</p><h2 id="journey-title">Engineering Journey &amp; Fabrication Log</h2></header>
+        <p class="section-intro">Selected project photographs documenting prototype integration, team collaboration, and sensor preparation.</p>
+        <ol class="journey-steps" id="journey-steps" aria-label="Engineering journey development timeline"></ol>
+      </div>
+    </section>
+
+    <!-- ==================== 15 TESTING PROTOCOL & RESULTS ==================== -->
+    <section class="section section-tinted" id="testing" aria-labelledby="testing-title">
+      <div class="shell">
+        <header class="title-block">
+          <p class="section-number"><span class="tb-label">SEC</span> 15</p>
           <h2 id="testing-title">Testing Protocols &amp; Experimental Results</h2>
         </header>
 
         <div class="result-flag">
-          <strong>Testing Policy &amp; Scientific Integrity:</strong> Measured voltages, step counts, and energy numbers will only be populated after formal testing with calibrated multimeters and digital storage oscilloscopes. Below is the active test matrix.
+          <strong>Testing Policy &amp; Scientific Integrity:</strong> No nominal performance or test results are assumed. Record measurements only after a supervisor-reviewed test with suitable instruments. Below is the proposed test matrix.
         </div>
 
         <div class="table-wrap" tabindex="0" role="region" aria-labelledby="test-caption">
@@ -486,7 +693,7 @@ void loop() {
                 <th scope="col">Test Objective</th>
                 <th scope="col">Parameter</th>
                 <th scope="col">Test Conditions</th>
-                <th scope="col">Expected Nominal</th>
+                <th scope="col">Expected / Target</th>
                 <th scope="col">Measured Lab Result</th>
                 <th scope="col">Status</th>
               </tr>
@@ -497,59 +704,11 @@ void loop() {
       </div>
     </section>
 
-    <!-- ==================== 09 BILL OF MATERIALS ==================== -->
-    <section class="section" id="bom-section" aria-labelledby="bom-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 09</p>
-          <h2 id="bom-title">Engineering Bill of Materials (BOM)</h2>
-        </header>
-        <p class="section-intro">Complete component inventory, electrical ratings, mechanical stock, unit costs, and procurement status.</p>
-
-        <div class="bom-toolbar">
-          <div class="bom-filters">
-            <button type="button" class="bom-filter-btn active" data-category="all">All Items</button>
-            <button type="button" class="bom-filter-btn" data-category="Mechanical">Mechanical</button>
-            <button type="button" class="bom-filter-btn" data-category="Electrical / Sensors">Sensors &amp; Power</button>
-            <button type="button" class="bom-filter-btn" data-category="Embedded &amp; Display">Embedded &amp; LCD</button>
-            <button type="button" class="bom-filter-btn" data-category="Fasteners &amp; Mounting">Fasteners</button>
-          </div>
-          <input type="search" class="bom-search" id="bom-search-input" placeholder="Search BOM components..." aria-label="Search Bill of Materials">
-        </div>
-
-        <div class="bom-table-container">
-          <table class="bom-table">
-            <thead>
-              <tr>
-                <th scope="col">Item</th>
-                <th scope="col">Component Description</th>
-                <th scope="col">Technical Specification</th>
-                <th scope="col">Qty</th>
-                <th scope="col">Unit Cost</th>
-                <th scope="col">Total</th>
-                <th scope="col">Source / Vendor</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody id="bom-rows"></tbody>
-          </table>
-        </div>
-
-        <div class="bom-summary-card">
-          <div>
-            <h4 style="margin:0 0 4px;font-size:16px;">Total Estimated Prototype Cost</h4>
-            <p style="margin:0;font-size:14px;color:var(--muted);">All items procured through Sanjivani University Makerspace inventory and verified local vendors.</p>
-          </div>
-          <div style="font-family:var(--mono);font-size:26px;font-weight:800;color:var(--energy-ink);" id="bom-total-amount">₹1,710</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== 10 DEMONSTRATION VIDEO ==================== -->
+    <!-- ==================== 16 DEMONSTRATION VIDEO ==================== -->
     <section class="section section-tinted" id="video-section" aria-labelledby="video-title">
       <div class="shell">
         <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 10</p>
+          <p class="section-number"><span class="tb-label">SEC</span> 16</p>
           <h2 id="video-title">Prototype Demonstration Video</h2>
         </header>
 
@@ -563,7 +722,7 @@ void loop() {
               </button>
               <h3 style="font-size:22px;margin-bottom:8px;color:#fff;">Magic Step Prototype Live Walkthrough</h3>
               <p style="color:#94a3b8;font-size:15px;max-width:54ch;margin:0 auto;">
-                Demonstrating stepping excitation, bridge rectifier LED pulse indicator, and ESP32 real-time 16×2 LCD step count increments.
+                No project demonstration recording is currently included in the repository.
               </p>
               <p style="font-family:var(--mono);font-size:12px;color:var(--amber);margin-top:14px;">
                 [Video demonstration embed slot for university evaluation]
@@ -579,14 +738,14 @@ void loop() {
       </div>
     </section>
 
-    <!-- ==================== 11 PROJECT GALLERY ==================== -->
+    <!-- ==================== 17 PROJECT GALLERY ==================== -->
     <section class="section" id="gallery" aria-labelledby="gallery-title">
       <div class="shell">
         <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 11</p>
+          <p class="section-number"><span class="tb-label">SEC</span> 17</p>
           <h2 id="gallery-title">Project Gallery &amp; CAD Renders</h2>
         </header>
-        <p class="section-intro">Workshop assembly photographs, SolidWorks renders, electrical circuit schematics, and laboratory test setups. Click any card to open in the zoomable viewer.</p>
+        <p class="section-intro">Project-development photographs, component models, design illustrations, and functional diagrams. Click a card to open it in the zoomable viewer.</p>
 
         <div class="gallery-toolbar">
           <div class="gallery-filters" role="group" aria-label="Filter Gallery">
@@ -603,122 +762,50 @@ void loop() {
       </div>
     </section>
 
-    <!-- ==================== 12 BUILD STATUS & ROADMAP ==================== -->
+    <!-- ==================== 18 BUILD STATUS & ROADMAP ==================== -->
     <section class="section section-tinted" id="status" aria-labelledby="status-title">
       <div class="shell">
         <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 12</p>
+          <p class="section-number"><span class="tb-label">SEC</span> 18</p>
           <h2 id="status-title">Prototype Build Status</h2>
         </header>
         <div class="status-groups" id="status-groups"></div>
       </div>
     </section>
 
-    <!-- ==================== 13 DOWNLOADS & DELIVERABLES ==================== -->
+    <!-- ==================== 19 DOWNLOADS & DELIVERABLES ==================== -->
     <section class="section" id="downloads" aria-labelledby="downloads-title">
       <div class="shell">
         <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 13</p>
+          <p class="section-number"><span class="tb-label">SEC</span> 19</p>
           <h2 id="downloads-title">Deliverables &amp; Downloads</h2>
         </header>
-        <p class="section-intro">Download official academic deliverables prepared for the university Makerspace capstone evaluation.</p>
+        <p class="section-intro">No verified poster or final report PDF is currently included. Use the linked technical documentation while official deliverables are prepared.</p>
 
         <div class="download-grid">
           <div class="download-card">
             <div>
               <span class="dl-format dl-pdf">PDF · A1</span>
               <h3>Academic Project Poster</h3>
-              <p>High-resolution conference poster detailing the mechanical design, energy conversion pathway, electronics schematic, and prototype findings.</p>
+              <p>No poster file is available in this repository. The website and technical documents describe the project without claiming unverified circuit details or test results.</p>
             </div>
-            <button class="button button-quiet" type="button" data-download="Magic_Step_Poster_A1.pdf">Download Poster (PDF)</button>
+            <a class="button button-quiet" href="docs/project-overview.md">Read project overview</a>
           </div>
 
           <div class="download-card">
             <div>
               <span class="dl-format dl-pdf">PDF · DOC</span>
               <h3>Final Project Report</h3>
-              <p>Comprehensive engineering documentation report with full calculations, transducer specifications, wiring schematics, and evaluation log.</p>
+              <p>A final report PDF is not available. The maintained technical documentation is organized in the repository's docs folder.</p>
             </div>
-            <button class="button button-quiet" type="button" data-download="Magic_Step_Project_Report.pdf">Download Report (PDF)</button>
+            <a class="button button-quiet" href="#references">Browse technical documentation</a>
           </div>
 
-          <div class="download-card">
-            <div>
-              <span class="dl-format dl-zip">ZIP · CAD</span>
-              <h3>SolidWorks CAD Files</h3>
-              <p>Complete 3D assembly models (.SLDASM), part files (.SLDPRT), exploded views, and dimensioned 2D engineering drawings (.SLDDRW).</p>
-            </div>
-            <button class="button button-quiet" type="button" data-download="Magic_Step_SolidWorks_CAD.zip">Download CAD Package (ZIP)</button>
-          </div>
-
-          <div class="download-card">
-            <div>
-              <span class="dl-format dl-code">INO · C++</span>
-              <h3>ESP32 Arduino Firmware</h3>
-              <p>ESP32 telemetry source code with I²C LCD library, non-blocking debounce algorithms, and battery voltage ADC sensing functions.</p>
-            </div>
-            <button class="button button-quiet" type="button" data-download="MagicStep_Telemetry_ESP32.zip">Download Source (ZIP)</button>
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== 14 REFERENCES ==================== -->
-    <section class="section section-tinted" id="references" aria-labelledby="references-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 14</p>
-          <h2 id="references-title">Documentation &amp; Academic References</h2>
-        </header>
-
-        <div class="ref-layout">
-          <div>
-            <h3 class="subhead">Engineering Records in Repository</h3>
-            <ul class="doc-list">
-              <li><a href="docs/project-overview.md">Project Overview &amp; Abstract ↗</a></li>
-              <li><a href="docs/working-principle.md">Transduction Physics &amp; Formulae ↗</a></li>
-              <li><a href="docs/mechanical-design.md">Mechanical Dimensions &amp; CAD Design ↗</a></li>
-              <li><a href="docs/electronics-and-firmware.md">Electronics, Pinout &amp; ESP32 Firmware ↗</a></li>
-              <li><a href="docs/testing-and-results.md">Testing Protocols &amp; Results Matrix ↗</a></li>
-              <li><a href="docs/safety-and-maintenance.md">Electrical &amp; Lithium-Ion Safety ↗</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 class="subhead">Key Academic References</h3>
-            <ol class="ref-list">
-              <li>S. Roundy, P. K. Wright, and J. Rabaey, <em>Energy Scavenging for Wireless Sensor Networks: with Special Focus on Vibrations</em>, Springer, 2003.</li>
-              <li>H. A. Sodano, D. J. Inman, and G. Park, “A review of power harvesting from piezoelectric materials (1990–2003),” <em>Shock and Vibration Digest</em>, vol. 36, no. 3, pp. 197–206, 2004.</li>
-              <li>G. K. Ottman, H. F. Hofmann, and G. A. Lesieutre, “Optimized piezoelectric energy harvesting circuit using step-down converter in discontinuous conduction mode,” <em>IEEE Trans. Power Electronics</em>, vol. 18, no. 2, 2003.</li>
-              <li>N. S. Shenck and J. A. Paradiso, “Energy scavenging with shoe-mounted piezoelectrics,” <em>IEEE Micro</em>, vol. 21, no. 3, pp. 30–42, 2001.</li>
-              <li>J. G. Rocha et al., “Energy harvesting from human walking for autonomous wearable sensor networks,” <em>IEEE Trans. Industrial Electronics</em>, vol. 57, no. 7, 2010.</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== 15 TEAM & ACKNOWLEDGEMENTS ==================== -->
-    <section class="section" id="team" aria-labelledby="team-title">
-      <div class="shell">
-        <header class="title-block">
-          <p class="section-number"><span class="tb-label">SEC</span> 15</p>
-          <h2 id="team-title">Project Team &amp; Acknowledgements</h2>
-        </header>
-
-        <h3 class="subhead">Student Project Members · Group 16</h3>
-        <div class="team-grid" id="team-grid"></div>
-
-        <h3 class="subhead" style="margin-top:44px;">Faculty Guidance</h3>
-        <div class="team-grid" id="guides-grid"></div>
-
-        <div class="callout" style="margin-top:40px;">
-          <h3>Acknowledgements</h3>
-          <p>We express our sincere gratitude to the Department of Mechanical Engineering and the Makerspace / Tinkerers' Lab faculty at Sanjivani University, Kopargaon for providing workshop facilities, machining equipment, testing instrumentation, and valuable guidance throughout the fabrication and evaluation of the Magic Step system.</p>
-        </div>
-      </div>
-    </section>
-  </main>
+      </main>
 
   <!-- ==================== FOOTER ==================== -->
   <footer class="site-footer">
@@ -726,7 +813,7 @@ void loop() {
       <p><strong>MAGIC STEP — Footstep Power Generation System</strong></p>
       <p>Group 16 · Department of Mechanical Engineering · Sanjivani University, Kopargaon · Academic Year 2026–27</p>
       <p class="footer-meta">
-        Prototype Status: <strong>Hardware Assembled · Firmware Running</strong> · Built for University Makerspace Evaluation · 
+        Prototype Status: <strong>Hardware assembled · Electrical validation pending</strong> · Built for University Makerspace Evaluation ·
         <a href="#top">Back to top ↑</a>
       </p>
     </div>
@@ -740,11 +827,16 @@ void loop() {
     <div class="dialog-bar">
       <span class="label-chip" id="dialog-kind">IMAGE</span>
       <strong id="dialog-title">Image Title</strong>
+      <div class="dialog-gallery-controls" id="dialog-gallery-controls" hidden>
+        <button type="button" class="dialog-btn" id="dialog-previous" aria-label="Previous project photo">←</button>
+        <span id="dialog-gallery-position" aria-live="polite"></span>
+        <button type="button" class="dialog-btn" id="dialog-next" aria-label="Next project photo">→</button>
+      </div>
       <button type="button" class="dialog-btn" id="dialog-zoom" aria-pressed="false">Zoom</button>
       <button type="button" class="dialog-btn" id="dialog-close" aria-label="Close image viewer">Close ×</button>
     </div>
     <div class="dialog-image-wrap" id="dialog-image-wrap">
-      <img id="dialog-image" src="" alt="">
+      <img id="dialog-image" alt="">
     </div>
     <p class="dialog-caption" id="dialog-description"></p>
   </dialog>
