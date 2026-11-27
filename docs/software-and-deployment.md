@@ -14,7 +14,7 @@ Then open <http://localhost:8000/> in a modern browser. Stop the local server wi
 
 The repository already has GitHub Pages configured to publish the repository root (`/`) from the `main` branch using the existing branch-based configuration. The project does not need a second Actions deployment workflow, so none was added.
 
-The GitHub Pages API reported the latest deployment as **built** at `2026-11-26T13:48:46Z`. That confirms an existing deployment, not publication of unmerged changes. Changes on a feature branch do not appear at the public URL until they reach the configured `main` source and Pages finishes a new build.
+The updated site was verified live after this revision reached `main`. Future changes on a feature branch do not appear at the public URL until they reach the configured source and Pages completes a new build. Check the repository's Pages settings and deployment status for the current state.
 
 Published site: <https://saishgodage45-jpg.github.io/magic-step-website/>
 
